@@ -10,3 +10,4 @@ Julia de Carvalho Gavioli
 Felipe Queiroz Lima
 Felipe de Carvalho Ferraz
 Ryan Patric Pina Servilha
+Guilherme Kiyoshi Yajima Pinheiro
