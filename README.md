@@ -1,4 +1,4 @@
-# Grupo-10
+# AGRO SMART
 Grupo 10 de Pesquisa e Inovação. 
 
 MONITORAMENTO DE UMIDADE DA SOJA
