@@ -1,13 +1,13 @@
 # Grupo-10
 Grupo 10 de Pesquisa e Inovação. 
 
-MONITORAMENTO DE SOJA
+MONITORAMENTO DE UMIDADE DA SOJA
 
 Colaboradores:
 
 Henrique Dourado Domingos
-Julia de Carvalho Gavioli
-Felipe Queiroz Lima
-Felipe de Carvalho Ferraz
-Ryan Patric Pina Servilha
-Guilherme Kiyoshi Yajima Pinheiro
+Julia de Carvalho Gavioli <br>
+Felipe Queiroz Lima  <br>
+Felipe de Carvalho Ferraz  <br>
+Ryan Patric Pina Servilha  <br>
+Guilherme Kiyoshi Yajima Pinheiro  <br>
