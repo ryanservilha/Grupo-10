@@ -104,3 +104,41 @@ header {
     border: 1px solid var(--green-300);
     color: #FFF;
 }
+
+.home {
+    background: url('/imgs/home.jpg');
+    height: 30vw;
+    background-size: cover;
+}
+
+.home h1 {
+    color: white;
+    font-weight: bold;
+    font-family: sans-serif;
+    width: 100%;
+    font-size: 3.6vw;
+    padding: 2rem;
+}
+
+.simulador {
+    width: 100%;
+    padding: 2rem;
+} 
+
+.simulador button {
+    width: 8rem;
+    height: 2rem;
+    border-radius: 10px;
+    border: 1px solid #000;
+    background-color: #000;
+    color: white;
+}
+
+.simulador input {
+    width: 13%;
+    height: 2rem;
+    border-radius: 10px;
+    border: none;
+    align-items: center;
+    text-align: center;
+}
