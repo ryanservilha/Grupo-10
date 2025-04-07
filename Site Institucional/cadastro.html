@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/cadastro.css">
+    <title>Cadastro Agro Smart</title>
+</head>
+<body>
+    <div class="container">
+        <div class="introducao">
+            <div class="textos">
+                <h2>Faça seu cadastro</h2>
+                <h2>E utilize da nossa <span>solução!</span></h2>
+            </div>
+            <div class="figuraFazendeiros">
+                <img src="imgs/fazendeiros.png">
+            </div>
+        </div>
+        <div class="cadastro">
+            <h2 id="tituloCadastro">Cadastre-se</h2>
+            <div class="inputs">
+                <div class="inputsRow">
+                    <div class="caixinha">
+                        <p>Razão Social</p>
+                        <input id="inpt_razaoSocial" placeholder="Digite sua razão social">
+                    </div>
+                    <div class="caixinha">
+                        <p>CNPJ</p>
+                        <input id="inpt_cnpj" placeholder="Digite seu CNPJ">
+                    </div>
+                </div>
+                <div class="inputsRow">
+                    <div class="caixinha">
+                        <p>Email</p>
+                        <input id="inpt_email" placeholder="Digite o seu email">
+                    </div>
+                    <div class="caixinha">
+                        <p>Telefone</p>
+                        <input id="inpt_telefone" placeholder="Digite seu telefone">
+                    </div>
+                </div>
+                <div class="inputsRow">
+                    <div class="caixinha">
+                        <p>Senha</p>
+                        <input id="inpt_senha" type="password" placeholder="Crie uma senha">
+                    </div>
+                    <div class="caixinha">
+                        <p>Confirmar Senha</p>
+                        <input id="inpt_confirmeSenha" type="password" placeholder="Confirme sua senha">
+                    </div>
+                </div>
+            </div>
+            <div class="botaoCadastrar">
+                <button onclick="cadastrarConta()"><p>Cadastrar</p></button>
+            </div>
+            <h3>Já possui cadastro? <a href="login.html">Login</a></h3>
+        </div>
+    </div>
+</body>
+</html>
