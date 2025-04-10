@@ -1,5 +1,5 @@
 // DECLARANDO QUAL PINO RECEBERÁ O VALOR COLETADO PELO SENSOR
-const int PINO_SENSOR_UMIDADE_SOLO = A0;
+const int PINO_SENSOR_UMIDADE_SOLO = A5;
 
 void setup()
 {
@@ -26,7 +26,7 @@ void loop()
   MOSTRA NO GRÁFICO O COMPORTAMENTO DOS DADOS, ESTABELECENDO LABEL
   DE UMIDADE MAXIMA E MINIMA PARA AUXÍLIO
   */
-  Serial.print(porcentagemUmidade);
+  Serial.println(porcentagemUmidade);
 
 
   if (porcentagemUmidade < 0) {
