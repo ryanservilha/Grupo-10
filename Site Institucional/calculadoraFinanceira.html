@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/calculadora.css">
+    <title>Simulador Financeiro</title>
+</head>
+<body>
+    <div class="container">
+        <div class="introducao">
+            <div class="textos">
+                <h2>Faça uma simulação</h2>
+                <h2>Com base o seu <span>produto</span></h2>
+            </div>
+            <div class="figuraFazendeiros">
+                <img src="imgs/fazendeiros.png">
+            </div>
+        </div>
+        <div class="simulacao">
+            <h2 id="titulo">Insira as informações</h2>
+            <div class="inputs">
+                <div class="inputsRow">
+                    <div class="caixinha">
+                        <p>Nome da Empresa</p>
+                        <input id="inpt_nomeEmpresa" placeholder="Digite o nome da sua mpresa">
+                    </div>
+                    <div class="caixinha">
+                        <p>Sacas que Produzirá Esse Ano</p>
+                        <input id="inpt_qtdLotesSoja" placeholder="Digite a quantidade">
+                    </div>
+                </div>
+                <div class="inputsRow">
+                    <div class="caixinha">
+                        <p>Valor de Cada Saca</p>
+                        <input id="inpt_valorLote" placeholder="Digite o valor R$">
+                    </div>
+                    <div class="caixinha">
+                        <p>Quantidade de Sensores</p>
+                        <input id="inpt_qtdSensores" placeholder="Digite a quantidade que deseja">
+                    </div>
+                </div>
+                <div class="inputsRow">
+                    <div class="caixinha">
+                        <p>Média da Umidade Nessa Última Temporada</p>
+                        <input id="inpt_mediaUmidade" placeholder="Digite a média da umidade do solo nessa última temporada">
+                    </div>
+                </div>
+            </div>
+            <div class="botaoSimular">
+                <button onclick="calcular()"><p>Simular</p></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function calcular() {
+        var empresa = inpt_nomeEmpresa.value;
+        var qtdLotes = Number(inpt_qtdLotesSoja.value);
+        var valorLote = Number(inpt_valorLote.value);
+        var mediaUmidade = Number(inpt_mediaUmidade.value);
+        var qtdSensores = Number(inpt_qtdSensores.value);
+        var maoDeObra = 5000; // custo da nossa mão de obra
+        var custo = (qtdSensores * 100) + maoDeObra; // valor do custo da solução
+        var total = custo * 1.30; // lucro de 30%
+        var valorPerda = 0;
+        var mensagemRisco = '';
+        var mensagemSolucao = '';
+
+
+        if (empresa == '' || qtdLotes == '' || valorLote == '' || mediaUmidade == '') {
+            alert(`Digite em todos os campos!`);
+        }
+        else if (qtdLotes < 1 || valorLote < 1) {
+            alert(`Digite valores coerentes!`);
+        }
+        else {
+            valorPerda = qtdLotes * valorLote;
+
+            mensagemRisco = `Terá um prejuízo de R$${valorPerda} se não tomar providências!`;
+
+            mensagemSolucao = `Com a nossa solução, você tem um sistema de controle qualificado para cuidar do seu produto. 
+Gastando apenas R$${total},00 você previne diariamente futuros estragos. Faça parte da AgroSmart!`
+
+            if (mediaUmidade < 13) {
+                alert(`${empresa} você possui risco de ter grãos trincados e quebrados.`)
+                alert(mensagemRisco);
+                alert(mensagemSolucao);
+            }
+            else if (mediaUmidade > 15) {
+                alert(`${empresa} você possui risco de ter abrasão nos graõs`)
+                alert(mensagemRisco);
+                alert(mensagemSolucao);
+            }
+            else {
+                alert(`Clima ideal para a colheita da soja!`);
+                alert(`${empresa} ainda que a umidade esteja adequada ultimamente, você deve estar preparado para mudanças repentinas no clima, como acontece em diferentes estações do ano.`);
+                alert(mensagemSolucao);
+            }
+            
+        }
+    }
+</script>
