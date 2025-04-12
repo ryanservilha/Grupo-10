@@ -7,6 +7,7 @@
     list-style-type: none;
     text-decoration: none;
     font-family: var(--font-title);
+    overflow-x: hidden;
 }
 
 :root {
@@ -74,7 +75,7 @@ header {
 .botoes {
     display: flex;
     gap: 1rem;
-    width: 12%;
+    width: 11%;
     
 }
 
@@ -82,17 +83,17 @@ header {
     border: 1px solid #000;
     background-color: transparent;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 7px;
     padding: 0.5rem;
     font-weight: bold;
     transition: all 0.4s ease;
 }
 
 #login {
-    background-color: var(--green-000);
-    border: 1px solid var(--green-000);
-    color: white;
-    font-weight: bold;
+    background-color: var(--green-300);
+    border: 1px solid #000000;
+    color: #000000;
+    width: 100%;
     transition: all 0.4s ease;
 }
 
@@ -104,9 +105,9 @@ header {
 }
 
 #cadastro:hover {
-    background-color: var(--green-000);
-    border: 1px solid var(--green-000);
-    color: #FFF;
+    background-color: var(--green-300);
+    border: 1px solid #000000;
+    color: #000000;
 }
 
 .home {
@@ -114,6 +115,7 @@ header {
     display: flex;
     gap: 2rem;
     width: 100%;
+    height: 82vh;
 }
 
 .title {
@@ -123,7 +125,8 @@ header {
 }
 
 .title h1 {
-    font-size: 60px;
+    font-size: 59.1px;
+    
 }
 
 .content-left button {
@@ -140,6 +143,91 @@ header {
 
 }
 
-.content-right {
-
+#btnCadastroHome {
+    background-color: #ffffff;
+    
 }
+
+#btnCadastroHome:hover {
+    background-color:var(--green-300);
+}
+
+.content-right {
+    width: 100%;
+    
+}
+
+.servicos {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+.servicos h2 {
+    font-size: 4rem;
+}
+
+.cards {
+    
+    text-align: center;
+    align-items: center;
+    margin-top: 6rem;
+    width: 100%;
+    position: relative;
+    left: 2%;
+}
+
+.card1 {
+    /* border: 1px solid #000; */
+    background-color: var(--green-300);
+    border-radius: 8px;
+    width: 45.5%;
+    padding: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+
+.card2 {
+    /* border: 1px solid #000; */
+    background-color: var(--green-300);
+    border-radius: 8px;
+    width: 45.5%;
+    padding: 2rem;
+    display: flex;
+    gap: 1rem;
+    
+}
+
+.card3 {
+    /* border: 1px solid #000; */
+    background-color: var(--green-300);
+    border-radius: 8px;
+    width: 45.5%;
+    padding: 2rem;
+    display: flex;
+    gap: 1rem;
+    
+}
+
+.card1 img {
+    width: 50px;
+    height: 50px;
+}
+
+.card2 img {
+    width: 50px;
+    height: 50px;
+}
+
+.card3 img {
+    width: 50px;
+    height: 50px;
+}
+
+.text {
+    width: 100%;
+    
+}
+
