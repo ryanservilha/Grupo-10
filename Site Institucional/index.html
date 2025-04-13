@@ -177,7 +177,61 @@
                 </div>
             </div>
 
-           
+    </section>
+
+    <section>
+
+        <div class="simuladorFinanceiro">
+
+                <div class="introducao">
+                    <div class="textSimulador">
+                        <h2>Faça uma simulação</h2>
+                        <h2>Com base no seu <span>produto</span></h2>
+                    </div>
+                </div>
+                <div class="simulacao">
+                    <h2 id="titulo">Insira as informações</h2>
+                    <div class="inputs">
+                        <div class="inputsRow">
+                            <div class="caixinha">
+                                <p>Nome da Empresa</p>
+                                <input id="inpt_nomeEmpresa" placeholder="Digite o nome da sua empresa:">
+                            </div>
+                            <div class="caixinha">
+                                <p>Sacas que Produzirá Esse Ano</p>
+                                <input id="inpt_qtdLotesSoja" placeholder="Digite a quantidade:">
+                            </div>
+                        </div>
+                        <div class="inputsRow">
+                            <div class="caixinha">
+                                <p>Valor de Cada Saca</p>
+                                <input id="inpt_valorLote" placeholder="Digite o valor R$">
+                            </div>
+                            <div class="caixinha">
+                                <p>Quantidade de Sensores</p>
+                                <input id="inpt_qtdSensores" placeholder="Digite a quantidade que deseja:">
+                            </div>
+                        </div>
+                        <div class="inputsRow">
+                            <div class="caixinha">
+                                <p>Média da Umidade Nessa Última Temporada</p>
+                                <input id="inpt_mediaUmidade" placeholder="Digite a média da umidade do solo nessa última temporada">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="botaoSimular">
+                        <button onclick="calcular()"><p>Simular Agora!</p></button>
+                    </div>
+                </div>
+
+                <!-- <div class="retornoSimulador">
+                    <h4>Resultado: </h4>
+                </div> -->
+
+            </div>
+
+       
+
     </section>
     
 </body>
