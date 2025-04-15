@@ -1,8 +1,6 @@
 # AGRO SMART
-Aqui está o exemplo de um README para o projeto **AgroSmart**, inspirado no modelo fornecido:
 
 ---
-
 <h3 align="center">
     <img src="public/assets/logo.png" alt="logo AgroSmart" width="150">
 </h3>
@@ -56,7 +54,7 @@ Visite o site institucional da AgroSmart para saber mais sobre a solução, bene
 <img src="public/assets/prototipo.png"/>
 
 ## 📊 Diagrama de Visão de Negócio
-<img src="https://i.imgur.com/E02oRqm.png"/>
+<img src=""/>
 
 ## 🧱 Banco de Dados
 Consulte nossas tabelas nos repositórios.
@@ -103,14 +101,7 @@ Consulte nossas tabelas nos repositórios.
     style="padding-right: 10px;"
     src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Arduino_Logo.svg"
 />
-<img
-    align="left"
-    alt="Python"
-    title="Python"
-    width="50px"
-    style="padding-right: 10px;"
-    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg"
-/><br>
+<br>
 
 ## 👤 Equipe
 <table>
@@ -123,7 +114,3 @@ Consulte nossas tabelas nos repositórios.
 <td  align="center"><a  href="https://github.com/usuario3" ><img src="public/assets/equipe3.jpg" border-radius="50%"; width="200px;"/><br/><b> Equipe 3 </b></a><br /><a  href="https://github.com/usuario3" ><img  src="https://www.svgrepo.com/show/439171/github.svg"  width="20"/></a>
 </td>
 </table>
-
----
-
-Esse modelo está estruturado para refletir as funcionalidades e benefícios do **AgroSmart**, como o monitoramento da umidade do solo, com uma abordagem de fácil leitura e visualização.
