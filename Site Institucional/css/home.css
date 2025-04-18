@@ -297,7 +297,7 @@ header {
 
 .simulacao {
     width: 50%;
-    height: 500px;
+    height: 400px;
     margin-right: 9%;
     margin-top: 40px;
     border-radius: 35px;
@@ -306,6 +306,20 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.resposta_simulador {
+    width: 30%;
+}
+
+.resposta_simulador h1 {
+    font-weight: 650;
+    text-align: center;
+}
+
+.resposta_simulador h2 {
+    font-weight: 650;
+    text-align: start;
 }
 
 #titulo {
@@ -648,17 +662,18 @@ header {
     display: block;
     width: 100%;
     padding: 12px;
-    background-color: #8bc34a;
-    color: white;
+    background-color: var(--green-300);
+    color: rgb(0, 0, 0);
     border: none;
     border-radius: 8px;
     font-size: 1em;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    border: 2px solid black;
 }
 
 .botao-enviar:hover {
-    background-color: #7cb342;
+    background-color: #ffffff;
 }
 
 .footer {
@@ -668,7 +683,7 @@ header {
     justify-content: center;
     text-align: center;
     height: 5vw;
-    
+    border: 2px solid black;
 }
 
 .footer h4 {

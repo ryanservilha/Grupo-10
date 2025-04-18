@@ -2,45 +2,28 @@ function calcular() {
     var empresa = inpt_nomeEmpresa.value;
     var qtdLotes = Number(inpt_qtdLotesSoja.value);
     var valorLote = Number(inpt_valorLote.value);
-    var mediaUmidade = Number(inpt_mediaUmidade.value);
-    var qtdSensores = Number(inpt_qtdSensores.value);
-    var maoDeObra = 5000; // custo da nossa mão de obra
-    var custo = (qtdSensores * 100) + maoDeObra; // valor do custo da solução
-    var total = custo * 1.30; // lucro de 30%
-    var valorPerda = 0;
-    var mensagemRisco = '';
-    var mensagemSolucao = '';
+    var porcentagemPerda = Number(inpt_perda.value);
+    var gasto = valorLote * qtdLotes;
+    var valorPerda = gasto * (porcentagemPerda / 100);
+    var msgSolucao = "<h2> Com a nossa solução você previne futuros danos na sua plantação e no seu bolso! <br> <br> <h1>Venha fazer parte da Agro Smart!</h1></h2>";
 
-
-    if (empresa == '' || qtdLotes == '' || valorLote == '' || mediaUmidade == '') {
+    if (empresa == '' || qtdLotes == '' || valorLote == '') {
         alert(`Digite em todos os campos!`);
     }
     else if (qtdLotes < 1 || valorLote < 1) {
         alert(`Digite valores coerentes!`);
     }
     else {
-        valorPerda = qtdLotes * valorLote;
-
-        mensagemRisco = `Terá um prejuízo de R$${valorPerda} se não tomar providências!`;
-
-        mensagemSolucao = `Com a nossa solução, você tem um sistema de controle qualificado para cuidar do seu produto. 
-Gastando apenas R$${total},00 você previne diariamente futuros estragos. Faça parte da AgroSmart!`
-
-        if (mediaUmidade < 13) {
-            alert(`${empresa} você possui risco de ter grãos trincados e quebrados.`)
-            alert(mensagemRisco);
-            alert(mensagemSolucao);
-        }
-        else if (mediaUmidade > 15) {
-            alert(`${empresa} você possui risco de ter abrasão nos grãos`)
-            alert(mensagemRisco);
-            alert(mensagemSolucao);
+        if (porcentagemPerda > 0) {
+            msg_simulador.innerHTML = `<h1> Olá <b style="color: #82da18">${empresa}!</b> </h1> <br>
+            <h2> Você teve uma perda de <b style="color: red">R$${valorPerda}</b> na sua plantação! <br> </h2>`;
+            msg_simulador.innerHTML += msgSolucao;
         }
         else {
-            alert(`Clima ideal para a colheita da soja!`);
-            alert(`${empresa} ainda que a umidade esteja adequada ultimamente, você deve estar preparado para mudanças repentinas no clima, como acontece em diferentes estações do ano.`);
-            alert(mensagemSolucao);
+            msg_simulador.innerHTML = `<h1> Olá <b style="color: #82da18">${empresa}!</b> </h1> <br>
+            <h2> Por mais que ainda você não teve nenhuma perda na sua plantação, é necessário estar preparado para os momentos de dificuldade! <br> </h2>`;
+            msg_simulador.innerHTML += msgSolucao;
         }
-        
+
     }
 }

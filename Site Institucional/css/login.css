@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 
 * {
     margin: 0;
     box-sizing: border-box;
-    font-family: Poppins;
+    font-family: 'Space Grotesk';
     border: none;
 }
 
@@ -14,21 +14,42 @@ body {
 .container {
     width: 95%;
     height: 500px;
-    margin: 5%;
+    margin: 3%;
+    margin-left: 5%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+}
+
+.logo a {
+    text-decoration: none;
+    color: black;
+}
+
+.logo h1 {
+    font-size: 18px;
+}
+
+.container2 {
+    display: flex;
 }
 
 .introducao {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    margin-top: 2%;
 }
 
 .textos {
-    color: #337616;
+    color: #77cb12;
     font-size: 24px;
 }
+
+.textos h2{
+    margin-left: 5%;
+}
+
 
 .textos span {
     color: black;
@@ -43,15 +64,15 @@ body {
     width: 44%;
     height: 550px;
     margin-right: 9%;
-    margin-top: 20px;
-    border-radius: 35px;
-    background: linear-gradient(90deg, #2b7b13, #0d3600);
-    box-shadow: 1px 2px 10px 4px #08230063;
+    margin-top: 32px;
+    border-radius: 25px;
+    background-color: #B9FF66;
+    border: 2px solid black;
 }
 
 .acessoLogin h2 {
     text-align: center;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 #tituloLogin {
@@ -71,7 +92,7 @@ body {
 }
 
 .inputs p {
-    color: white;
+    color: rgb(0, 0, 0);
     font-size: 19px;
     font-weight: 600;
     margin-left: 4%;
@@ -83,10 +104,11 @@ body {
     border-radius: 15px;
     font-size: 18px;
     font-weight: 540;
+    border: 2px solid black;
 }
 
 .inputs input::placeholder {
-    color: #337616;
+    color: #a8d200;
     font-weight: 560;
     font-size: 16px;
 }
@@ -99,14 +121,14 @@ body {
 }
 
 .inputs a {
-    color: white;
+    color: rgb(0, 0, 0);
     text-decoration: none;
     align-self: center;
     font-weight: 460;
 }
 
 .inputs a:hover {
-    color: rgb(240, 240, 240);
+    color: rgb(62, 62, 62);
 }
 
 .botaoEntrar {
@@ -118,19 +140,20 @@ body {
     padding: 15px;
     border-radius: 15px;
     margin-top: 4%;
-    background-color: rgb(81, 173, 35);
+    background-color: rgb(255, 255, 255);
     cursor: pointer;
     transition: 0.3s ease;
+    border: 2px solid black;
 }
 
 .botaoEntrar button:hover {
-    background-color: rgb(81, 173, 35);
+    background-color: #B9FF66;
 }
 
 .botaoEntrar button p {
     font-size: 18px;
     font-weight: 550;
-    color: white;
+    color: rgb(0, 0, 0);
     text-transform: uppercase;
 }
 
@@ -138,13 +161,13 @@ body {
     text-align: center;
     font-size: 14px;
     font-weight: 450;
-    color: white;
+    color: rgb(0, 0, 0);
     margin-top: 5.7%;
 }
 
 .acessoLogin h3 a {
     text-decoration: none;
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: 650;
 }
 

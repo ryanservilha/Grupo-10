@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 
 * {
     margin: 0;
     box-sizing: border-box;
-    font-family: Poppins;
+    font-family: 'Space Grotesk';
     border: none;
 }
 
@@ -14,11 +14,26 @@ body {
 .container {
     width: 95%;
     height: 90%;
-    margin: 5%;
+    margin: 3%;
+    margin-left: 5%;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     position: fixed;
     gap: 15px;
+}
+
+.logo a {
+    text-decoration: none;
+    color: black;
+}
+
+.logo h1 {
+    font-size: 18px;
+}
+
+.container2 {
+    display: flex;
 }
 
 .introducao {
@@ -28,7 +43,7 @@ body {
 }
 
 .textos {
-    color: #337616;
+    color: #84d520;
     font-size: 24px;
     margin-left: 5%;
 }
@@ -44,23 +59,23 @@ body {
 
 .cadastro {
     width: 44%;
-    height: 550px;
+    height: 530px;
     margin-right: 9%;
     margin-top: 20px;
-    border-radius: 35px;
-    background: linear-gradient(90deg, #2b7b13, #0d3600);
-    box-shadow: 1px 2px 10px 4px #08230063;
+    border-radius: 25px;
+    background-color: #B9FF66;
+    border: 2px solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 #tituloCadastro {
-    font-size: 40px;
+    font-size: 38px;
     font-weight: 520;
     text-transform: uppercase;
     margin-top: 30px;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .inputs {
@@ -77,7 +92,7 @@ body {
 }
 
 .inputsRow p {
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: 500;
     margin-left: 10px;
 }
@@ -86,6 +101,7 @@ body {
     padding: 15px;
     border-radius: 15px;
     width: 265px;
+    border: 2px solid black;
 }
 
 .caixinha {
@@ -95,34 +111,35 @@ body {
 }
 
 .inputsRow input::placeholder {
-    color: #337616d1;
+    color: #a8d200;
     font-weight: 500;
     font-size: 14px;
 }
 
 .botaoCadastrar button {
-    background-color: rgb(84, 184, 34);
+    background-color: rgb(255, 255, 255);
     width: 270px;
     padding: 14px;
     border-radius: 14px;
     margin-top: 30px;
     cursor: pointer;
     transition: 0.3s ease;
+    border: 2px solid black;
 }
 
 .botaoCadastrar button:hover {
-    background-color: rgb(81, 173, 35);
+    background-color: #B9FF66;
 }
 
 .botaoCadastrar button p {
-    color: white;
+    color: rgb(0, 0, 0);
     text-transform: uppercase;
     font-size: 18px;
     font-weight: 550;
 }
 
 .cadastro h3 {
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: 500;
     font-size: 14px;
     margin-top: 22px;
@@ -130,7 +147,7 @@ body {
 
 .cadastro h3 a {
     text-decoration: none;
-    color: white;
+    color: rgb(0, 0, 0);
     font-weight: 650;
 }
 

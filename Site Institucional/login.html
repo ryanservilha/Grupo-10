@@ -4,39 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/login.css">
+    <script src="js/cadastroLogin.js"></script>
     <title>Login Agro Smart</title>
 </head>
+
 <body>
     <div class="container">
-        <div class="introducao">
-            <div class="textos">
-                <h2>Faça o Login</h2>
-                <h2>E entre para o nosso time <span>Agro Smart</span></h2>
-            </div>
-            <div class="figuraFazendeiros">
-                <img src="imgs/fazendeiros.png">
-            </div>
+        <div class="logo">
+            <a href="index.html">
+                <h1>Agro Smart<span>.</span></h1>
+                <svg width="79" height="14" viewBox="0 0 79 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 2.69324C15.6667 9.19324 49.8 18.2932 77 2.69324" stroke="#CCF32F" stroke-width="4"
+                        stroke-linecap="round" />
+                </svg>
+            </a>
         </div>
-        <div class="acessoLogin">
-            <h2 id="tituloLogin">Login</h2>
-            <div class="inputs">
-                <div class="inputUsuario">
-                    <p>Usuário</p>
-                    <input type="text" id="inpt_usuario" placeholder="Digite o nome de usuário ou o email">
+        <div class="container2">
+            <div class="introducao">
+                <div class="textos">
+                    <h2>Faça o Login</h2>
+                    <h2>E entre para o nosso time!</h2>
                 </div>
-                <div class="inputSenha">
-                    <p>Senha</p>
-                    <div class="senha">
-                        <input type="password" id="inpt_usuario" placeholder="Digite sua senha"> 
+                <div class="figuraFazendeiros">
+                    <img src="imgs/fazendeiros.png">
+                </div>
+            </div>
+            <div class="acessoLogin">
+                <h2 id="tituloLogin">Login</h2>
+                <div class="inputs">
+                    <div class="inputUsuario">
+                        <p>Usuário</p>
+                        <input type="text" id="inpt_emailUsuario" placeholder="Digite o seu email">
                     </div>
+                    <div class="inputSenha">
+                        <p>Senha</p>
+                        <div class="senha">
+                            <input type="password" id="inpt_senhaUsuario" placeholder="Digite sua senha">
+                        </div>
+                    </div>
+                    <a href="#">Recuperar senha?</a>
                 </div>
-                <a href="#">Recuperar senha?</a>
+                <div class="botaoEntrar">
+                    <button onclick="entrarConta()">
+                        <p>Entrar</p>
+                    </button>
+                </div>
+                <h3>Novo na Agro Smart? <a href="cadastro.html">Cadastrar</a></h3>
             </div>
-            <div class="botaoEntrar">
-                <button onclick="entrarConta()"><p>Entrar</p></button>
-            </div>
-            <h3>Novo na Agro Smart? <a href="cadastro.html">Cadastrar</a></h3>
         </div>
     </div>
 </body>
+
 </html>
