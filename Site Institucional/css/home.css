@@ -16,6 +16,7 @@
     --green-100: #D9ED82;
     --green-000: #a8d200;
     --black: #000;
+    --black-100: #191A23;
     --font-title: "Space Grotesk", sans-serif;
 }
 
@@ -104,7 +105,7 @@ header {
     color: #000;
     border: 1px solid #000;
 
-}
+} 
 
 #cadastro:hover {
     background-color: var(--green-300);
@@ -263,12 +264,16 @@ header {
     width: 100%;
     text-align: center;
     align-items: center;
+    display: flex;
+    
 }
 
 
 
 .introducao {
     display: flex;
+    justify-content: center;
+    width: 100%;
     flex-direction: column;
     gap: 40px;
     
@@ -276,12 +281,13 @@ header {
 
 .textSimulador {
     color: var(--black);
-    font-size: 24px;
+    font-size: 1.7rem;
     margin-left: 5%;
 }
 
 .textSimulador span {
     color: var(--green-200);
+    text-decoration: underline;
 }
 
 .figuraFazendeiros img {
@@ -290,7 +296,7 @@ header {
 }
 
 .simulacao {
-    width: 43%;
+    width: 50%;
     height: 500px;
     margin-right: 9%;
     margin-top: 40px;
@@ -388,15 +394,222 @@ header {
     text-decoration: underline;
 }
 
+
+
 .sobre {
     width: 100%;
-    height: 100vh;
+    
     background-color: var(--green-300);
+    margin-top: 6rem;
 }
 
 .sobre h3 {
     font-size: 4vw;
+    font-weight: 500;
     text-align: center;
     margin-top: 2rem;
-    text-decoration:underline var(--black);
+    /* text-decoration:underline var(--black); */
+}
+
+.content-about-1 {
+    background-color: var(--black-100);
+    border-radius: 8px;
+    color: #FFF;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    
+    padding: 1rem;
+    margin-top: 2rem;
+    height: 10vw;
+    width: 90%;
+
+
+    margin-left: 5rem;
+
+    transition: all 0.4s ease;
+}
+
+.content-about-1:hover {
+    background-color: var(--black);
+}
+
+.content-about-1 p {
+    font-size: 1.8vw;
+}
+
+.content-about-1 h1 {
+    width: 18%;
+}
+
+.content-about-2 {
+    background-color: var(--black-100);
+    border-radius: 8px;
+    color: #FFF;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    
+    padding: 1rem;
+    margin-top: 2rem;
+    height: 10vw;
+    width: 90%;
+
+
+    margin-left: 5rem;
+
+    transition: all 0.4s ease;
+}
+
+.content-about-2:hover {
+    background-color: var(--black);
+}
+
+.content-about-2 p {
+    font-size: 1.8vw;
+}
+
+.content-about-2 h1 {
+    width: 14%;
+}
+
+.content-about-3 {
+    background-color: var(--black-100);
+    border-radius: 8px;
+    color: #FFF;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    
+    padding: 1rem;
+    margin-top: 2rem;
+    height: 10vw;
+    width: 90%;
+
+
+    margin-left: 5rem;
+    transition: all 0.4s ease;
+}
+
+.content-about-3:hover {
+    background-color: var(--black);
+}
+
+.content-about-3 p {
+    font-size: 1.8vw;
+}
+
+.content-about-3 h1 {
+    width: 20%;;
+}
+
+.content-about-1 span {
+    width: 20%;
+    color: var(--green-300);
+    text-align: left;
+}
+
+.content-about-2 span {
+    width: 20%;
+    color: var(--green-300);
+    align-items: center;
+    text-align: left;
+}
+
+.content-about-3 span {
+    width: 20%;
+    color: var(--green-300);
+    
+}
+
+.content-about-4 {
+    align-items: center;
+    text-align: center;
+    margin-top: 4rem;
+    width: 78%;
+    margin-left: 9rem;
+    margin-bottom: 10rem;
+}
+
+.content-about-4 h4 {
+    font-size: 2vw;
+    color: var(--black-100);
+    font-style: italic;
+}
+
+.content-about-4 span {
+    text-decoration: underline #ffffff;
+}
+
+
+.equipe {
+    background-color: var(--green-300);
+    text-align: center;
+}
+
+.equipe h3 {
+    font-size: 3rem;
+    color: var(--black-100);
+}
+
+.fotos {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+}
+
+.fotos2 {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 5rem;
+}
+
+.foto1 {
+    border: 1px solid var(--black-100);
+    height: 300px;
+    width: 250px;
+}
+
+.foto2 {
+    border: 1px solid var(--black-100);
+    height: 300px;
+    width: 250px;
+}
+
+.foto3 {
+    border: 1px solid var(--black-100);
+    height: 300px;
+    width: 250px;
+}
+
+.foto4 {
+    border: 1px solid var(--black-100);
+    height: 300px;
+    width: 250px;
+}
+
+.foto5 {
+    border: 1px solid var(--black-100);
+    height: 300px;
+    width: 250px;
+}
+
+.foto6 {
+    border: 1px solid var(--black-100);
+    height: 300px;
+    width: 250px;
+}
+
+
+.contato {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--green-300);
+    text-align: center;
+    
+}
+
+.contato h3 {
+    font-size: 3vw;
+    margin-top: 10rem;
 }
