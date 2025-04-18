@@ -604,12 +604,73 @@ header {
 .contato {
     width: 100%;
     height: 100vh;
-    background-color: var(--green-300);
+    background-color: #fff;
     text-align: center;
     
 }
 
 .contato h3 {
     font-size: 3vw;
-    margin-top: 10rem;
+    margin-top: 5rem;
+}
+
+.contato h5 {
+    font-size: 1.3vw;
+}
+
+.formulario-contato {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.campo {
+    margin-bottom: 20px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.campo input,
+.campo textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 8px;
+    font-size: 1em;
+}
+
+.botao-enviar {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #8bc34a;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.botao-enviar:hover {
+    background-color: #7cb342;
+}
+
+.footer {
+    text-align: center;
+    background-color: var(--green-300);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    height: 5vw;
+    
+}
+
+.footer h4 {
+    margin-top: 2rem;
 }

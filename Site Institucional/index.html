@@ -251,7 +251,7 @@
                 
             </div>
 
-            <span id="msg-simulador">Olá</span>
+            <span id="msg-simulador"></span>
                 <!-- <div class="retornoSimulador">
                     <h4>Resultado: </h4>
                 </div> -->
@@ -316,16 +316,45 @@
                 <h4>Ryan Patric</h4>
             </div>
         </div>
-        
+        <br><br><br>
     </div>
 
     <section>
 
         <div class="contato">
             <h3>Contate-nos</h3>
+            <h5>Envie a sua dúvida</h5>
+    
+            <div class="formulario-contato">
+                <form method="post">
+                    <div class="campo">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome" placeholder="Digite seu nome completo" required>
+                    </div>
+    
+                    <div class="campo">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+                    </div>
+    
+                    <div class="campo">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" name="mensagem" rows="5" placeholder="Como podemos ajudar?" required></textarea>
+                    </div>
+    
+                    <button type="submit" class="botao-enviar">Enviar Dúvida</button>
+                </form>
+            </div>
         </div>
 
     </section>
+
+        <footer>
+            <div class="footer">
+            <h4>AgroSmart @ 2025. All rights reserved.</h4>
+        </div>
+        </footer>
+    
     
 </body>
 
