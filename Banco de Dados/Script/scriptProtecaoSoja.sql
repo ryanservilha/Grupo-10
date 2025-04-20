@@ -141,30 +141,30 @@ INSERT INTO localidadeSensor (terreno, fkEmpresa) VALUES
 ('Fazenda Sol Nascente', 2);
 
 SELECT 
-    emp.razaoSocial,
-    emp.emailEmpresa,
-    ender.cidade,
-    ender.estado,
-    loc.terreno,
-    func.nomeFuncionario,
-    setor.nomeSetor,
+    e.razaoSocial,
+    e.emailEmpresa,
+    en.cidade,
+    en.estado,
+    l.terreno,
+    f.nomeFuncionario,
+    s.nomeSetor,
     sens.nomeSensor,
     sens.statusSensor,
-    dado.dadoSensor,
-    dado.dataHoraEmissao
+    d.dadoSensor,
+    d.dataHoraEmissao
 FROM 
-    empresa emp
+    empresa AS e
 JOIN 
-    enderecoEmpresa ender ON emp.fkEndereco = ender.idEndereco
+    enderecoEmpresa AS en ON e.fkEndereco = en.idEndereco
 JOIN 
-    localidadeSensor loc ON emp.idEmpresa = loc.fkEmpresa
+    localidadeSensor AS l ON e.idEmpresa = l.fkEmpresa
 JOIN 
-    funcionarioEmpresa func ON emp.idEmpresa = func.fkEmpresa
+    funcionarioEmpresa AS f ON e.idEmpresa = f.fkEmpresa
 JOIN 
-    setorFuncionario setor ON func.fkSetor = setor.idSetor
+    setorFuncionario AS s ON f.fkSetor = s.idSetor
 JOIN 
-    sensorEmpresa sens ON sens.fkResponsavelSensor = func.idFuncionario
+    sensorEmpresa AS sens ON sens.fkResponsavelSensor = f.idFuncionario
 JOIN 
-    dadoSensor dado ON dado.fkSensor = sens.idSensor
+    dadoSensor AS d ON d.fkSensor = sens.idSensor
 ORDER BY 
-    dado.dataHoraEmissao DESC;
+    d.dataHoraEmissao DESC;
