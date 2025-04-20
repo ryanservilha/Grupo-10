@@ -59,28 +59,30 @@ INSERT INTO setorFuncionario (nomeSetor) VALUES
 -- criação da tabela funcionarioEmpresa
 
 CREATE TABLE funcionarioEmpresa (
-idFuncionario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-nomeFuncionario VARCHAR(60) NOT NULL,
-fkSetor INT NOT NULL,
-fkGerente INT NOT NULL,
-CONSTRAINT fkSetorFuncionario 
-FOREIGN KEY (fkSetor) 
-REFERENCES setorFuncionario(idSetor),
-CONSTRAINT fkFuncionarioGerente
-FOREIGN KEY (fkGerente)
-REFERENCES funcionarioEmpresa(idFuncionario)
+    idFuncionario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    nomeFuncionario VARCHAR(60) NOT NULL,
+    fkSetor INT NOT NULL,
+    fkGerente INT NOT NULL,
+    fkEmpresa INT NOT NULL,  
+    CONSTRAINT fkSetorFuncionario 
+        FOREIGN KEY (fkSetor) 
+        REFERENCES setorFuncionario(idSetor),
+    CONSTRAINT fkFuncionarioGerente
+        FOREIGN KEY (fkGerente)
+        REFERENCES funcionarioEmpresa(idFuncionario),
+    CONSTRAINT fkFuncionarioEmpresa
+        FOREIGN KEY (fkEmpresa)
+        REFERENCES empresa(idEmpresa)
 );
 
--- insert para funcionarioEmpresa (gerente)
 
-INSERT INTO funcionarioEmpresa (nomeFuncionario, fkSetor, fkGerente) VALUES
-('Carlos Gerente', 3, 1); -- o próprio como gerente para evitar erro de chave estrangeira
 
--- inserts para funcionarioEmpresa (outros funcionários)
+INSERT INTO funcionarioEmpresa (nomeFuncionario, fkSetor, fkGerente, fkEmpresa) VALUES
+('Carlos Gerente', 3, 1, 1); 
 
-INSERT INTO funcionarioEmpresa (nomeFuncionario, fkSetor, fkGerente) VALUES
-('Ana Engenheira', 2, 1),
-('Bruno Técnico', 1, 1);
+INSERT INTO funcionarioEmpresa (nomeFuncionario, fkSetor, fkGerente, fkEmpresa) VALUES
+('Ana Engenheira', 2, 1, 1),  
+('Bruno Técnico', 1, 1, 2);   
 
 -- criação da tabela sensorEmpresa
 CREATE TABLE sensorEmpresa (
@@ -107,7 +109,7 @@ INSERT INTO sensorEmpresa (nomeSensor, statusSensor, fkResponsavelSensor) VALUES
 CREATE TABLE dadoSensor (
 idDadoSensor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 dadoSensor DECIMAL(3,1) NOT NULL,
-dataHoraEmissao TIMESTAMP NOT NULL,
+dataHoraEmissao  DATETIME NOT NULL,
 fkSensor INT NOT NULL,
 CONSTRAINT fkSensorDado
 FOREIGN KEY (fkSensor)
@@ -117,9 +119,9 @@ REFERENCES sensorEmpresa(idSensor)
 -- inserts para dadoSensor
 
 INSERT INTO dadoSensor (dadoSensor, dataHoraEmissao, fkSensor) VALUES
-(23.4, NOW(), 1),
-(5.8, NOW(), 2),
-(30.1, NOW(), 3);
+(23.4, '2024-02-17 08:30:00', 1), 
+(5.8,  '2025-04-20 09:00:00', 2),
+(30.1, '2023-01-2 09:30:00', 3);
 
 -- criação da tabela localidadeSensor
 
@@ -137,3 +139,32 @@ REFERENCES empresa(idEmpresa)
 INSERT INTO localidadeSensor (terreno, fkEmpresa) VALUES
 ('Fazenda Rio Verde', 1),
 ('Fazenda Sol Nascente', 2);
+
+SELECT 
+    emp.razaoSocial,
+    emp.emailEmpresa,
+    ender.cidade,
+    ender.estado,
+    loc.terreno,
+    func.nomeFuncionario,
+    setor.nomeSetor,
+    sens.nomeSensor,
+    sens.statusSensor,
+    dado.dadoSensor,
+    dado.dataHoraEmissao
+FROM 
+    empresa emp
+JOIN 
+    enderecoEmpresa ender ON emp.fkEndereco = ender.idEndereco
+JOIN 
+    localidadeSensor loc ON emp.idEmpresa = loc.fkEmpresa
+JOIN 
+    funcionarioEmpresa func ON emp.idEmpresa = func.fkEmpresa
+JOIN 
+    setorFuncionario setor ON func.fkSetor = setor.idSetor
+JOIN 
+    sensorEmpresa sens ON sens.fkResponsavelSensor = func.idFuncionario
+JOIN 
+    dadoSensor dado ON dado.fkSensor = sens.idSensor
+ORDER BY 
+    dado.dataHoraEmissao DESC;
