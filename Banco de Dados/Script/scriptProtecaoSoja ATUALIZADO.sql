@@ -90,19 +90,23 @@ idSensor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 nomeSensor VARCHAR(20) NOT NULL,
 statusSensor VARCHAR(7) NOT NULL,
 fkResponsavelSensor INT NOT NULL,
+fkLocalidade INT NOT NULL,
 CONSTRAINT chkStatusSensor	
 CHECK (statusSensor IN ('ativo', 'inativo')),
 CONSTRAINT fkSensorResponsavel
 FOREIGN KEY (fkResponsavelSensor)
-REFERENCES funcionarioEmpresa(idFuncionario)
+REFERENCES funcionarioEmpresa(idFuncionario),
+CONSTRAINT chkSensorLocalidade
+FOREIGN KEY (fkLocalidade)
+REFERENCES localidadeSensor(idLocalidade)
 );
 
 -- inserts para sensorEmpresa
 
-INSERT INTO sensorEmpresa (nomeSensor, statusSensor, fkResponsavelSensor) VALUES
-('SensorUmidade', 'ativo', 2),
-('SensorPH', 'inativo', 3),
-('SensorTemperatura', 'ativo', 2);
+INSERT INTO sensorEmpresa (nomeSensor, statusSensor, fkResponsavelSensor, fkLocalidade) VALUES
+('SensorUmidade', 'ativo', 2, 1),
+('SensorPH', 'inativo', 3, 1),
+('SensorTemperatura', 'ativo', 2, 1);
 
 -- criação da tabela dadoSensor
 
@@ -119,9 +123,18 @@ REFERENCES sensorEmpresa(idSensor)
 -- inserts para dadoSensor
 
 INSERT INTO dadoSensor (dadoSensor, dataHoraEmissao, fkSensor) VALUES
-(23.4, '2024-02-17 08:30:00', 1), 
-(5.8,  '2025-04-20 09:00:00', 2),
-(30.1, '2023-01-2 09:30:00', 3);
+(10.4, '2024-02-17 08:30:00', 1), 
+(13.8, '2025-04-20 09:00:00', 2),
+(14.0, '2023-01-2 09:30:00', 3),
+(11.4, '2024-02-17 08:30:00', 1), 
+(12.8, '2025-04-20 09:00:00', 2),
+(15.0, '2023-01-2 09:30:00', 3),
+(10.4, '2024-02-17 08:30:00', 1), 
+(13.8, '2025-04-20 09:00:00', 2),
+(14.0, '2023-01-2 09:30:00', 3),
+(11.4, '2024-02-17 08:30:00', 1), 
+(12.8, '2025-04-20 09:00:00', 2),
+(15.0, '2023-01-2 09:30:00', 3);
 
 -- criação da tabela localidadeSensor
 
@@ -168,3 +181,28 @@ JOIN
     dadoSensor AS d ON d.fkSensor = sens.idSensor
 ORDER BY 
     d.dataHoraEmissao DESC;
+
+-- Select para capturar informações da empresa
+SELECT e.razaoSocial AS 'Razão Social', e.emailEmpresa AS 'Contato', concat(d.logradouro, ' ', d.numero, ' ', d.cidade, ' ', d.estado, ' ', d.pais) AS 'Endereço'
+FROM empresa AS e
+JOIN enderecoEmpresa AS d
+ON e.fkEndereco = d.idEndereco; 
+
+-- Select para listar os funcionários da empresa e os sensores que são responsáveis
+SELECT e.razaoSocial AS 'Razão Social', f.nomeFuncionario AS 'Funcionário', s.nomeSensor AS 'Sensor Responsável', l.terreno AS 'Localidade Sensor', s.statusSensor AS 'Sensor'
+FROM empresa AS e 
+JOIN funcionarioEmpresa AS f
+ON e.idEmpresa = f.fkEmpresa
+JOIN localidadeSensor AS l
+ON e.idEmpresa = l.fkEmpresa
+JOIN sensorEmpresa AS s
+ON s.fkLocalidade = l.idLocalidade;
+
+-- Select para trazer os dados dos sensores que possuem umidade inadequada
+SELECT s.nomeSensor AS 'Sensor', concat(d.dadoSensor, '%') AS 'Taxa de Umidade Obtida', d.dataHoraEmissao AS 'Data da Emissão', l.terreno AS 'Localidade'
+FROM sensorEmpresa AS s
+JOIN dadoSensor AS d
+ON d.fkSensor = s.idSensor
+JOIN localidadeSensor AS l
+ON s.fkLocalidade = l.idLocalidade
+WHERE d.dadoSensor > 15 OR d.dadoSensor < 13;
