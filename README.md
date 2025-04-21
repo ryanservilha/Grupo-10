@@ -45,7 +45,11 @@ A AgroSmart oferece um sistema inteligente de monitoramento da umidade do solo, 
 - Intervalo de irrigação: Monitoramento contínuo da umidade para otimização dos recursos.
 
 ## 💻 Site Institucional
-Visite o site institucional da AgroSmart para saber mais sobre a solução, benefícios e como nossa tecnologia pode transformar a produção de soja no Brasil. Descubra como podemos aumentar sua produtividade e reduzir perdas. 🔗[Veja o nosso protótipo completo](https://www.figma.com/design/prototipo-agrosmart)
+Visite o site institucional da AgroSmart para saber mais sobre a solução, benefícios e como nossa tecnologia pode transformar a produção de soja no Brasil. Descubra como podemos aumentar sua produtividade e reduzir perdas. 
+![siteInsti](https://github.com/user-attachments/assets/37e07f3e-fe01-4f0a-8bba-9c4b7322204d)
+
+
+🔗[Veja o nosso protótipo completo](https://www.figma.com/design/prototipo-agrosmart)
 
 <img src="public/assets/prototipo.png"/>
 
