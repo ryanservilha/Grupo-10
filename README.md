@@ -132,7 +132,7 @@ Modelagem:
 
   <div style="text-align: center; min-width: 200px;">
     <a href="https://github.com/ryanservilha">
-      <img src="https://github.com/ryanservilha" style="border-radius: 50%;" width="200px" /><br/>
+      <img src="https://github.com/ryanservilha.png" style="border-radius: 50%;" width="200px" /><br/>
       <b>Equipe 2</b>
     </a><br />
     <a href="https://github.com/ryanservilha">
@@ -142,7 +142,7 @@ Modelagem:
 
   <div style="text-align: center; min-width: 200px;">
     <a href="https://github.com/henriquedouradoo">
-      <img src="https://github.com/henriquedouradoo" style="border-radius: 50%;" width="200px" /><br/>
+      <img src="https://github.com/henriquedouradoo.png" style="border-radius: 50%;" width="200px" /><br/>
       <b>Equipe 3</b>
     </a><br />
     <a href="https://github.com/henriquedouradoo">
@@ -152,7 +152,7 @@ Modelagem:
 
   <div style="text-align: center; min-width: 200px;">
     <a href="https://github.com/juliaGavioli">
-      <img src="https://github.com/juliaGavioli" style="border-radius: 50%;" width="200px" /><br/>
+      <img src="https://github.com/juliaGavioli.png" style="border-radius: 50%;" width="200px" /><br/>
       <b>Equipe 4</b>
     </a><br />
     <a href="https://github.com/juliaGavioli">
@@ -162,7 +162,7 @@ Modelagem:
 
   <div style="text-align: center; min-width: 200px;">
     <a href="https://github.com/felipzp">
-      <img src="https://github.com/felipzp" style="border-radius: 50%;" width="200px" /><br/>
+      <img src="https://github.com/felipzp.png" style="border-radius: 50%;" width="200px" /><br/>
       <b>Equipe 5</b>
     </a><br />
     <a href="https://github.com/felipzp">
@@ -172,7 +172,7 @@ Modelagem:
 
   <div style="text-align: center; min-width: 200px;">
     <a href="https://github.com/kiyoshiiguilherme">
-      <img src="https://github.com/kiyoshiiguilherme" style="border-radius: 50%;" width="200px" /><br/>
+      <img src="https://github.com/kiyoshiiguilherme.png" style="border-radius: 50%;" width="200px" /><br/>
       <b>Equipe 6</b>
     </a><br />
     <a href="https://github.com/kiyoshiiguilherme">
