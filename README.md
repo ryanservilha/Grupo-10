@@ -99,7 +99,7 @@ Modelagem:
     title="C++"
     width="50px"
     style="padding-right: 10px;"
-    src="[https://upload.wikimedia.org/wikipedia/commons/e/ec/Arduino_Logo.svg](https://imgs.search.brave.com/HIyolGPhcdXAj_jvIDEO_AsSPitg-eqKd5iMjsilhNI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi8xLzE4L0lT/T19DJTJCJTJCX0xv/Z28uc3ZnLzI1MHB4/LUlTT19DJTJCJTJC/X0xvZ28uc3ZnLnBu/Zw)"
+    src="[https://imgs.search.brave.com/HIyolGPhcdXAj_jvIDEO_AsSPitg-eqKd5iMjsilhNI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi8xLzE4L0lT/T19DJTJCJTJCX0xv/Z28uc3ZnLzI1MHB4/LUlTT19DJTJCJTJC/X0xvZ28uc3ZnLnBu/Zw]"
 />
 <br>
 
