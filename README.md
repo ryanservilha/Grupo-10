@@ -50,7 +50,8 @@ Visite o site institucional da AgroSmart para saber mais sobre a solução, bene
 <img src="public/assets/prototipo.png"/>
 
 ## 📊 Diagrama de Visão de Negócio
-[Diagrama de visao de negócio.pdf](https://github.com/user-attachments/files/19839636/Diagrama.de.visao.de.negocio.pdf)
+![visaodenegocio](https://github.com/user-attachments/assets/6cc74099-0624-4479-ab6f-0013de3777c9)
+
 
 
 ## 🧱 Banco de Dados
