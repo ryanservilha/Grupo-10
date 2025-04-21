@@ -110,8 +110,10 @@ Modelagem:
     src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" 
 />
 <br>
-## 👤 Equipe
+
 <table>
+## 👤 Equipe
+<br>
 <td  align="center"><a  href= "https://github.com/usuario1"><img src="public/assets/equipe1.jpg" border-radius="50%"; width="200px;"/><br/><b> Equipe 1 </b></a><br /><a  href="https://github.com/usuario1" ><img  src="https://www.svgrepo.com/show/439171/github.svg"  width="20"/></a>
 </td>
 
