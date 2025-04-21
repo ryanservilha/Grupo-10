@@ -49,7 +49,7 @@ Visite o site institucional da AgroSmart para saber mais sobre a solução, bene
 ![siteInsti](https://github.com/user-attachments/assets/37e07f3e-fe01-4f0a-8bba-9c4b7322204d)
 
 
-🔗[Veja o nosso protótipo completo](https://www.figma.com/design/prototipo-agrosmart)
+🔗[Veja o nosso protótipo completo](https://www.figma.com/design/IQmL4IyT1owW7wYCXbzQVF/prot%C3%B3tipo-agro?node-id=3-5&t=eQVe0PtxNijAiPbF-1)
 
 
 ## 📊 Diagrama de Visão de Negócio
