@@ -93,16 +93,23 @@ Modelagem:
     style="padding-right: 10px;" 
     src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" 
 />
-<img
-    align="left"
-    alt="Arduino"
+<img 
+    align="left" 
+    alt="C++" 
     title="C++"
-    width="50px"
-    style="padding-right: 10px;"
-    src="[https://imgs.search.brave.com/HIyolGPhcdXAj_jvIDEO_AsSPitg-eqKd5iMjsilhNI/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy90/aHVtYi8xLzE4L0lT/T19DJTJCJTJCX0xv/Z28uc3ZnLzI1MHB4/LUlTT19DJTJCJTJC/X0xvZ28uc3ZnLnBu/Zw]"
+    width="50px" 
+    style="padding-right: 10px;" 
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cplusplus/cplusplus-original.svg" 
+/>
+<img 
+    align="left" 
+    alt="Node.js" 
+    title="Node.js"
+    width="50px" 
+    style="padding-right: 10px;" 
+    src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" 
 />
 <br>
-
 ## 👤 Equipe
 <table>
 <td  align="center"><a  href= "https://github.com/usuario1"><img src="public/assets/equipe1.jpg" border-radius="50%"; width="200px;"/><br/><b> Equipe 1 </b></a><br /><a  href="https://github.com/usuario1" ><img  src="https://www.svgrepo.com/show/439171/github.svg"  width="20"/></a>
