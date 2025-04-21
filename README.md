@@ -123,45 +123,41 @@ Modelagem:
     <td align="center">
       <a href="https://github.com/FelipeLima24">
         <img src="https://github.com/FelipeLima24.png" width="100px;" alt="FelipeLima24"/><br />
-        <sub><b>Equipe 1</b></sub>
+        <sub><b>Felipe Q</b></sub>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/ryanservilha">
         <img src="https://github.com/ryanservilha.png" width="100px;" alt="ryanservilha"/><br />
-        <sub><b>Equipe 2</b></sub>
+        <sub><b>Ryan</b></sub>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/henriquedouradoo">
         <img src="https://github.com/henriquedouradoo.png" width="100px;" alt="henriquedouradoo"/><br />
-        <sub><b>Equipe 3</b></sub>
+        <sub><b>Henrique D.</b></sub>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/juliaGavioli">
         <img src="https://github.com/juliaGavioli.png" width="100px;" alt="juliaGavioli"/><br />
-        <sub><b>Equipe 4</b></sub>
+        <sub><b>Julia</b></sub>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/felipzp">
         <img src="https://github.com/felipzp.png" width="100px;" alt="felipzp"/><br />
-        <sub><b>Equipe 5</b></sub>
+        <sub><b>Felipe F</b></sub>
       </a>
     </td>
     <td align="center">
       <a href="https://github.com/kiyoshiiguilherme">
         <img src="https://github.com/kiyoshiiguilherme.png" width="100px;" alt="kiyoshiiguilherme"/><br />
-        <sub><b>Equipe 6</b></sub>
+        <sub><b>Guilherme</b></sub>
       </a>
     </td>
   </tr>
 </table>
-
-    <a href="https://github.com/kiyoshiiguilherme">
-      <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
-    </a>
   </div>
 
 </div>
