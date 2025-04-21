@@ -59,7 +59,7 @@ Modelagem:
 ![modelagem](https://github.com/user-attachments/assets/c0400a07-4f89-40c5-b47d-414d25d767d4)
 
 
-## 🗒️ Tecnologias usadas no projeto
+## 🛠️ Tecnologias Utilizadas
 
 <img 
     align="left" 
@@ -109,17 +109,72 @@ Modelagem:
     style="padding-right: 10px;" 
     src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg" 
 />
-<br>
+<br><br>
+
+## 👥 Equipe
 
 <table>
-## 👤 Equipe
-<br>
-<td  align="center"><a  href= "https://github.com/usuario1"><img src="public/assets/equipe1.jpg" border-radius="50%"; width="200px;"/><br/><b> Equipe 1 </b></a><br /><a  href="https://github.com/usuario1" ><img  src="https://www.svgrepo.com/show/439171/github.svg"  width="20"/></a>
+<tr>
+<td align="center">
+    <a href="https://github.com/usuario1">
+        <img src="public/assets/equipe1.jpg" style="border-radius: 50%;" width="200px" /><br/>
+        <b>Equipe 1</b>
+    </a><br />
+    <a href="https://github.com/usuario1">
+        <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
+    </a>
 </td>
 
-<td  align="center"><a  href= "https://github.com/usuario2" ><img src="public/assets/equipe2.jpg"  border-radius="50%"; width="200px;"/><br/><b> Equipe 2 </b></a><br /><a  href="https://github.com/usuario2" ><img  src="https://www.svgrepo.com/show/439171/github.svg"  width="20"/></a>
+<td align="center">
+    <a href="https://github.com/usuario2">
+        <img src="public/assets/equipe2.jpg" style="border-radius: 50%;" width="200px" /><br/>
+        <b>Equipe 2</b>
+    </a><br />
+    <a href="https://github.com/usuario2">
+        <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
+    </a>
 </td>
 
-<td  align="center"><a  href="https://github.com/usuario3" ><img src="public/assets/equipe3.jpg" border-radius="50%"; width="200px;"/><br/><b> Equipe 3 </b></a><br /><a  href="https://github.com/usuario3" ><img  src="https://www.svgrepo.com/show/439171/github.svg"  width="20"/></a>
+<td align="center">
+    <a href="https://github.com/usuario3">
+        <img src="public/assets/equipe3.jpg" style="border-radius: 50%;" width="200px" /><br/>
+        <b>Equipe 3</b>
+    </a><br />
+    <a href="https://github.com/usuario3">
+        <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
+    </a>
 </td>
+</tr>
+
+<tr>
+<td align="center">
+    <a href="https://github.com/usuario4">
+        <img src="public/assets/equipe4.jpg" style="border-radius: 50%;" width="200px" /><br/>
+        <b>Equipe 4</b>
+    </a><br />
+    <a href="https://github.com/usuario4">
+        <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
+    </a>
+</td>
+
+<td align="center">
+    <a href="https://github.com/usuario5">
+        <img src="public/assets/equipe5.jpg" style="border-radius: 50%;" width="200px" /><br/>
+        <b>Equipe 5</b>
+    </a><br />
+    <a href="https://github.com/usuario5">
+        <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
+    </a>
+</td>
+
+<td align="center">
+    <a href="https://github.com/usuario6">
+        <img src="public/assets/equipe6.jpg" style="border-radius: 50%;" width="200px" /><br/>
+        <b>Equipe 6</b>
+    </a><br />
+    <a href="https://github.com/usuario6">
+        <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
+    </a>
+</td>
+</tr>
 </table>
