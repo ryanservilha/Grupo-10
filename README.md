@@ -118,68 +118,67 @@ Modelagem:
 
 ## 👥 Equipe
 
-<table style="display: flex;">
-<tr>
-<td align="center">
+<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
+
+  <div style="text-align: center;">
     <a href="https://github.com/usuario1">
-        <img src="public/assets/equipe1.jpg" style="border-radius: 50%;" width="200px" /><br/>
-        <b>Equipe 1</b>
+      <img src="public/assets/equipe1.jpg" style="border-radius: 50%;" width="200px" /><br/>
+      <b>Equipe 1</b>
     </a><br />
     <a href="https://github.com/usuario1">
-        <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
+      <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
     </a>
-</td>
+  </div>
 
-<td align="center">
+  <div style="text-align: center;">
     <a href="https://github.com/usuario2">
-        <img src="public/assets/equipe2.jpg" style="border-radius: 50%;" width="200px" /><br/>
-        <b>Equipe 2</b>
+      <img src="public/assets/equipe2.jpg" style="border-radius: 50%;" width="200px" /><br/>
+      <b>Equipe 2</b>
     </a><br />
     <a href="https://github.com/usuario2">
-        <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
+      <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
     </a>
-</td>
+  </div>
 
-<td align="center">
+  <div style="text-align: center;">
     <a href="https://github.com/usuario3">
-        <img src="public/assets/equipe3.jpg" style="border-radius: 50%;" width="200px" /><br/>
-        <b>Equipe 3</b>
+      <img src="public/assets/equipe3.jpg" style="border-radius: 50%;" width="200px" /><br/>
+      <b>Equipe 3</b>
     </a><br />
     <a href="https://github.com/usuario3">
-        <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
+      <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
     </a>
-</td>
-</tr>
+  </div>
 
-<tr>
-<td align="center">
+  <div style="text-align: center;">
     <a href="https://github.com/usuario4">
-        <img src="public/assets/equipe4.jpg" style="border-radius: 50%;" width="200px" /><br/>
-        <b>Equipe 4</b>
+      <img src="public/assets/equipe4.jpg" style="border-radius: 50%;" width="200px" /><br/>
+      <b>Equipe 4</b>
     </a><br />
     <a href="https://github.com/usuario4">
-        <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
+      <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
     </a>
-</td>
+  </div>
 
-<td align="center">
+  <div style="text-align: center;">
     <a href="https://github.com/usuario5">
-        <img src="public/assets/equipe5.jpg" style="border-radius: 50%;" width="200px" /><br/>
-        <b>Equipe 5</b>
+      <img src="public/assets/equipe5.jpg" style="border-radius: 50%;" width="200px" /><br/>
+      <b>Equipe 5</b>
     </a><br />
     <a href="https://github.com/usuario5">
-        <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
+      <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
     </a>
-</td>
+  </div>
 
-<td align="center">
+  <div style="text-align: center;">
     <a href="https://github.com/usuario6">
-        <img src="public/assets/equipe6.jpg" style="border-radius: 50%;" width="200px" /><br/>
-        <b>Equipe 6</b>
+      <img src="public/assets/equipe6.jpg" style="border-radius: 50%;" width="200px" /><br/>
+      <b>Equipe 6</b>
     </a><br />
     <a href="https://github.com/usuario6">
-        <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
+      <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
     </a>
-</td>
-</tr>
-</table>
+  </div>
+
+</div>
+
