@@ -55,6 +55,10 @@ Visite o site institucional da AgroSmart para saber mais sobre a solução, bene
 ## 🧱 Banco de Dados
 Consulte nossas tabelas nos repositórios.
 
+Modelagem:
+![modelagem](https://github.com/user-attachments/assets/c0400a07-4f89-40c5-b47d-414d25d767d4)
+
+
 ## 🗒️ Tecnologias usadas no projeto
 
 <img 
