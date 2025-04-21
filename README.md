@@ -1,10 +1,6 @@
 # AGRO SMART
 
 ---
-<h3 align="center">
-    <img src="public/assets/logo.png" alt="logo AgroSmart" width="150">
-</h3>
-
 <b>MONITORAMENTO INTELIGENTE DE UMIDADE DO SOLO PARA CULTIVO DE SOJA</b>
 
 <p>
