@@ -118,63 +118,47 @@ Modelagem:
 
 ## 👥 Equipe
 
-<div style="display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 40px; justify-content: center; padding: 20px 0;">
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/FelipeLima24">
+        <img src="https://github.com/FelipeLima24.png" width="100px;" alt="FelipeLima24"/><br />
+        <sub><b>Equipe 1</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/ryanservilha">
+        <img src="https://github.com/ryanservilha.png" width="100px;" alt="ryanservilha"/><br />
+        <sub><b>Equipe 2</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/henriquedouradoo">
+        <img src="https://github.com/henriquedouradoo.png" width="100px;" alt="henriquedouradoo"/><br />
+        <sub><b>Equipe 3</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/juliaGavioli">
+        <img src="https://github.com/juliaGavioli.png" width="100px;" alt="juliaGavioli"/><br />
+        <sub><b>Equipe 4</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/felipzp">
+        <img src="https://github.com/felipzp.png" width="100px;" alt="felipzp"/><br />
+        <sub><b>Equipe 5</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/kiyoshiiguilherme">
+        <img src="https://github.com/kiyoshiiguilherme.png" width="100px;" alt="kiyoshiiguilherme"/><br />
+        <sub><b>Equipe 6</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
-  <div style="text-align: center; min-width: 200px;">
-    <a href="https://github.com/FelipeLima24">
-      <img src="https://github.com/FelipeLima24.png" style="border-radius: 50%;" width="200px" /><br/>
-      <b>Equipe 1</b>
-    </a><br />
-    <a href="https://github.com/FelipeLima24">
-      <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
-    </a>
-  </div>
-
-  <div style="text-align: center; min-width: 200px;">
-    <a href="https://github.com/ryanservilha">
-      <img src="https://github.com/ryanservilha.png" style="border-radius: 50%;" width="200px" /><br/>
-      <b>Equipe 2</b>
-    </a><br />
-    <a href="https://github.com/ryanservilha">
-      <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
-    </a>
-  </div>
-
-  <div style="text-align: center; min-width: 200px;">
-    <a href="https://github.com/henriquedouradoo">
-      <img src="https://github.com/henriquedouradoo.png" style="border-radius: 50%;" width="200px" /><br/>
-      <b>Equipe 3</b>
-    </a><br />
-    <a href="https://github.com/henriquedouradoo">
-      <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
-    </a>
-  </div>
-
-  <div style="text-align: center; min-width: 200px;">
-    <a href="https://github.com/juliaGavioli">
-      <img src="https://github.com/juliaGavioli.png" style="border-radius: 50%;" width="200px" /><br/>
-      <b>Equipe 4</b>
-    </a><br />
-    <a href="https://github.com/juliaGavioli">
-      <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
-    </a>
-  </div>
-
-  <div style="text-align: center; min-width: 200px;">
-    <a href="https://github.com/felipzp">
-      <img src="https://github.com/felipzp.png" style="border-radius: 50%;" width="200px" /><br/>
-      <b>Equipe 5</b>
-    </a><br />
-    <a href="https://github.com/felipzp">
-      <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
-    </a>
-  </div>
-
-  <div style="text-align: center; min-width: 200px;">
-    <a href="https://github.com/kiyoshiiguilherme">
-      <img src="https://github.com/kiyoshiiguilherme.png" style="border-radius: 50%;" width="200px" /><br/>
-      <b>Equipe 6</b>
-    </a><br />
     <a href="https://github.com/kiyoshiiguilherme">
       <img src="https://www.svgrepo.com/show/439171/github.svg" width="20"/>
     </a>
