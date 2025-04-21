@@ -113,7 +113,7 @@ Modelagem:
 
 ## 👥 Equipe
 
-<table>
+<table style="display: flex;">
 <tr>
 <td align="center">
     <a href="https://github.com/usuario1">
