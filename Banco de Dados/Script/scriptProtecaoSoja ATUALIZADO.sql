@@ -102,6 +102,7 @@ INSERT INTO localidadeSensor (terreno, fkEmpresa) VALUES
 ('Fazenda Sol Nascente', 2);
 
 -- criação da tabela sensorEmpresa
+
 CREATE TABLE sensorEmpresa (
 idSensor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 nomeSensor VARCHAR(20) NOT NULL,
@@ -166,6 +167,7 @@ FROM empresa AS e
 JOIN enderecoEmpresa AS d ON e.fkEndereco = d.idEndereco; 
 
 -- select para listar os funcionários da empresa e os sensores que são responsáveis
+
 SELECT e.razaoSocial AS 'Razão Social',
 	f.nomeFuncionario AS 'Funcionário',
 	s.nomeSensor AS 'Sensor Responsável',
@@ -177,6 +179,7 @@ JOIN localidadeSensor AS l ON e.idEmpresa = l.fkEmpresa
 JOIN sensorEmpresa AS s ON s.fkLocalidade = l.idLocalidade;
 
 -- select para trazer os dados dos sensores que possuem umidade inadequada
+
 SELECT s.nomeSensor AS 'Sensor',
 	concat(d.dadoSensor, '%') AS 'Taxa de Umidade Obtida',
 	d.dataHoraEmissao AS 'Data da Emissão',
