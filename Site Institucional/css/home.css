@@ -582,12 +582,18 @@ header {
     border: 1px solid var(--black-100);
     height: 300px;
     width: 250px;
+    background: url(https://avatars.githubusercontent.com/u/198760140?v=4);
+    background-size: cover;
+    background-position: 60%;
 }
 
 .foto2 {
     border: 1px solid var(--black-100);
     height: 300px;
     width: 250px;
+    background: url(https://avatars.githubusercontent.com/u/199305428?v=4);
+    background-size: cover;
+    background-position: 50%;
 }
 
 .foto3 {
@@ -600,12 +606,18 @@ header {
     border: 1px solid var(--black-100);
     height: 300px;
     width: 250px;
+    background: url(https://avatars.githubusercontent.com/u/198920045?v=4);
+    background-size: cover;
+    background-position: 60%;
 }
 
 .foto5 {
     border: 1px solid var(--black-100);
     height: 300px;
     width: 250px;
+    background: url(https://avatars.githubusercontent.com/u/125815196?v=4);
+    background-size: cover;
+    background-position: 60%;
 }
 
 .foto6 {
