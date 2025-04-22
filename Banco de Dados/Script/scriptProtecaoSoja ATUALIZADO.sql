@@ -131,28 +131,16 @@ INSERT INTO sensorEmpresa (nomeSensor, statusSensor, fkResponsavelSensor, fkLoca
 CREATE TABLE dadoSensor (
 idDadoSensor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 dadoSensor DECIMAL(3,1) NOT NULL,
-dataHoraEmissao  DATETIME NOT NULL,
+dataHoraEmissao  DATETIME DEFAULT CURRENT_TIMESTAMP,
 fkSensor INT NOT NULL,
 CONSTRAINT fkSensorDado
 FOREIGN KEY (fkSensor)
 REFERENCES sensorEmpresa(idSensor)
 );
 
--- inserts para dadoSensor
+-- select nos dados inseridos pela API; 
 
-INSERT INTO dadoSensor (dadoSensor, dataHoraEmissao, fkSensor) VALUES
-(10.4, '2024-02-17 08:30:00', 1), 
-(13.8, '2025-04-20 09:00:00', 2),
-(14.0, '2023-01-2 09:30:00', 3),
-(11.4, '2024-02-17 08:30:00', 1), 
-(12.8, '2025-04-20 09:00:00', 2),
-(15.0, '2023-01-2 09:30:00', 3),
-(10.4, '2024-02-17 08:30:00', 1), 
-(13.8, '2025-04-20 09:00:00', 2),
-(14.0, '2023-01-2 09:30:00', 3),
-(11.4, '2024-02-17 08:30:00', 1), 
-(12.8, '2025-04-20 09:00:00', 2),
-(15.0, '2023-01-2 09:30:00', 3);
+SELECT * FROM dadoSensor;
 
 -- select para capturar informações da empresa
 
