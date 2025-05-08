@@ -48,20 +48,61 @@ body {
 .titulo {
     background-color: white;
     border-radius: 25px;
-    width: 20%;
-    height: 50px;
+    width: 30%;
+    height: 65px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 2px solid black;
     margin-right: 9%;
+    gap: 8%;
 }
 
-.titulo h2 {
+.textinho h2 {
+    margin-top: 2px;
     text-transform: uppercase;
-    font-size: 20;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 650;
     font-family: Inter;
+}
+
+.cores {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+
+.cores p {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.vermelho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 25px;
+    background-color: red;
+    border-radius: 9px;
+    color: white;
+}
+
+.verde {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 29%;
+    height: 25px;
+    background-color: rgb(2, 165, 2);
+    border-radius: 9px;
+    color: white;
 }
 
 .perfil {
@@ -84,15 +125,19 @@ body {
 
 .cima {
     display: flex;
+    flex-direction: row;
     width: 100%;
+    height: 30vh;
+    justify-content: center;
 }
 
 .quadrados {
+    width: 92%;
     display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    width: 55%;
     gap: 5%;
-    margin-left: 5%;
 }
 
 .quadrado {
@@ -107,34 +152,125 @@ body {
     border: 2px solid black;
 }
 
-#totalSensores h2 {
-    padding: 20px;
+#totalSensores h2, #media30dias h2 {
+    padding: 15px;
     font-size: 18px;
     color: rgb(65, 65, 65);
 }
 
-#totalSensores p {
+#totalSensores p, #media30dias p {
     font-size: 45px;
     font-weight: 650;
 }
 
+#maiorTaxaDia h2 {
+    padding: 15px;  
+    font-size: 17px;
+    color: rgb(65, 65, 65);
+}
+
+#maiorTaxaDia h3 {
+    margin-top: 9px;
+    font-size: 35px;
+    font-weight: 670;
+}
+
+#maiorTaxaDia p {
+    font-weight: 600;
+}
+
+#alertas {
+    line-height: 40px;
+    position: relative;
+}
+
 #alertas h2 {
     color: rgb(65, 65, 65);
-    padding: 25px;
+    padding: 17px;
+}
+
+#alertas a {
+    position: absolute;
+    color: rebeccapurple;
+    text-decoration: underline;
+    font-size: 15px;
+    font-weight: 700;
+    display: none;
+    bottom: 2px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#alertas a:hover {
+    font-size: 16px;
+}
+
+#alertas:hover a {
+    display: block;
 }
 
 #alertas p {
-    font-size: 21px;
-    font-weight: 850;
+    font-size: 55px;
+    font-weight: 950;
     color: rgb(232, 4, 4);
 }
 
+
+.baixo {
+    display: flex;
+    gap: 5%;
+}
+
+.graficoDia {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 30px;
+    border: 2px solid black;
+    width: 50%;
+    height: 280px;
+    text-align: center;
+    margin-left: 4%;
+}
+
+.cimaGrafico {
+    display: flex;
+    flex-direction: row;
+    height: 30%;
+    width: 100%;
+    align-items: center;
+}
+
+.cimaGrafico select {
+    height: 25px;
+    width: 15%;
+    background-color: rebeccapurple;
+    color: white;
+    font-weight: 650;
+    justify-items: start;
+    text-align: center;
+    border: none;
+    border-radius: 8px;
+    margin-left: 20px;
+}
+
+.graficoDia .cimaGrafico h2 {
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+.graficoDia canvas {
+    margin-top: 2px;
+    margin-left: 7px;
+    margin-right: 20px; 
+    margin-bottom: 10px;   
+}
 .grafico30dias {
     background-color: white;
     border-radius: 30px;
     border: 2px solid black;
     width: 60%;
-    height: 250px;
+    height: 280px;
     text-align: center;
 }
 
@@ -147,53 +283,95 @@ body {
     margin: 60px;
     margin-top: 0;
     margin-left: 10px;
-    margin-right: 10px;
+    margin-right: 30px;
 }
 
-.baixo {
+.grafico30 {
+    width: 100%;
+    height: 20%;
     display: flex;
-    gap: 5%;
+    align-items: center;
 }
 
-.graficoDia {
-    background-color: white;
-    border-radius: 30px;
-    border: 2px solid black;
-    width: 50%;
-    height: 250px;
+.grafico30 select {
+    height: 25px;
+    width: 15%;
+    background-color: rebeccapurple;
+    color: white;
+    font-weight: 650;
+    justify-items: start;
     text-align: center;
-    margin-left: 4%;
+    border: none;
+    border-radius: 8px;
+    margin-left: 20px;
 }
 
-.graficoDia h2 {
-    margin: 12px;
-    font-size: 20px;
+.grafico30 h2 {
+    margin-left: 20px;
 }
 
-.graficoDia canvas {
-    margin: 55px;
-    margin-top: 0;
-    margin-left: 10px;
-    margin-right: 10px;    
+#detalhe {
+    position: absolute;
+    margin-right: 23%;
+    width: 40vh;
+    height: 30vh;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    z-index: 999;
 }
 
-.graficoTempoReal {
-    background-color: white;
-    border-radius: 30px;
-    border: 2px solid black;
-    width: 60%;
-    height: 250px;
+.botaoFechar {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 20%;
+    align-items: center;
+}
+
+.botaoFechar button {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    background-color: red;
+    color: white;
+    font-weight: 700;
+    font-size: 17px;
+    border-radius: 9px;
     text-align: center;
+    border: none;
+    transition: 0.2s ease;
 }
 
-.graficoTempoReal h2 {
-    margin: 12px;
-    font-size: 20px;
+.botaoFechar button:hover {
+    transform: scale(1.02);
 }
 
-.graficoTempoReal canvas {
-    margin: 55px;
-    margin-top: 0;
-    margin-left: 10px;
-    margin-right: 10px;
+.lista {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90%;
+}
+
+.lista ul {
+    line-height: 40px;
+}
+
+.lista ul li span {
+    color: red;
+    font-weight: 700;
+}
+
+#overlay {
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(1.7px);
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 998;
+    display: none;
 }
