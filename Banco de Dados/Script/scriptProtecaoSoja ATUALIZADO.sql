@@ -29,7 +29,7 @@ CREATE TABLE empresa (
 idEmpresa INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 razaoSocial VARCHAR(45) NOT NULL,
 cnpj CHAR(14) NOT NULL,
-fkEndereco INT UNIQUE NOT NULL
+fkEndereco INT UNIQUE NOT NULL,
 CONSTRAINT fkEmpresaEndereco 
 FOREIGN KEY (fkEndereco)
 REFERENCES endereco(idEndereco)
@@ -85,14 +85,34 @@ INSERT INTO funcionario (nome, telefone, senha, email, fkGerente, fkEmpresa, fkS
 ('Ana Engenheira', '44988887777', 'senha456', 'ana@empresa.com', 1, 1, 2),
 ('Bruno Técnico', '66997776666', 'senha789', 'bruno@empresa.com', 1, 2, 1);
 
+-- criação da tabela sensor
+
+CREATE TABLE sensor (
+idSensor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+nome VARCHAR(20) NOT NULL,
+status VARCHAR(7) NOT NULL,
+fkEmpresa INT NOT NULL,
+CONSTRAINT chkStatusSensor	
+CHECK (status IN ('ativo', 'inativo')),
+CONSTRAINT fkSensorEmpresa 
+FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
+);
+
+-- inserts para sensor
+
+INSERT INTO sensor (nome, status, fkEmpresa) VALUES
+('SensorUmidade', 'ativo', 1),
+('SensorPH', 'inativo', 1),
+('SensorTemperatura', 'ativo', 2);
+
 -- criação da tabela localidade
 
 CREATE TABLE localidade (
 idLocalidade INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
 terreno VARCHAR(45) NOT NULL, 
 coordenadas VARCHAR(45) NOT NULL UNIQUE,
-fkSensor INT NOT NULL
-CONSTRAINT fkSensorEmpresa 
+fkSensor INT NOT NULL,
+CONSTRAINT fkLocalidadeSensor 
 FOREIGN KEY (fkSensor)
 REFERENCES sensor(idSensor)
 );
@@ -102,23 +122,6 @@ REFERENCES sensor(idSensor)
 INSERT INTO localidade (terreno, coordenadas, fkSensor) VALUES
 ('Fazenda Rio Verde', '23S51W', 1),
 ('Fazenda Sol Nascente', '12S55W', 2);
-
--- criação da tabela sensor
-
-CREATE TABLE sensor (
-idSensor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-nome VARCHAR(20) NOT NULL,
-status VARCHAR(7) NOT NULL,
-CONSTRAINT chkStatusSensor	
-CHECK (statusSensor IN ('ativo', 'inativo'))
-);
-
--- inserts para sensor
-
-INSERT INTO sensor (nome, status) VALUES
-('SensorUmidade', 'ativo'),
-('SensorPH', 'inativo'),
-('SensorTemperatura', 'ativo');
 
 -- criação da tabela medida
 
@@ -131,6 +134,15 @@ CONSTRAINT fkSensorDado
 FOREIGN KEY (fkSensor)
 REFERENCES sensor(idSensor)
 );
+
+-- insert na tabela medida
+
+INSERT INTO medida (dado, fkSensor) VALUES
+(12.5, 1),  -- sensor 1 (SensorUmidade)
+(13.7, 2),  -- sensor 2 (SensorPH)
+(16.0, 3),  -- sensor 3 (SensorTemperatura)
+(14.2, 1),
+(17.1, 2);
 
 -- select nos dados inseridos pela API; 
 
@@ -158,8 +170,8 @@ SELECT
   s.status AS 'Status do Sensor'
 FROM empresa AS e
 JOIN funcionario AS f ON f.fkEmpresa = e.idEmpresa
-JOIN localidade AS l ON l.fkSensor IS NOT NULL
-JOIN sensor AS s ON s.idSensor = l.fkSensor;
+JOIN sensor AS s ON s.fkEmpresa = e.idEmpresa
+JOIN localidade AS l ON l.fkSensor = s.idSensor;
 
 
 -- select para trazer os dados dos sensores que possuem umidade inadequada
@@ -172,6 +184,8 @@ FROM sensor AS s
 JOIN medida AS m ON m.fkSensor = s.idSensor
 JOIN localidade AS l ON l.fkSensor = s.idSensor
 WHERE m.dado > 15 OR m.dado < 13;
+
+
 
 -- select com todas as tabelas
 
@@ -191,7 +205,7 @@ FROM empresa AS e
 JOIN endereco AS en ON e.fkEndereco = en.idEndereco
 JOIN funcionario AS f ON f.fkEmpresa = e.idEmpresa
 JOIN setor AS st ON f.fkSetor = st.idSetor
-JOIN localidade AS l ON l.fkSensor IS NOT NULL
-JOIN sensor AS se ON se.idSensor = l.fkSensor
+JOIN sensor AS se ON se.fkEmpresa = e.idEmpresa
+JOIN localidade AS l ON l.fkSensor = se.idSensor
 JOIN medida AS m ON m.fkSensor = se.idSensor
 ORDER BY m.dataHoraEmissao DESC;
