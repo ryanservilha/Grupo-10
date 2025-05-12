@@ -56,7 +56,8 @@ Visite o site institucional da AgroSmart para saber mais sobre a solução, bene
 ![visaodenegocio](https://github.com/user-attachments/assets/6cc74099-0624-4479-ab6f-0013de3777c9)
 
 ## 🖥️ Diagrama de Solução
-![visaodenegocio](https://github.com/user-attachments/assets/6cc74099-0624-4479-ab6f-0013de3777c9)
+![visaodesolução](https://github.com/user-attachments/assets/cf1879ea-f702-4dfa-9b9b-9d487e1b3122)
+
 
 
 
