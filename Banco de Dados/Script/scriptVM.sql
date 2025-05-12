@@ -1,149 +1,175 @@
 -- criação do banco de dados
--- CREATE DATABASE protecaoSoja;
-
--- usando o banco de dados
+CREATE DATABASE protecaoSoja;
 USE protecaoSoja;
 
--- criação da tabela enderecoEmpresa
-
-CREATE TABLE enderecoEmpresa (
-idEndereco INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-logradouro VARCHAR(100) NOT NULL,
-numero VARCHAR(6) NOT NULL,
-cidade VARCHAR(45) NOT NULL,
-estado CHAR(2) NOT NULL,
-pais VARCHAR(45) NOT NULL
+-- criação da tabela endereco
+CREATE TABLE endereco (
+  idEndereco INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  logradouro VARCHAR(100) NOT NULL,
+  numero VARCHAR(6) NOT NULL,
+  cidade VARCHAR(45) NOT NULL,
+  estado CHAR(2) NOT NULL,
+  pais VARCHAR(45) NOT NULL
 );
 
--- insert para enderecoEmpresa
-
-INSERT INTO enderecoEmpresa (logradouro, numero, cidade, estado, pais) VALUES
+-- inserts para endereco
+INSERT INTO endereco (logradouro, numero, cidade, estado, pais) VALUES
 ('Rua das Lavouras', '123', 'Londrina', 'PR', 'Brasil'),
 ('Av. Soja Forte', '456', 'Sorriso', 'MT', 'Brasil');
 
 -- criação da tabela empresa
-
 CREATE TABLE empresa (
-idEmpresa INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-razaoSocial VARCHAR(45) NOT NULL,
-cnpj CHAR(14) NOT NULL,
-emailEmpresa VARCHAR(45) NOT NULL,
-nomeUsuario VARCHAR(45) NOT NULL,
-senhaEmpresa VARCHAR(45) NOT NULL,
-telefone CHAR(11) NOT NULL,
-fkEndereco INT UNIQUE NOT NULL,
-CONSTRAINT fkEmpresaEndereco 
-FOREIGN KEY (fkEndereco)
-REFERENCES enderecoEmpresa(idEndereco)
+  idEmpresa INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  razaoSocial VARCHAR(45) NOT NULL,
+  cnpj CHAR(14) NOT NULL,
+  fkEndereco INT UNIQUE NOT NULL,
+  CONSTRAINT fkEmpresaEndereco 
+    FOREIGN KEY (fkEndereco)
+    REFERENCES endereco(idEndereco)
 );
 
--- insert para empresa
+-- inserts para empresa
+INSERT INTO empresa (razaoSocial, cnpj, fkEndereco) VALUES
+('AgroSoja LTDA', '12345678000199', 1),
+('SojaMax SA', '98765432000155', 2);
 
-INSERT INTO empresa (razaoSocial, cnpj, emailEmpresa, nomeUsuario, senhaEmpresa, telefone, fkEndereco) VALUES
-('AgroSoja LTDA', '12345678000199', 'contato@agrosoja.com', 'agrosoja_user', 'senha123', '44999999999', 1),
-('SojaMax SA', '98765432000155', 'suporte@sojamax.com', 'sojamax_user', 'senha456', '66988888888', 2);
-
--- criação da tabela setorFuncionario
-
-CREATE TABLE setorFuncionario (
-idSetor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-nomeSetor VARCHAR(45) NOT NULL
+-- criação da tabela funcionario
+CREATE TABLE funcionario (
+  idFuncionario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  nome VARCHAR(60) NOT NULL,
+  telefone CHAR(11) NOT NULL,
+  senha VARCHAR(45) NOT NULL,
+  email VARCHAR(45) NOT NULL,
+  setor VARCHAR(45) NOT NULL,
+  fkGerente INT,
+  fkEmpresa INT NOT NULL,
+  CONSTRAINT fkFuncionarioGerente
+    FOREIGN KEY (fkGerente)
+    REFERENCES funcionario(idFuncionario),
+  CONSTRAINT fkFuncionarioEmpresa
+    FOREIGN KEY (fkEmpresa)
+    REFERENCES empresa(idEmpresa)
 );
 
--- insert para setorFuncionario
-INSERT INTO setorFuncionario (nomeSetor) VALUES
-('TI'),
-('Engenharia Agrícola'),
-('Administração');
+-- inserts para funcionario
+INSERT INTO funcionario (nome, telefone, senha, email, setor, fkGerente, fkEmpresa) VALUES
+('Carlos Gerente', '44999999999', 'senha123', 'carlos@empresa.com', 'TI', NULL, 1),
+('Ana Engenheira', '44988887777', 'senha456', 'ana@empresa.com', 'Engenharia Agrícola', 1, 1),
+('Bruno Técnico', '66997776666', 'senha789', 'bruno@empresa.com', 'Administração', 1, 1);
 
--- criação da tabela funcionarioEmpresa
-
-CREATE TABLE funcionarioEmpresa (
-idFuncionario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-nomeFuncionario VARCHAR(60) NOT NULL,
-fkSetor INT NOT NULL,
-fkGerente INT NOT NULL,
-CONSTRAINT fkSetorFuncionario 
-FOREIGN KEY (fkSetor) 
-REFERENCES setorFuncionario(idSetor),
-CONSTRAINT fkFuncionarioGerente
-FOREIGN KEY (fkGerente)
-REFERENCES funcionarioEmpresa(idFuncionario)
+-- criação da tabela localidade
+CREATE TABLE localidade (
+  idLocalidade INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  terreno VARCHAR(45) NOT NULL, 
+  coordenadas VARCHAR(45) NOT NULL UNIQUE
 );
 
--- insert para funcionarioEmpresa (gerente)
+-- inserts para localidade
+INSERT INTO localidade (terreno, coordenadas) VALUES
+('Fazenda Rio Verde', '23S51W'),
+('Fazenda Sol Nascente', '12S55W');
 
-INSERT INTO funcionarioEmpresa (nomeFuncionario, fkSetor, fkGerente) VALUES
-('Carlos Gerente', 3, 1); -- o próprio como gerente para evitar erro de chave estrangeira
-
--- inserts para funcionarioEmpresa (outros funcionários)
-
-INSERT INTO funcionarioEmpresa (nomeFuncionario, fkSetor, fkGerente) VALUES
-('Ana Engenheira', 2, 1),
-('Bruno Técnico', 1, 1);
-
--- criação da tabela sensorEmpresa
-CREATE TABLE sensorEmpresa (
-idSensor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-nomeSensor VARCHAR(20) NOT NULL,
-statusSensor VARCHAR(7) NOT NULL,
-fkResponsavelSensor INT NOT NULL,
-CONSTRAINT chkStatusSensor	
-CHECK (statusSensor IN ('ativo', 'inativo')),
-CONSTRAINT fkSensorResponsavel
-FOREIGN KEY (fkResponsavelSensor)
-REFERENCES funcionarioEmpresa(idFuncionario)
+-- criação da tabela sensor
+CREATE TABLE sensor (
+  idSensor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  nome VARCHAR(20) NOT NULL,
+  status VARCHAR(7) NOT NULL,
+  fkEmpresa INT NOT NULL,
+  fkLocalidade INT NOT NULL,
+  CONSTRAINT chkStatusSensor CHECK (status IN ('ativo', 'inativo')),
+  CONSTRAINT fkSensorEmpresa FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa),
+  CONSTRAINT fkSensorLocalidade FOREIGN KEY (fkLocalidade) REFERENCES localidade(idLocalidade)
 );
 
--- inserts para sensorEmpresa
+-- inserts para sensor
+INSERT INTO sensor (nome, status, fkEmpresa, fkLocalidade) VALUES
+('SensorUmidade', 'ativo', 1, 1),
+('SensorPH', 'inativo', 1, 1),
+('SensorTemperatura', 'ativo', 2, 2);
 
-INSERT INTO sensorEmpresa (nomeSensor, statusSensor, fkResponsavelSensor) VALUES
-('SensorUmidade', 'ativo', 2),
-('SensorPH', 'inativo', 3),
-('SensorTemperatura', 'ativo', 2);
-
--- criação da tabela dadoSensor
-
-CREATE TABLE dadoSensor (
-idDadoSensor INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-dadoSensor DECIMAL(3,1) NOT NULL,
-dataHoraEmissao TIMESTAMP NOT NULL,
-fkSensor INT NOT NULL,
-CONSTRAINT fkSensorDado
-FOREIGN KEY (fkSensor)
-REFERENCES sensorEmpresa(idSensor)
+-- criação da tabela medida
+CREATE TABLE medida (
+  idMedida INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  dado DECIMAL(3,1) NOT NULL,
+  dataHoraEmissao DATETIME DEFAULT CURRENT_TIMESTAMP,
+  fkSensor INT NOT NULL,
+  CONSTRAINT fkSensorDado
+    FOREIGN KEY (fkSensor)
+    REFERENCES sensor(idSensor)
 );
 
--- inserts para dadoSensor
+-- inserts para medida
+INSERT INTO medida (dado, fkSensor) VALUES
+(12.5, 1),
+(13.7, 2),
+(16.0, 3),
+(14.2, 1),
+(17.1, 2);
 
-INSERT INTO dadoSensor (dadoSensor, dataHoraEmissao, fkSensor) VALUES
-(23.4, NOW(), 1),
-(5.8, NOW(), 2),
-(30.1, NOW(), 3);
+-- select nos dados inseridos pela API; 
 
--- criação da tabela localidadeSensor
+SELECT * FROM medida;
 
-CREATE TABLE localidadeSensor (
-idLocalidade INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-terreno VARCHAR(45) NOT NULL, 
-fkEmpresa INT NOT NULL,
-CONSTRAINT fkEmpresaLocalidade 
-FOREIGN KEY (fkEmpresa)
-REFERENCES empresa(idEmpresa)
-);
+-- select para capturar informações da empresa
 
--- inserts para localidadeSensor
+SELECT 
+  e.razaoSocial AS 'Razão Social',
+  e.cnpj AS 'CNPJ',
+  CONCAT(en.logradouro, ', ',
+         en.numero, ', ',
+         en.cidade, ' - ',
+         en.estado, ', ',
+         en.pais) AS 'Endereço'
+FROM empresa AS e
+JOIN endereco AS en ON e.fkEndereco = en.idEndereco;
 
-INSERT INTO localidadeSensor (terreno, fkEmpresa) VALUES
-('Fazenda Rio Verde', 1),
-('Fazenda Sol Nascente', 2);
+-- select para listar os funcionários da empresa e os sensores
 
--- insert para medidaSensor
-CREATE TABLE medidaSensor (
-idMedida int primary key auto_increment,
-sensor_analogico decimal (4,2),
-dataAtual datetime default current_timestamp
-);
+SELECT 
+  e.razaoSocial AS 'Razão Social',
+  f.nome AS 'Funcionário',
+  s.nome AS 'Sensor',
+  l.terreno AS 'Localidade do Sensor',
+  s.status AS 'Status do Sensor'
+FROM empresa AS e
+JOIN funcionario AS f ON f.fkEmpresa = e.idEmpresa
+JOIN sensor AS s ON s.fkEmpresa = e.idEmpresa
+JOIN localidade AS l ON s.fkLocalidade = l.idLocalidade;
 
-select * from  medidaSensor;
- 
+
+
+-- select para trazer os dados dos sensores que possuem umidade inadequada
+
+
+SELECT 
+  s.nome AS 'Sensor',
+  CONCAT(m.dado, '%') AS 'Taxa de Umidade Obtida',
+  m.dataHoraEmissao AS 'Data da Emissão',
+  l.terreno AS 'Localidade'
+FROM sensor AS s
+JOIN medida AS m ON m.fkSensor = s.idSensor
+JOIN localidade AS l ON s.fkLocalidade = l.idLocalidade
+WHERE m.dado > 15 OR m.dado < 13;
+
+
+
+-- select com todas as tabelas
+SELECT 
+  e.razaoSocial AS 'Empresa',
+  e.cnpj AS 'CNPJ',
+  en.cidade AS 'Cidade',
+  en.estado AS 'Estado',
+  l.terreno AS 'Terreno',
+  f.nome AS 'Funcionário',
+  f.setor AS 'Setor',
+  se.nome AS 'Sensor',
+  se.status AS 'Status do Sensor',
+  m.dado AS 'Valor da Medida',
+  m.dataHoraEmissao AS 'Data'
+FROM empresa AS e
+JOIN endereco AS en ON e.fkEndereco = en.idEndereco
+JOIN funcionario AS f ON f.fkEmpresa = e.idEmpresa
+JOIN sensor AS se ON se.fkEmpresa = e.idEmpresa
+JOIN localidade AS l ON se.fkLocalidade = l.idLocalidade
+JOIN medida AS m ON m.fkSensor = se.idSensor
+ORDER BY m.dataHoraEmissao DESC;
