@@ -24,17 +24,16 @@ INSERT INTO enderecoEmpresa (logradouro, numero, cidade, estado, pais) VALUES
 -- criação da tabela empresa
 
 CREATE TABLE empresa (
-idEmpresa INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+idEmpresa INT PRIMARY KEY AUTO_INCREMENT,
 razaoSocial VARCHAR(45) NOT NULL,
 cnpj CHAR(14) NOT NULL,
 emailEmpresa VARCHAR(45) NOT NULL,
 senhaEmpresa VARCHAR(45) NOT NULL,
-telefone CHAR(11) NOT NULL,
-fkEndereco INT UNIQUE NOT NULL,
-CONSTRAINT fkEmpresaEndereco 
-FOREIGN KEY (fkEndereco)
-REFERENCES enderecoEmpresa(idEndereco)
+telefone CHAR(11) NOT NULL
 );
+
+
+select * from empresa;
 
 -- insert para empresa
 
@@ -138,3 +137,61 @@ REFERENCES sensorEmpresa(idSensor)
 -- select nos dados inseridos pela API; 
 
 SELECT * FROM dadoSensor;
+
+-- select para capturar informações da empresa
+
+SELECT e.razaoSocial AS 'Razão Social',
+	e.emailEmpresa AS 'Contato',
+	concat(d.logradouro, ' ',
+	d.numero, ' ',
+	d.cidade, ' ',
+	d.estado, ' ',
+	d.pais) AS 'Endereço'
+FROM empresa AS e
+JOIN enderecoEmpresa AS d ON e.fkEndereco = d.idEndereco; 
+
+-- select para listar os funcionários da empresa e os sensores que são responsáveis
+
+SELECT e.razaoSocial AS 'Razão Social',
+	f.nomeFuncionario AS 'Funcionário',
+	s.nomeSensor AS 'Sensor Responsável',
+	l.terreno AS 'Localidade Sensor',
+	s.statusSensor AS 'Sensor'
+FROM empresa AS e 
+JOIN funcionarioEmpresa AS f ON e.idEmpresa = f.fkEmpresa
+JOIN localidadeSensor AS l ON e.idEmpresa = l.fkEmpresa
+JOIN sensorEmpresa AS s ON s.fkLocalidade = l.idLocalidade;
+
+-- select para trazer os dados dos sensores que possuem umidade inadequada
+
+SELECT s.nomeSensor AS 'Sensor',
+	concat(d.dadoSensor, '%') AS 'Taxa de Umidade Obtida',
+	d.dataHoraEmissao AS 'Data da Emissão',
+	l.terreno AS 'Localidade'
+FROM sensorEmpresa AS s
+JOIN dadoSensor AS d ON d.fkSensor = s.idSensor
+JOIN localidadeSensor AS l ON s.fkLocalidade = l.idLocalidade
+WHERE d.dadoSensor > 15 OR d.dadoSensor < 13;
+
+-- select com todas as tabelas
+
+SELECT 
+	e.razaoSocial,
+    e.emailEmpresa,
+    en.cidade,
+    en.estado,
+    l.terreno,
+    f.nomeFuncionario,
+    s.nomeSetor,
+    sens.nomeSensor,
+    sens.statusSensor,
+    d.dadoSensor,
+    d.dataHoraEmissao
+FROM empresa AS e
+JOIN enderecoEmpresa AS en ON e.fkEndereco = en.idEndereco
+JOIN localidadeSensor AS l ON e.idEmpresa = l.fkEmpresa
+JOIN funcionarioEmpresa AS f ON e.idEmpresa = f.fkEmpresa
+JOIN setorFuncionario AS s ON f.fkSetor = s.idSetor
+JOIN sensorEmpresa AS sens ON sens.fkResponsavelSensor = f.idFuncionario
+JOIN dadoSensor AS d ON d.fkSensor = sens.idSensor
+ORDER BY d.dataHoraEmissao DESC;
