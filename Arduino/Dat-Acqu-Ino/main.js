@@ -19,11 +19,11 @@ const serial = async (
     // conexão com o banco de dados MySQL
     let poolBancoDados = mysql.createPool(
         {
-            host: '127.0.0.1', // nesse caso é para o servidor lubuntu no local usa localhost
-            user: 'aluno', // usuario do ubuntu ou local
-            password: 'Sptech#2024', // senha do lubuntu ou local
+            host: 'localhost', // nesse caso é para o servidor lubuntu no local usa localhost
+            user: 'funcionario', // usuario do ubuntu ou local
+            password: 'agro', // senha do lubuntu ou local
             database: 'protecaoSoja', // banco de dados
-            port: 3307 // 3307 quando é lubuntu, quando local 3306
+            port: 3306 // 3307 quando é lubuntu, quando local 3306
         }
     ).promise();
 
@@ -63,7 +63,7 @@ const serial = async (
 
             // este insert irá inserir os dados na tabela "medida"
             await poolBancoDados.execute(
-                'INSERT INTO dadoSensor (dadoSensor, fkSensor) VALUES (?, ?)', // remover o sensor_digital
+                'INSERT INTO medida (dado, fkSensor) VALUES (?, ?)', // remover o sensor_digital
                 [sensorAnalogico, 1]
             );
             console.log("valores inseridos no banco: ", sensorAnalogico);
