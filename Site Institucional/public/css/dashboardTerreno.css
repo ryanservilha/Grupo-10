@@ -165,19 +165,21 @@ body {
     font-weight: 650;
 }
 
-#maiorTaxaDia h2 {
-    padding: 15px;
+#maiorTaxaDia h2, #menorTaxaDia h2 {
+    padding: 13px;
     font-size: 17px;
     color: rgb(65, 65, 65);
 }
 
-#maiorTaxaDia h3 {
+#maiorTaxaDia h3,
+#menorTaxaDia h3 {
     margin-top: 9px;
     font-size: 35px;
     font-weight: 670;
 }
 
-#maiorTaxaDia p {
+#maiorTaxaDia p,
+#menorTaxaDia p {
     font-weight: 600;
 }
 
@@ -238,6 +240,7 @@ body {
     height: 30%;
     width: 100%;
     align-items: center;
+    justify-content: center;
 }
 
 .cimaGrafico select {
@@ -254,7 +257,6 @@ body {
 }
 
 .graficoDia .cimaGrafico h2 {
-    margin-left: 20px;
     font-size: 20px;
 }
 
@@ -275,7 +277,6 @@ body {
 }
 
 .grafico30dias h2 {
-    margin: 12px;
     font-size: 20px;
 }
 
@@ -291,6 +292,7 @@ body {
     height: 20%;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .grafico30 select {

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/dashboardTerreno.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard Agro Smart</title>
 </head>
@@ -46,7 +46,7 @@
                 <div class="quadrados">
                     <div class="quadrado" id="totalSensores">
                         <h2>Total de Sensores Ativos na Plantação</h2>
-                        <p><b style="color: rgb(15, 202, 15);">30</b>/32</p>
+                        <p><b style="color: rgb(15, 202, 15);">5</b>/5</p>
                     </div>
                     <div class="quadrado" id="alertas">
                         <h2>Alertas</h2>
@@ -68,15 +68,15 @@
                         </div>
                     </div>
 
-                    <div class="quadrado" id="maiorTaxaDia">
-                        <h2>Maior Taxa de Umidade do Dia</h2>
-                        <h3>15.7%</h3>
-                        <p>05:48 - Terren. 2</p>
+                    <div class="quadrado" id="menorTaxaDia">
+                        <h2>Menor Taxa de Umidade do Dia</h2>
+                        <h3>12.7%</h3>
+                        <p>05:48</p>
                     </div>
                     <div class="quadrado" id="maiorTaxaDia">
                         <h2>Maior Taxa de Umidade do Dia</h2>
                         <h3>15.7%</h3>
-                        <p>05:48 - Terren. 1</p>
+                        <p>12:48</p>
                     </div>
                 </div>
 
@@ -84,27 +84,13 @@
             <div class="baixo">
                 <div class="graficoDia">
                     <div class="cimaGrafico">
-                        <select id="opcoesTerrenos">
-                            <option value="terreno1">Terreno 1</option>
-                            <option value="terreno2">Terreno 2</option>
-                            <option value="terreno3">Terreno 3</option>
-                            <option value="terreno4">Terreno 4</option>
-                            <option value="terreno5">Terreno 5</option>
-                        </select>
                         <h2>Variação de Umidade ao Longo do Dia</h2>
                     </div>
                     <canvas id="graficoUmidadeDia"></canvas>
                 </div>
                 <div class="grafico30dias">
                     <div class="grafico30">
-                        <select id="opcoesTerrenos">
-                            <option value="terreno1">Terreno 1</option>
-                            <option value="terreno2">Terreno 2</option>
-                            <option value="terreno3">Terreno 3</option>
-                            <option value="terreno4">Terreno 4</option>
-                            <option value="terreno5">Terreno 5</option>
-                        </select>
-                        <h2>Média da Taxa de Umidade nos Últimos 30 Dias</h2>
+                        <h2>Quantidade de Alertas nos Últimos 30 Dias</h2>
                     </div>      
                     <canvas id="graficoUmidade30Dias"></canvas>
                 </div>
