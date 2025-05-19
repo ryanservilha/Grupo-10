@@ -31,6 +31,10 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 2rem;
+
+    position: fixed;
+    z-index: 1000;
+    background: white;
 }
 
 .navbar ul {
@@ -78,7 +82,7 @@ header {
 .botoes {
     display: flex;
     gap: 1rem;
-    width: 11%;
+    width: 15%;
     
 }
 
@@ -276,13 +280,15 @@ header {
     width: 100%;
     flex-direction: column;
     gap: 40px;
+    text-align: center;
+
     
 }
 
 .textSimulador {
     color: var(--black);
     font-size: 1.7rem;
-    margin-left: 5%;
+    margin-left: 0%;
 }
 
 .textSimulador span {
@@ -298,7 +304,7 @@ header {
 .simulacao {
     width: 50%;
     height: 400px;
-    margin-right: 9%;
+    margin-right: 5%;
     margin-top: 40px;
     border-radius: 35px;
     background: linear-gradient(90deg, var(--green-300), var(--green-300));
@@ -306,6 +312,12 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+}
+
+.simuladorFinanceiro {
+    text-align: center;
+    margin-left: 6rem;
 }
 
 .resposta_simulador {
