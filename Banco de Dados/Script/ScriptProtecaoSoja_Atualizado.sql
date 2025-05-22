@@ -173,3 +173,64 @@ JOIN sensor AS se ON se.fkEmpresa = e.idEmpresa
 JOIN localidade AS l ON se.fkLocalidade = l.idLocalidade
 JOIN medida AS m ON m.fkSensor = se.idSensor
 ORDER BY m.dataHoraEmissao DESC;
+
+
+
+
+
+-- KPI Menor Umidade
+select min(m.dado) AS 'Menor Taxa de Umidade Registrada', m.dataHoraEmissao AS 'Hora', l.idLocalidade AS 'Terreno' 
+from medida as m
+join sensor as s
+on m.fkSensor = s.idSensor
+join localidade as l
+ON s.fkLocalidade = l.idLocalidade	
+group by dataHoraEmissao, idLocalidade
+limit 1;
+
+-- KPI Maior umidade
+select max(m.dado) AS 'Menor Taxa de Umidade Registrada', m.dataHoraEmissao AS 'Hora', l.idLocalidade AS 'Terreno' 
+from medida as m
+join sensor as s
+on m.fkSensor = s.idSensor
+join localidade as l
+ON s.fkLocalidade = l.idLocalidade	
+group by dataHoraEmissao, idLocalidade
+limit 1;
+
+
+-- alerta de umidades acima de 15 e abaixo de 13
+Select
+	l.idlocalidade,
+    s.nome as NomeSensor,
+    m.dado,
+    m.DataHoraEmissao 
+    from medida m
+    join sensor s on m.fkSensor = s.idSensor
+    join localidade l on s.fkLocalidade = l.idlocalidade where m.dado > 15 or m.dado < 13;
+    
+    
+    
+	-- Select para contar sensores ativos
+    select count(status) as 'Sensores Ativos' from sensor where status = 'ativo';
+    
+    select m.dado AS 'Variedade de umidade ao longo do dia', m.dataHoraEmissao AS 'Hora', l.idLocalidade AS 'Terreno' 
+from medida as m
+join sensor as s	
+on m.fkSensor = s.idSensor
+join localidade as l
+ON s.fkLocalidade = l.idLocalidade;
+    
+SELECT
+    m.dado AS 'Umidade',
+    m.dataHoraEmissao AS 'Hora da Medição',
+    l.idlocalidade AS 'Terreno'
+FROM
+    medida AS m
+JOIN
+    sensor AS s ON m.fkSensor = s.idSensor
+JOIN
+    localidade AS l ON s.fkLocalidade = l.idLocalidade
+ORDER BY
+    l.idLocalidade, m.dataHoraEmissao;
+    
