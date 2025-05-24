@@ -10,6 +10,15 @@
 </head>
 
 <body>
+    <div class="sidebar">
+        <div class="containerSideBar">
+            <a href="dashboard.html" class="itens" id="clicked">Graficos</a>
+            <a href="dashTerreno.html" class="itens" id="sideTerrenos">Terrenos</a>
+            <a href="#" class="itens" id="sideJira">Jira</a>
+            <a href="./BobIA/public/index.html" class="itens" id="sideBob">Bob I.A</a>
+            <a href="index.html" class="itens" id="sideButton">Sair</a>
+        </div>
+    </div>
     <div class="container">
         <div class="header">
             <div class="logo">
@@ -38,7 +47,7 @@
                 </div>
             </div>
             <div class="perfil">
-                <img src="imgs/profile.png" width="80px" height="80px">
+                <h2>Bem vindo, <span>Ryan</span></h2>
             </div>
         </div>
         <div class="main_content">
@@ -105,7 +114,7 @@
                             <option value="terreno5">Terreno 5</option>
                         </select>
                         <h2>Média da Taxa de Umidade nos Últimos 30 Dias</h2>
-                    </div>      
+                    </div>
                     <canvas id="graficoUmidade30Dias"></canvas>
                 </div>
             </div>
@@ -157,14 +166,14 @@
         type: 'bar',
         data: {
             labels: ['24/03', '25/03', '26/03', '27/03', '28/03', '29/03', '30/03', '31/03',
-            '01/04', '02/04', '03/04', '04/04', '05/04', '06/04', '07/04', '08/04',
-            '09/04', '10/04', '11/04', '12/04', '13/04', '14/04', '15/04', '16/04',
-            '17/04', '18/04', '19/04', '20/04', '21/04', '22/04'], 
+                '01/04', '02/04', '03/04', '04/04', '05/04', '06/04', '07/04', '08/04',
+                '09/04', '10/04', '11/04', '12/04', '13/04', '14/04', '15/04', '16/04',
+                '17/04', '18/04', '19/04', '20/04', '21/04', '22/04'],
             datasets: [{
                 label: 'Terreno 1',
                 data: [15, 14, 13, 15, 14, 14, 15, 13, 13, 13, 14, 14, 15, 13, 15, 13, 14, 15, 15, 12, 13, 15, 14, 13, 15, 14, 13, 13, 20, 18],
                 borderColor: '#ED145B',
-                backgroundColor: '#ED145B'  
+                backgroundColor: '#ED145B'
             }
             ]
         },
