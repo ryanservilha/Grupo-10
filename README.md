@@ -155,12 +155,6 @@ Modelagem:
         <sub><b>Felipe F</b></sub>
       </a>
     </td>
-    <td align="center">
-      <a href="https://github.com/kiyoshiiguilherme">
-        <img src="https://github.com/kiyoshiiguilherme.png" width="100px;" alt="kiyoshiiguilherme"/><br />
-        <sub><b>Guilherme</b></sub>
-      </a>
-    </td>
   </tr>
 </table>
   </div>
