@@ -46,7 +46,7 @@ CREATE TABLE funcionario (
   senha VARCHAR(45) NOT NULL,
   setor VARCHAR(45),
   fkGerente INT,
-  fkEmpresa INT NOT NULL,
+  fkEmpresa INT,
   fkCodigo CHAR(5) NOT NULL,
   CONSTRAINT fkFuncionarioGerente
     FOREIGN KEY (fkGerente)
@@ -113,17 +113,6 @@ CREATE TABLE medida (
     FOREIGN KEY (fkSensor)
     REFERENCES sensor(idSensor)
 );
-
-select * from medida;
-
--- inserts para medida
-INSERT INTO medida (dado, fkSensor) VALUES
-(12.5, 1),
-(13.7, 2),
-(16.0, 3),
-(14.2, 1),
-(17.1, 2);
-
 -- select nos dados inseridos pela API; 
 
 SELECT * FROM medida;
