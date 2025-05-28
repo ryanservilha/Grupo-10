@@ -12,6 +12,7 @@ CREATE TABLE endereco (
   pais VARCHAR(45) NOT NULL
 );
 
+
 -- inserts para endereco
 INSERT INTO endereco (logradouro, numero, cidade, estado, pais) VALUES
 ('Rua das Lavouras', '123', 'Londrina', 'PR', 'Brasil'),
@@ -19,43 +20,55 @@ INSERT INTO endereco (logradouro, numero, cidade, estado, pais) VALUES
 
 -- criação da tabela empresa
 CREATE TABLE empresa (
-  idEmpresa INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  razaoSocial VARCHAR(45) NOT NULL,
-  cnpj CHAR(14) NOT NULL,
-  fkEndereco INT UNIQUE NOT NULL,
-  CONSTRAINT fkEmpresaEndereco 
-    FOREIGN KEY (fkEndereco)
-    REFERENCES endereco(idEndereco)
+idEmpresa INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+razaoSocial VARCHAR(45) NOT NULL,
+cnpj CHAR(14) NOT NULL,
+codigoVerificacao char(5) NOT NULL UNIQUE,
+fkEndereco INT UNIQUE NOT NULL,
+CONSTRAINT fkEmpresaEndereco 
+FOREIGN KEY (fkEndereco)
+REFERENCES endereco(idEndereco)
 );
 
 -- inserts para empresa
-INSERT INTO empresa (razaoSocial, cnpj, fkEndereco) VALUES
-('AgroSoja LTDA', '12345678000199', 1),
-('SojaMax SA', '98765432000155', 2);
+INSERT INTO empresa (razaoSocial, cnpj, codigoVerificacao, fkEndereco) VALUES
+('AgroSoja LTDA', '12345678000199', '12125', 1),
+('SojaMax SA', '98765432000155', '34345', 2);
+
+select * from empresa;
 
 -- criação da tabela funcionario
 CREATE TABLE funcionario (
   idFuncionario INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   nome VARCHAR(60) NOT NULL,
-  telefone CHAR(11) NOT NULL,
-  senha VARCHAR(45) NOT NULL,
+  cpf char(11) NOT NULL,
   email VARCHAR(45) NOT NULL,
-  setor VARCHAR(45) NOT NULL,
+  senha VARCHAR(45) NOT NULL,
+  setor VARCHAR(45),
   fkGerente INT,
-  fkEmpresa INT NOT NULL,
+  fkEmpresa INT,
+  fkCodigo CHAR(5) NOT NULL,
   CONSTRAINT fkFuncionarioGerente
     FOREIGN KEY (fkGerente)
     REFERENCES funcionario(idFuncionario),
   CONSTRAINT fkFuncionarioEmpresa
     FOREIGN KEY (fkEmpresa)
-    REFERENCES empresa(idEmpresa)
+    REFERENCES empresa(idEmpresa),
+  CONSTRAINT fkCodigoVerificacaoEmpresa
+  FOREIGN KEY (fkCodigo)
+	REFERENCES empresa(codigoVerificacao)
 );
 
--- inserts para funcionario
-INSERT INTO funcionario (nome, telefone, senha, email, setor, fkGerente, fkEmpresa) VALUES
-('Carlos Gerente', '44999999999', 'senha123', 'carlos@empresa.com', 'TI', NULL, 1),
-('Ana Engenheira', '44988887777', 'senha456', 'ana@empresa.com', 'Engenharia Agrícola', 1, 1),
-('Bruno Técnico', '66997776666', 'senha789', 'bruno@empresa.com', 'Administração', 1, 1);
+
+
+-- criação da tabela funcionario
+  INSERT INTO funcionario (nome, cpf, email, senha, setor, fkGerente, fkEmpresa, fkCodigo) VALUES
+('Carlos Gerente',  '44999999999', 'carlos@empresa.com', 'senha123',  'TI',  NULL, 1, '12125'),
+('Ana Engenheira', '44988887777', 'ana@empresa.com',    'senha456', 'Engenharia Agrícola',1, 1, '12125'),
+('Bruno Técnico',   '66997776666', 'bruno@empresa.com',  'senha789','Administração', 1,  1, '34345');
+
+  
+  select * from funcionario;
 
 -- criação da tabela localidade
 CREATE TABLE localidade (
@@ -81,11 +94,14 @@ CREATE TABLE sensor (
   CONSTRAINT fkSensorLocalidade FOREIGN KEY (fkLocalidade) REFERENCES localidade(idLocalidade)
 );
 
+select * from sensor;
+
 -- inserts para sensor
 INSERT INTO sensor (nome, status, fkEmpresa, fkLocalidade) VALUES
 ('SensorUmidade', 'ativo', 1, 1),
 ('SensorPH', 'inativo', 1, 1),
 ('SensorTemperatura', 'ativo', 2, 2);
+
 
 -- criação da tabela medida
 CREATE TABLE medida (
@@ -97,15 +113,6 @@ CREATE TABLE medida (
     FOREIGN KEY (fkSensor)
     REFERENCES sensor(idSensor)
 );
-
--- inserts para medida
-INSERT INTO medida (dado, fkSensor) VALUES
-(12.5, 1),
-(13.7, 2),
-(16.0, 3),
-(14.2, 1),
-(17.1, 2);
-
 -- select nos dados inseridos pela API; 
 
 SELECT * FROM medida;
@@ -124,7 +131,6 @@ FROM empresa AS e
 JOIN endereco AS en ON e.fkEndereco = en.idEndereco;
 
 -- select para listar os funcionários da empresa e os sensores
-
 SELECT 
   e.razaoSocial AS 'Razão Social',
   f.nome AS 'Funcionário',
@@ -139,8 +145,6 @@ JOIN localidade AS l ON s.fkLocalidade = l.idLocalidade;
 
 
 -- select para trazer os dados dos sensores que possuem umidade inadequada
-
-
 SELECT 
   s.nome AS 'Sensor',
   CONCAT(m.dado, '%') AS 'Taxa de Umidade Obtida',
@@ -173,64 +177,3 @@ JOIN sensor AS se ON se.fkEmpresa = e.idEmpresa
 JOIN localidade AS l ON se.fkLocalidade = l.idLocalidade
 JOIN medida AS m ON m.fkSensor = se.idSensor
 ORDER BY m.dataHoraEmissao DESC;
-
-
-
-
-
--- KPI Menor Umidade
-select min(m.dado) AS 'Menor Taxa de Umidade Registrada', m.dataHoraEmissao AS 'Hora', l.idLocalidade AS 'Terreno' 
-from medida as m
-join sensor as s
-on m.fkSensor = s.idSensor
-join localidade as l
-ON s.fkLocalidade = l.idLocalidade	
-group by dataHoraEmissao, idLocalidade
-limit 1;
-
--- KPI Maior umidade
-select max(m.dado) AS 'Menor Taxa de Umidade Registrada', m.dataHoraEmissao AS 'Hora', l.idLocalidade AS 'Terreno' 
-from medida as m
-join sensor as s
-on m.fkSensor = s.idSensor
-join localidade as l
-ON s.fkLocalidade = l.idLocalidade	
-group by dataHoraEmissao, idLocalidade
-limit 1;
-
-
--- alerta de umidades acima de 15 e abaixo de 13
-Select
-	l.idlocalidade,
-    s.nome as NomeSensor,
-    m.dado,
-    m.DataHoraEmissao 
-    from medida m
-    join sensor s on m.fkSensor = s.idSensor
-    join localidade l on s.fkLocalidade = l.idlocalidade where m.dado > 15 or m.dado < 13;
-    
-    
-    
-	-- Select para contar sensores ativos
-    select count(status) as 'Sensores Ativos' from sensor where status = 'ativo';
-    
-    select m.dado AS 'Variedade de umidade ao longo do dia', m.dataHoraEmissao AS 'Hora', l.idLocalidade AS 'Terreno' 
-from medida as m
-join sensor as s	
-on m.fkSensor = s.idSensor
-join localidade as l
-ON s.fkLocalidade = l.idLocalidade;
-    
-SELECT
-    m.dado AS 'Umidade',
-    m.dataHoraEmissao AS 'Hora da Medição',
-    l.idlocalidade AS 'Terreno'
-FROM
-    medida AS m
-JOIN
-    sensor AS s ON m.fkSensor = s.idSensor
-JOIN
-    localidade AS l ON s.fkLocalidade = l.idLocalidade
-ORDER BY
-    l.idLocalidade, m.dataHoraEmissao;
-    
