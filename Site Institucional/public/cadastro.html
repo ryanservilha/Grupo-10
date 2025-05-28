@@ -35,12 +35,12 @@
                 <div class="inputs">
                     <div class="inputsRow">
                         <div class="caixinha">
-                            <p>Razão Social</p>
-                            <input id="inpt_razaoSocial" placeholder="Digite sua razão social">
+                            <p>Nome</p>
+                            <input id="inpt_nome" placeholder="Digite seu nome">
                         </div>
                         <div class="caixinha">
-                            <p>CNPJ</p>
-                            <input id="inpt_cnpj" placeholder="Digite seu CNPJ">
+                            <p>CPF</p>
+                            <input id="inpt_cpf" placeholder="Digite seu CPF">
                         </div>
                     </div>
                     <div class="inputsRow">
@@ -49,8 +49,8 @@
                             <input id="inpt_emailCadastrado" placeholder="Digite o seu email">
                         </div>
                         <div class="caixinha">
-                            <p>Telefone</p>
-                            <input id="inpt_telefone" placeholder="Digite seu telefone">
+                            <p>Código de Verificação</p>
+                            <input id="inpt_code" placeholder="Código de Verificação">
                         </div>
                     </div>
                     <div class="inputsRow">
@@ -83,10 +83,10 @@
 
 function cadastrar() {
     
-    var nomeVar = inpt_razaoSocial.value;
-    var cnpjVar = inpt_cnpj.value;
+     var nomeVar = inpt_nome.value;
+    var cpfVar = inpt_cpf.value;
     var emailVar = inpt_emailCadastrado.value;
-    var telefoneVar = inpt_telefone.value;
+    var empresaVar = inpt_code.value;
     var senhaVar = inpt_senhaCadastrada.value;
     var confirmacaoSenhaVar = inpt_confirmeSenha.value;
     // var idEmpresaVincular
@@ -94,9 +94,9 @@ function cadastrar() {
     // Verificando se há algum campo em branco
     if (
       nomeVar == "" ||
-      cnpjVar == "" ||
+      cpfVar == "" ||
+      empresaVar == "" ||
       emailVar == "" ||
-      telefoneVar == "" ||
       senhaVar == "" ||
       confirmacaoSenhaVar == ""
     ) {
@@ -117,7 +117,7 @@ function cadastrar() {
       finalizarAguardar();
       return false;
     }
-    else if (cnpjVar.length < 14) {
+    else if (!cpfVar.length == 11) {
       // cardErro.style.display = "block";
       // mensagem_erro.innerHTML = "(Seu nome deve ter mais de 1 caractere)"
 
@@ -132,10 +132,10 @@ function cadastrar() {
       finalizarAguardar();
       return false;
     }
-    else if (!telefoneVar.length == 11) {
+    else if (!empresaVar.length == 5) {
       // cardErro.style.display = "block";
       // mensagem_erro.innerHTML = "(O seu E-mail deve conter @ e .)"
-      alert ('Seu telefone precisa ter 11 caracteres')
+      alert ('Seu código precisa ter 5 caracteres')
       finalizarAguardar();
       return false;
     }
@@ -170,9 +170,9 @@ function cadastrar() {
         // crie um atributo que recebe o valor recuperado aqui
         // Agora vá para o arquivo routes/usuario.js
         nomeServer: nomeVar,
-        cnpjServer: cnpjVar,
+        cpfServer: cpfVar,
         emailServer: emailVar,
-        telefoneServer: telefoneVar,
+        empresaServer: empresaVar,
         senhaServer: senhaVar
       }),
     })
