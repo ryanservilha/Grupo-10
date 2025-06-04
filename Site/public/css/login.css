@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Space Grotesk';
+    border: none;
+
+}
+
+body {
+    background-color: white;
+}
+
+.container {
+    width: 90%;
+    height: 500px;
+    margin: 2%;
+    margin-left: 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.logo a {
+    text-decoration: none;
+    color: black;
+}
+
+.logo h1 {
+    font-size: 18px;
+}
+
+.logo span {
+    color: #a8d200;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.container2 {
+    display: flex;
+    gap: 10rem;
+}
+
+.introducao {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin-top: 2%;
+}
+
+.textos {
+    color: #77cb12;
+    font-size: 24px;
+}
+
+.textos h2{
+    margin-left: 5%;
+}
+
+
+.textos span {
+    color: black;
+}
+
+.figuraFazendeiros {
+    width: 100%;
+}
+
+.figuraFazendeiros img {
+    width: 450px;
+    height: fit-content;
+}
+
+.acessoLogin {
+    width: 44%;
+    height: 550px;
+    margin-right: 9%;
+    margin-top: 32px;
+    border-radius: 25px;
+    background-color: #9cdf4a;
+    border: 2px solid black;
+}
+
+.acessoLogin h2 {
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+
+#tituloLogin {
+    font-size: 40px;
+    font-weight: 520;
+    text-transform: uppercase;
+    margin-top: 30px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 300px;
+    gap: 30px;
+}
+
+.inputs p {
+    color: rgb(0, 0, 0);
+    font-size: 19px;
+    font-weight: 600;
+    margin-left: 4%;
+}
+
+.inputs input {
+    width: 400px;
+    padding: 22px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: 540;
+    border: 2px solid black;
+}
+
+.inputs input::placeholder {
+    color: #a8d200;
+    font-weight: 560;
+    font-size: 16px;
+}
+
+.inputUsuario,
+.inputSenha {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputs a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    align-self: center;
+    font-weight: 460;
+}
+
+.inputs a:hover {
+    color: rgb(62, 62, 62);
+}
+
+.botaoEntrar {
+    text-align: center;
+}
+
+.botaoEntrar button {
+    width: 75%;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 4%;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: 0.3s ease;
+    border: 2px solid black;
+}
+
+.botaoEntrar button:hover {
+    background-color: #B9FF66;
+}
+
+.botaoEntrar button p {
+    font-size: 18px;
+    font-weight: 550;
+    color: rgb(0, 0, 0);
+    text-transform: uppercase;
+}
+
+.acessoLogin h3 {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 450;
+    color: rgb(0, 0, 0);
+    margin-top: 5.7%;
+}
+
+.acessoLogin h3 a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: 650;
+}
+
+.acessoLogin h3 a:hover {
+    text-decoration: underline;
+}

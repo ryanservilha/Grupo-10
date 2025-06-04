@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Dashboard Agro Smart</title>
+</head>
+
+<body onload="obterDados()">
+    <div class="sidebar">
+        <div class="containerSideBar">
+            <a href="dashboard.html" class="itens" id="clicked">Graficos</a>
+            <a href="dashTerreno.html" class="itens" id="sideTerrenos">Terrenos</a>
+            <a href="#" class="itens" id="sideJira">Jira</a>
+            <a href="./BobIA/public/index.html" class="itens" id="sideBob">Bob I.A</a>
+            <a href="index.html" class="itens" id="sideButton">Sair</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>Agro Smart<span>.</span></h1>
+                    <svg width="79" height="14" viewBox="0 0 79 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2 2.69324C15.6667 9.19324 49.8 18.2932 77 2.69324" stroke="#FFFF" stroke-width="4"
+                            stroke-linecap="round" />
+                    </svg>
+                </a>
+            </div>
+            <div class="titulo">
+                <div class="textinho">
+                    <h2>Taxa de Umidade</h2>
+                </div>
+                <div class="cores">
+                    <div class="vermelho">
+                        <p>Menor que 13%</p>
+                    </div>
+                    <div class="verde">
+                        <p>Entre 13% e 15%</p>
+                    </div>
+                    <div class="vermelho">
+                        <p>Maior que 15% </p>
+                    </div>
+                </div>
+            </div>
+            <div class="perfil">
+                <h2>Bem vindo, <span id="b_usuario">Usuário</span></h2>
+            </div>
+        </div>
+        <div class="main_content">
+            <div class="cima">
+                <div class="quadrados">
+                    <div class="quadrado" id="totalSensores">
+                        <h2>Total de Sensores Ativos na Plantação</h2>
+                        <p><b id="sensoresAtivos"></b></p>
+                    </div>
+                    <div class="quadrado" id="alertas">
+                        <h2>Alertas</h2>
+                        <p id="quantAlertas"></p>
+                        <a onclick="mostrarDetalhe()">Detalhe</a>
+                    </div>
+                    <div id="overlay"></div>
+                    <div class="quadrado" id="detalhe">
+                        <div class="botaoFechar">
+                            <button onclick="fecharDetalhe()">X</button>
+                        </div>
+                        <div class="lista">
+                            <ul id="listaAlertas">
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="quadrado" id="maiorTaxaDia">
+                        <h2>Menor Taxa de Umidade do Dia</h2>
+                        <h3 id="menorUmidade"></h3>
+                        <p id="terrenoHorarioMenor"></p>
+                    </div>
+                    <div class="quadrado" id="maiorTaxaDia">
+                        <h2>Maior Taxa de Umidade do Dia</h2>
+                        <h3 id="maiorUmidade"></h3>
+                        <p id="terrenoHorarioMaior"></p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="baixo">
+                <div class="graficoDia">
+                    <div class="cimaGrafico">
+                        <select id="opcoesTerrenos">
+                            <option value="terreno1">Terreno 1</option>
+                            <option value="terreno2">Terreno 2</option>
+                        </select>
+                        <h2>Variação de Umidade ao Longo do Dia</h2>
+                    </div>
+                    <canvas id="graficoUmidadeDia"></canvas>
+                </div>
+                <div class="grafico30dias">
+                    <div class="grafico30">
+                        <select id="opcoesTerrenos">
+                            <option value="terreno1">Terreno 1</option>
+                            <option value="terreno2">Terreno 2</option>
+                        </select>
+                        <h2>Média da Taxa de Umidade nos Últimos 30 Dias</h2>
+                    </div>
+                    <canvas id="graficoUmidade30Dias"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+
+    function obterDados() {
+
+
+        var nomeUsuario = sessionStorage.NOME_USUARIO;
+        b_usuario.innerHTML = `${nomeUsuario}`
+
+
+        fetch(`/medidas/sensoresAtivos`, { cache: 'no-store' }).then(function (response) {
+            var vt_sensores = [];
+
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    vt_sensores = resposta;
+
+                    sensoresAtivos.innerHTML = `<b style="color: rgb(37, 219, 0);">${vt_sensores[0].Ativos}</b> / ${vt_sensores[0].Total}`;
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        fetch(`/medidas/qtdAlertas`, { cache: 'no-store' }).then(function (response) {
+            var vt_alertas = [];
+
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    vt_alertas = resposta;
+
+                    quantAlertas.innerHTML = `${vt_alertas[0].Terrenos}`;
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        fetch(`/medidas/conteudoAlertas`, { cache: 'no-store' }).then(function (response) {
+            var vt_conteudo = [];
+
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    vt_conteudo = resposta;
+
+                    for (var i = 0; i < vt_conteudo.length; i++) {
+                        listaAlertas.innerHTML += `<li>${vt_conteudo[i].Terreno}: <b style="color: red;">${vt_conteudo[i].Umidade}</b> - ${vt_conteudo[i].Horario}</li>`
+                    }
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        fetch(`/medidas/menorUmidade`, { cache: 'no-store' }).then(function (response) {
+            var vt_umidade = [];
+
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    vt_umidade = resposta;
+
+                    menorUmidade.innerHTML = `${vt_umidade[0].Taxa}`;
+                    terrenoHorarioMenor.innerHTML = `${vt_umidade[0].Hora} - ${vt_umidade[0].terreno}`;
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        fetch(`/medidas/maiorUmidade`, { cache: 'no-store' }).then(function (response) {
+            var vt_umidadeMaior = [];
+
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                    vt_umidadeMaior = resposta;
+
+                    maiorUmidade.innerHTML = `${vt_umidadeMaior[0].TaxaMaior}`;
+                    terrenoHorarioMaior.innerHTML = `${vt_umidadeMaior[0].Hora} - ${vt_umidadeMaior[0].terreno}`;
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        fetch(`/medidas/media-trinta-dias`)
+            .then((res) => res.json())
+            .then((dados) => {
+                const ultimosDados = dados.reverse();
+
+                // Mapeando as datas para labels, incluindo apenas o dia e o mês
+                const labels = ultimosDados.map((item) => {
+                    return new Date(item.momento_grafico).toLocaleDateString("pt-BR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                    });
+                });
+
+                // Mapeando os valores da umidade
+                const valores = ultimosDados.map((item) => item.umidade);
+
+                const ctx = document.getElementById("graficoUmidade30Dias").getContext("2d");
+
+                if (window.graficoAnotacoes instanceof Chart) {
+                    window.graficoAnotacoes.destroy();
+                }
+
+                window.graficoAnotacoes = new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: labels, // Usando as labels formatadas
+                        datasets: [
+                            {
+                                label: "Média de Umidade",
+                                data: valores,
+                                backgroundColor: "#ED145B",
+                                borderWidth: 1,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                grid: {
+                                    display: false,
+                                },
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: "(%)",
+                                },
+                                beginAtZero: true,
+                                grid: {
+                                    display: false,
+                                },
+                            },
+                        },
+                    },
+                });
+            })
+            .catch((erro) => {
+                console.error("Erro ao gerar gráfico de média da umidade nos últimos 30 dias:", erro);
+            });
+    }
+
+    fetch(`/medidas/aoLongoDia`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+
+                graficoDia(resposta);
+
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+
+    function graficoDia(resposta) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: 'Umidade',
+                data: [],
+                fill: false,
+                backgroundColor: '#6a3604',
+                borderColor: '#6a3604',
+                tension: 0.1,
+                pointRadius: 4,
+                pointHoverRadius: 6
+            }]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.Hora);
+            dados.datasets[0].data.push(registro.Medida);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'line',
+            data: dados,
+            options: {
+                interaction: {
+                    mode: 'index',
+                    intersect: false
+                },
+                plugins: {
+                    tooltip: {
+                        enabled: true
+                    },
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let myChart = new Chart(
+            document.getElementById(`graficoUmidadeDia`),
+            config
+        );
+
+    }
+
+    function mostrarDetalhe() {
+        detalhe.style.display = 'flex';
+
+        document.getElementById('detalhe').style.display = 'flex';
+        document.getElementById('overlay').style.display = 'block';
+    }
+
+    function fecharDetalhe() {
+        document.getElementById('detalhe').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+        detalhe.style.display = 'none';
+    }
+</script>

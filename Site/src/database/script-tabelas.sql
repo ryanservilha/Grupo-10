@@ -1,6 +1,5 @@
 -- criação do banco de dados
 CREATE DATABASE protecaoSoja;
-
 USE protecaoSoja;
 
 -- criação da tabela endereco
@@ -115,90 +114,69 @@ CREATE TABLE medida (
     REFERENCES sensor(idSensor)
 );
 
-INSERT INTO medida (dado, dataHoraEmissao, fkSensor) VALUES
-(12.5, NOW(), 1),
-(13.0, NOW(), 1),
-(19.0, NOW(), 1),
-(10.0, '2025-06-02 08:15:00', 1),
-(10.5, '2025-06-02 09:00:00', 1),
-(11.0, '2025-06-02 10:45:00', 1),
-(11.5, '2025-06-02 11:30:00', 1),
-(12.0, '2025-06-02 12:15:00', 1);
+select * from medida;
 
--- ---------------- DASHBOARD PRINCIPAL -------------------------------------------------
+-- select nos dados inseridos pela API; 
 
--- SELECT TAXA DE UMIDADE DOS ÚLTIMOS 30 DIAS 
-SELECT ROUND(AVG(dado), 2) AS umidade, 
-DATE(dataHoraEmissao) AS momento_grafico
-FROM medida
-GROUP BY DATE(dataHoraEmissao)
-ORDER BY momento_grafico DESC
-LIMIT 30;
+SELECT * FROM medida;
 
--- SELECT UMIDADE AO LONGO DO DIA
-select CONCAT(DATE_FORMAT(dataHoraEmissao, '%H'), ':00') AS Hora, round(avg(dado),1) as Medida from medida
-where DATE(dataHoraEmissao) = CURDATE()
-group by DATE_FORMAT(dataHoraEmissao, '%H')
-order by dataHoraEmissao DESC;
+-- select para capturar informações da empresa
 
--- TOTAL DE SENSORES ATIVOS
-SELECT (SELECT COUNT(*) FROM sensor 
-WHERE status LIKE 'ativo') AS 'Sensores', COUNT(idSensor) AS 'Total de Sensores' FROM sensor;
+SELECT 
+  e.razaoSocial AS 'Razão Social',
+  e.cnpj AS 'CNPJ',
+  CONCAT(en.logradouro, ', ',
+         en.numero, ', ',
+         en.cidade, ' - ',
+         en.estado, ', ',
+         en.pais) AS 'Endereço'
+FROM empresa AS e
+JOIN endereco AS en ON e.fkEndereco = en.idEndereco;
 
--- SELECT QTD TERRENOS EM ALERTAS 
-SELECT COUNT(DISTINCT idLocalidade) AS Terrenos FROM localidade
-JOIN sensor 
-ON fkLocalidade = idLocalidade
-JOIN medida 
-ON fkSensor = idSensor
-WHERE dado > 15 OR dado < 13;
-
--- SELECT CONTEUDO ALERTAS 
-SELECT terreno AS Terreno, CONCAT(dado, '%') AS Umidade, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Horario FROM medida
-JOIN sensor
-ON fkSensor = idSensor	
-JOIN localidade 
-ON fkLocalidade = idLocalidade
-WHERE dado > 15 OR dado < 13		
-GROUP BY DATE_FORMAT(dataHoraEmissao, '%H:%i');
-
--- SELECT MENOR TAXA DE UMIDADE DO DIA 
-SELECT CONCAT(MIN(dado),'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida
-	JOIN sensor 
-	ON idSensor = fkSensor
-	JOIN localidade 
-	ON fkLocalidade = idLocalidade
-	WHERE DATE(dataHoraEmissao) = CURDATE();	
-
--- SELECT MAIOR TAXA DE UMIDADE DO DIA 
-SELECT CONCAT(MAX(dado),'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida
-JOIN sensor 
-ON idSensor = fkSensor
-JOIN localidade 
-ON fkLocalidade = idLocalidade
-WHERE DATE(dataHoraEmissao) = CURDATE();
-
--- ---------------- DASHBOARD PARA TERRENOS -------------------------------------------------
-
--- SELECT VARIAÇÃO ULTIMOS 30 DIAS
-SELECT dado as umidade, DATE(dataHoraEmissao) as momento_grafico
-FROM medida 
-JOIN sensor
-ON fkSensor = idSensor
-JOIN localidade 
-ON idLocalidade = fkLocalidade
-WHERE idLocalidade = 1
-GROUP BY DATE(dataHoraEmissao)
-ORDER BY idMedida DESC LIMIT 30;
+-- select para listar os funcionários da empresa e os sensores
+SELECT 
+  e.razaoSocial AS 'Razão Social',
+  f.nome AS 'Funcionário',
+  s.nome AS 'Sensor',
+  l.terreno AS 'Localidade do Sensor',
+  s.status AS 'Status do Sensor'
+FROM empresa AS e
+JOIN funcionario AS f ON f.fkEmpresa = e.idEmpresa
+JOIN sensor AS s ON s.fkEmpresa = e.idEmpresa
+JOIN localidade AS l ON s.fkLocalidade = l.idLocalidade;
 
 
--- SELECT UMIDADE AO LONGO DO DIA
-select CONCAT(DATE_FORMAT(dataHoraEmissao, '%H'), ':00') AS Hora, round(avg(dado),1) as Medida from medida
-JOIN sensor
-ON fkSensor = idSensor
-JOIN localidade 
-ON idLocalidade = fkLocalidade
-WHERE DATE(dataHoraEmissao) = CURDATE() AND idLocalidade = 1
-group by DATE_FORMAT(dataHoraEmissao, '%H')
-order by dataHoraEmissao DESC;
 
+-- select para trazer os dados dos sensores que possuem umidade inadequada
+SELECT 
+  s.nome AS 'Sensor',
+  CONCAT(m.dado, '%') AS 'Taxa de Umidade Obtida',
+  m.dataHoraEmissao AS 'Data da Emissão',
+  l.terreno AS 'Localidade'
+FROM sensor AS s
+JOIN medida AS m ON m.fkSensor = s.idSensor
+JOIN localidade AS l ON s.fkLocalidade = l.idLocalidade
+WHERE m.dado > 15 OR m.dado < 13;
+
+
+
+-- select com todas as tabelas
+SELECT 
+  e.razaoSocial AS 'Empresa',
+  e.cnpj AS 'CNPJ',
+  en.cidade AS 'Cidade',
+  en.estado AS 'Estado',
+  l.terreno AS 'Terreno',
+  f.nome AS 'Funcionário',
+  f.setor AS 'Setor',
+  se.nome AS 'Sensor',
+  se.status AS 'Status do Sensor',
+  m.dado AS 'Valor da Medida',
+  m.dataHoraEmissao AS 'Data'
+FROM empresa AS e
+JOIN endereco AS en ON e.fkEndereco = en.idEndereco
+JOIN funcionario AS f ON f.fkEmpresa = e.idEmpresa
+JOIN sensor AS se ON se.fkEmpresa = e.idEmpresa
+JOIN localidade AS l ON se.fkLocalidade = l.idLocalidade
+JOIN medida AS m ON m.fkSensor = se.idSensor
+ORDER BY m.dataHoraEmissao DESC;
