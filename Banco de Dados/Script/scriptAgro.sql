@@ -119,11 +119,11 @@ INSERT INTO medida (dado, dataHoraEmissao, fkSensor) VALUES
 (12.5, NOW(), 1),
 (13.0, NOW(), 1),
 (19.0, NOW(), 1),
-(10.0, '2025-06-02 08:15:00', 1),
-(10.5, '2025-06-02 09:00:00', 1),
-(11.0, '2025-06-02 10:45:00', 1),
-(11.5, '2025-06-02 11:30:00', 1),
-(12.0, '2025-06-02 12:15:00', 1);
+(10.0, '2025-06-03 08:15:00', 1),
+(10.5, '2025-06-03 09:00:00', 1),
+(11.0, '2025-06-03 10:45:00', 1),
+(11.5, '2025-06-03 11:30:00', 1),
+(12.0, '2025-06-03 12:15:00', 1);
 
 -- ---------------- DASHBOARD PRINCIPAL -------------------------------------------------
 
@@ -131,7 +131,7 @@ INSERT INTO medida (dado, dataHoraEmissao, fkSensor) VALUES
 SELECT ROUND(AVG(dado), 2) AS umidade, 
 DATE(dataHoraEmissao) AS momento_grafico
 FROM medida
-GROUP BY DATE(dataHoraEmissao)
+GROUP BY DATE(dataHoraEmissao)	
 ORDER BY momento_grafico DESC
 LIMIT 30;
 
@@ -145,13 +145,15 @@ order by dataHoraEmissao DESC;
 SELECT (SELECT COUNT(*) FROM sensor 
 WHERE status LIKE 'ativo') AS 'Sensores', COUNT(idSensor) AS 'Total de Sensores' FROM sensor;
 
--- SELECT QTD TERRENOS EM ALERTAS 
-SELECT COUNT(DISTINCT idLocalidade) AS Terrenos FROM localidade
-JOIN sensor 
+-- SELECT QTD DE ALERTAS 
+SELECT COUNT(*) AS Alertas FROM
+(SELECT terreno AS Terreno, CONCAT(dado, '%') AS Umidade, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Horario FROM medida
+JOIN sensor
+ON fkSensor = idSensor	
+JOIN localidade 
 ON fkLocalidade = idLocalidade
-JOIN medida 
-ON fkSensor = idSensor
-WHERE dado > 15 OR dado < 13;
+WHERE DATE(dataHoraEmissao) = CURDATE() AND (dado > 15 OR dado < 13)			
+GROUP BY DATE_FORMAT(dataHoraEmissao, '%H:%i')) AS Subconsulta;
 
 -- SELECT CONTEUDO ALERTAS 
 SELECT terreno AS Terreno, CONCAT(dado, '%') AS Umidade, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Horario FROM medida
@@ -159,46 +161,61 @@ JOIN sensor
 ON fkSensor = idSensor	
 JOIN localidade 
 ON fkLocalidade = idLocalidade
-WHERE dado > 15 OR dado < 13		
-GROUP BY DATE_FORMAT(dataHoraEmissao, '%H:%i');
+WHERE DATE(dataHoraEmissao) = CURDATE() AND (dado > 15 OR dado < 13);
 
 -- SELECT MENOR TAXA DE UMIDADE DO DIA 
-SELECT CONCAT(MIN(dado),'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida
-	JOIN sensor 
-	ON idSensor = fkSensor
-	JOIN localidade 
-	ON fkLocalidade = idLocalidade
-	WHERE DATE(dataHoraEmissao) = CURDATE();	
-
--- SELECT MAIOR TAXA DE UMIDADE DO DIA 
-SELECT CONCAT(MAX(dado),'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida
+SELECT CONCAT(dado,'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida
 JOIN sensor 
 ON idSensor = fkSensor
 JOIN localidade 
 ON fkLocalidade = idLocalidade
-WHERE DATE(dataHoraEmissao) = CURDATE();
+WHERE DATE(dataHoraEmissao) = CURDATE()
+ORDER BY dado ASC LIMIT 1;	
 
--- ---------------- DASHBOARD PARA TERRENOS -------------------------------------------------
-
--- SELECT VARIAÇÃO ULTIMOS 30 DIAS
-SELECT dado as umidade, DATE(dataHoraEmissao) as momento_grafico
-FROM medida 
-JOIN sensor
-ON fkSensor = idSensor
+-- SELECT MAIOR TAXA DE UMIDADE DO DIA 
+SELECT CONCAT(dado,'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida
+JOIN sensor 
+ON idSensor = fkSensor
 JOIN localidade 
-ON idLocalidade = fkLocalidade
-WHERE idLocalidade = 1
-GROUP BY DATE(dataHoraEmissao)
-ORDER BY idMedida DESC LIMIT 30;
-
+ON fkLocalidade = idLocalidade
+WHERE DATE(dataHoraEmissao) = CURDATE()
+ORDER BY dado DESC LIMIT 1;
+select * from medida;
+-- ---------------- DASHBOARD PARA TERRENOS -------------------------------------------------
 
 -- SELECT UMIDADE AO LONGO DO DIA
 select CONCAT(DATE_FORMAT(dataHoraEmissao, '%H'), ':00') AS Hora, round(avg(dado),1) as Medida from medida
-JOIN sensor
+JOIN sensor 
 ON fkSensor = idSensor
-JOIN localidade 
-ON idLocalidade = fkLocalidade
-WHERE DATE(dataHoraEmissao) = CURDATE() AND idLocalidade = 1
+where DATE(dataHoraEmissao) = CURDATE() AND fkLocalidade = 1
 group by DATE_FORMAT(dataHoraEmissao, '%H')
-order by dataHoraEmissao DESC;
+order by dataHoraEmissao DESC;
 
+-- QUANTIDADE DE ALERTAS DURANTE O MÊS
+SELECT COUNT(idMedida) AS Quant, DATE_FORMAT(DATE(dataHoraEmissao), '%d/%m') AS Data FROM medida
+WHERE dado > 15 or dado < 13
+GROUP BY DATE(dataHoraEmissao)
+ORDER BY DATE(dataHoraEmissao) DESC LIMIT 30;
+
+-- SELECT QUANTIDADE DE SENSORES ATIVOS NAQUELE TERRENO
+SELECT (SELECT COUNT(*) FROM sensor 
+    WHERE status LIKE 'ativo' and fkLocalidade = 1) AS Ativos, COUNT(idSensor) AS Total FROM sensor
+    WHERE fkLocalidade = 1;
+
+-- SELECT MENOR TAXA DE UMIDADE DO DIA NAQUELE TERRENO
+SELECT CONCAT(dado,'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora FROM medida
+JOIN sensor 
+ON idSensor = fkSensor
+JOIN localidade 
+ON fkLocalidade = idLocalidade
+WHERE DATE(dataHoraEmissao) = CURDATE() AND fkLocalidade = 1
+ORDER BY dado ASC LIMIT 1;
+
+-- SELECT MAIOR TAXA DE UMIDADE DO DIA NAQUELE TERRENO
+SELECT CONCAT(dado,'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora FROM medida
+JOIN sensor 
+ON idSensor = fkSensor
+JOIN localidade 
+ON fkLocalidade = idLocalidade
+WHERE DATE(dataHoraEmissao) = CURDATE()AND fkLocalidade = 1
+ORDER BY dado DESC LIMIT 1;
