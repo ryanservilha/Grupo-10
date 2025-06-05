@@ -116,14 +116,14 @@ CREATE TABLE medida (
 );
 
 INSERT INTO medida (dado, dataHoraEmissao, fkSensor) VALUES
-(12.5, NOW(), 1),
-(13.0, NOW(), 1),
-(19.0, NOW(), 1),
-(10.0, '2025-06-03 08:15:00', 1),
-(10.5, '2025-06-03 09:00:00', 1),
-(11.0, '2025-06-03 10:45:00', 1),
-(11.5, '2025-06-03 11:30:00', 1),
-(12.0, '2025-06-03 12:15:00', 1);
+(15.0, '2025-06-05 08:15:00', 1),
+(17.5, '2025-06-05 09:00:00', 1),
+(13.0, '2025-06-05 10:45:00', 1),
+(11.5, '2025-06-05 11:30:00', 1),
+(12.0, '2025-06-05 12:15:00', 1);
+
+INSERT INTO medida (dado, dataHoraEmissao, fkSensor) VALUES
+(8.6, '2025-06-04 15:26:55', 1);
 
 -- ---------------- DASHBOARD PRINCIPAL -------------------------------------------------
 
@@ -136,24 +136,54 @@ ORDER BY momento_grafico DESC
 LIMIT 30;
 
 -- SELECT UMIDADE AO LONGO DO DIA
-select CONCAT(DATE_FORMAT(dataHoraEmissao, '%H'), ':00') AS Hora, round(avg(dado),1) as Medida from medida
-where DATE(dataHoraEmissao) = CURDATE()
-group by DATE_FORMAT(dataHoraEmissao, '%H')
-order by dataHoraEmissao DESC;
+SELECT 
+  Hora,
+  ROUND(AVG(Medida), 1) AS Medida,
+  MAX(UltimoHorario) AS UltimoHorario
+FROM (
+  SELECT 
+    DATE_FORMAT(dataHoraEmissao, '%H') AS Hora,
+    dado AS Medida,
+    dataHoraEmissao AS UltimoHorario
+  FROM medida
+  WHERE DATE(dataHoraEmissao) = CURDATE()
+) AS Subconsulta
+GROUP BY Hora
+ORDER BY UltimoHorario DESC;
+
 
 -- TOTAL DE SENSORES ATIVOS
 SELECT (SELECT COUNT(*) FROM sensor 
 WHERE status LIKE 'ativo') AS 'Sensores', COUNT(idSensor) AS 'Total de Sensores' FROM sensor;
 
 -- SELECT QTD DE ALERTAS 
-SELECT COUNT(*) AS Alertas FROM
-(SELECT terreno AS Terreno, CONCAT(dado, '%') AS Umidade, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Horario FROM medida
-JOIN sensor
-ON fkSensor = idSensor	
-JOIN localidade 
-ON fkLocalidade = idLocalidade
-WHERE DATE(dataHoraEmissao) = CURDATE() AND (dado > 15 OR dado < 13)			
-GROUP BY DATE_FORMAT(dataHoraEmissao, '%H:%i')) AS Subconsulta;
+SELECT COUNT(*) AS Alertas FROM (
+  SELECT 
+    MAX(terreno) AS Terreno, 
+    CONCAT(MAX(dado), '%') AS Umidade, 
+    DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Horario
+  FROM medida
+  JOIN sensor ON fkSensor = idSensor	
+  JOIN localidade ON fkLocalidade = idLocalidade
+  WHERE DATE(dataHoraEmissao) = CURDATE() 
+    AND (dado > 15 OR dado < 13)
+  GROUP BY DATE_FORMAT(dataHoraEmissao, '%H:%i')
+) AS Subconsulta;
+
+-- versão capturando a cada 5 segundos
+SELECT COUNT(*) AS Alertas FROM (
+  SELECT 
+    MAX(terreno) AS Terreno, 
+    CONCAT(MAX(dado), '%') AS Umidade, 
+    DATE_FORMAT(dataHoraEmissao, '%H:%i:') AS HoraMinuto,
+    FLOOR(SECOND(dataHoraEmissao) / 5) * 5 AS SegundoInicio
+  FROM medida
+  JOIN sensor ON fkSensor = idSensor	
+  JOIN localidade ON fkLocalidade = idLocalidade
+  WHERE DATE(dataHoraEmissao) = CURDATE() 
+    AND (dado > 15 OR dado < 13)
+  GROUP BY HoraMinuto, SegundoInicio
+) AS Subconsulta;
 
 -- SELECT CONTEUDO ALERTAS 
 SELECT terreno AS Terreno, CONCAT(dado, '%') AS Umidade, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Horario FROM medida
@@ -184,18 +214,24 @@ select * from medida;
 -- ---------------- DASHBOARD PARA TERRENOS -------------------------------------------------
 
 -- SELECT UMIDADE AO LONGO DO DIA
-select CONCAT(DATE_FORMAT(dataHoraEmissao, '%H'), ':00') AS Hora, round(avg(dado),1) as Medida from medida
-JOIN sensor 
-ON fkSensor = idSensor
-where DATE(dataHoraEmissao) = CURDATE() AND fkLocalidade = 1
-group by DATE_FORMAT(dataHoraEmissao, '%H')
-order by dataHoraEmissao DESC;
+SELECT 
+  CONCAT(DATE_FORMAT(dataHoraEmissao, '%H'), ':00') AS Hora, 
+  ROUND(AVG(dado),1) AS Medida
+FROM medida
+JOIN sensor ON fkSensor = idSensor
+WHERE DATE(dataHoraEmissao) = CURDATE() AND fkLocalidade = 1
+GROUP BY Hora
+ORDER BY Hora DESC;
+
 
 -- QUANTIDADE DE ALERTAS DURANTE O MÊS
-SELECT COUNT(idMedida) AS Quant, DATE_FORMAT(DATE(dataHoraEmissao), '%d/%m') AS Data FROM medida
-WHERE dado > 15 or dado < 13
-GROUP BY DATE(dataHoraEmissao)
-ORDER BY DATE(dataHoraEmissao) DESC LIMIT 30;
+SELECT COUNT(idMedida) AS Quant, DATE_FORMAT(DATE(dataHoraEmissao), '%d/%m') AS Data 
+FROM medida
+WHERE dado > 15 OR dado < 13
+GROUP BY DATE_FORMAT(DATE(dataHoraEmissao), '%d/%m')
+ORDER BY DATE_FORMAT(DATE(dataHoraEmissao), '%d/%m') DESC
+LIMIT 30;
+
 
 -- SELECT QUANTIDADE DE SENSORES ATIVOS NAQUELE TERRENO
 SELECT (SELECT COUNT(*) FROM sensor 

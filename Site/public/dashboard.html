@@ -120,6 +120,16 @@
         var nomeUsuario = sessionStorage.NOME_USUARIO;
         b_usuario.innerHTML = `${nomeUsuario}`
 
+            kpiSensoresAtivos();
+            kpiQtdAlertas();
+            conteudoKpiAlerta();
+            kpiMenorUmidade();
+            kpiMaiorUmidade();
+            graficoTrintaDias();
+            graficoLongoDia();
+
+
+        function kpiSensoresAtivos() {
 
         fetch(`/medidas/sensoresAtivos`, { cache: 'no-store' }).then(function (response) {
             var vt_sensores = [];
@@ -141,6 +151,12 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
 
+            setTimeout(obterDados, 5000);
+
+        }
+
+        function kpiQtdAlertas() {
+
         fetch(`/medidas/qtdAlertas`, { cache: 'no-store' }).then(function (response) {
             var vt_alertas = [];
 
@@ -160,6 +176,11 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
+
+        }
+
+
+        function conteudoKpiAlerta() {
 
         fetch(`/medidas/conteudoAlertas`, { cache: 'no-store' }).then(function (response) {
             var vt_conteudo = [];
@@ -184,6 +205,11 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
 
+        }
+
+
+        function kpiMenorUmidade() {
+
         fetch(`/medidas/menorUmidade`, { cache: 'no-store' }).then(function (response) {
             var vt_umidade = [];
 
@@ -204,6 +230,10 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
 
+        }
+
+        function kpiMaiorUmidade() {
+
         fetch(`/medidas/maiorUmidade`, { cache: 'no-store' }).then(function (response) {
             var vt_umidadeMaior = [];
 
@@ -223,6 +253,10 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
+
+        }
+
+        function graficoTrintaDias() {
 
         fetch(`/medidas/media-trinta-dias`)
             .then((res) => res.json())
@@ -286,6 +320,10 @@
             .catch((erro) => {
                 console.error("Erro ao gerar gráfico de média da umidade nos últimos 30 dias:", erro);
             });
+
+        }
+
+        function graficoLongoDia() {
 
         fetch(`/medidas/aoLongoDia`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
@@ -373,6 +411,8 @@
             setTimeout(() => atualizarGrafico(dados, myChart), 2000);
         }
     }
+
+}
 
     function mostrarDetalhe() {
         detalhe.style.display = 'flex';
