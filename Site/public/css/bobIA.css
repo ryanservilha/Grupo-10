@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    overflow: hidden;
+}
+
+body {
+    background-color: #B9FF66;
+    display: flex;
+}
+
+.sidebar {
+    width: 12%;
+    height: 100vh;
+    background-color: rebeccapurple;
+    border: 2px solid black;
+}
+
+.containerSideBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+    gap: 10%;
+}
+
+.itens {
+    border-radius: 10px;
+    height: 6%;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+#clicked {
+    background-color: #B9FF66;
+    font-weight: 650;
+}
+
+#sideButton {
+    background-color: red;
+    color: white;
+    font-weight: 650;
+    font-size: 17px;
+    border: 2px solid rgb(100, 0, 0);
+}
+
+.container {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 3%;
+    margin-top: 3%;
+    margin-left: 0;
+}
+
+h1 {
+    color: #1F2A44;
+}
+
+textarea[type="text"] {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 400px;
+}
+
+select,
+button {
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button {
+    background-color: #ED145B;
+    color: #FFFFFF;
+    border: none;
+}
+
+button:hover {
+    background-color: #EFB661;
+}
+
+#resposta {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #e8e8e8;
+    border: 1px solid #63666A;
+    text-align: left;
+    display: none;
+    width: 70%;
+}
+

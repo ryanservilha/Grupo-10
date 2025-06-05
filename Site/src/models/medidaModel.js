@@ -25,49 +25,53 @@ function buscarSensoresAtivos() {
 
 function buscarqtdAlertas() {
 
-    var instrucaoSql = `SELECT COUNT(DISTINCT idLocalidade) AS Terrenos FROM localidade
-    JOIN sensor 
+    var instrucaoSql = `SELECT COUNT(*) AS Alertas FROM
+    (SELECT terreno AS Terreno, CONCAT(dado, '%') AS Umidade, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Horario FROM medida
+    JOIN sensor
+    ON fkSensor = idSensor	
+    JOIN localidade 
     ON fkLocalidade = idLocalidade
-    JOIN medida 
-    ON fkSensor = idSensor
-    WHERE dado > 15 OR dado < 13;`;
+    WHERE DATE(dataHoraEmissao) = CURDATE() AND (dado > 15 OR dado < 13)			
+    GROUP BY DATE_FORMAT(dataHoraEmissao, '%H:%i')) AS Subconsulta;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 function conteudoAlertas() {
-    var instrucaoSql = `SELECT terreno AS Terreno, CONCAT(dado, '%') AS Umidade, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Horario FROM	 medida
-    JOIN sensor 
-    ON fkSensor = idSensor
+    var instrucaoSql = `SELECT terreno AS Terreno, CONCAT(dado, '%') AS Umidade, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Horario FROM medida
+    JOIN sensor
+    ON fkSensor = idSensor	
     JOIN localidade 
     ON fkLocalidade = idLocalidade
-    WHERE dado > 15 OR dado < 13		
-    GROUP BY DATE_FORMAT(dataHoraEmissao, '%H:%i');`;
+    WHERE DATE(dataHoraEmissao) = CURDATE() AND (dado > 15 OR dado < 13);`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 function menorUmidade() {
-    var instrucaoSql = `SELECT CONCAT(MIN(dado),'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida
-	JOIN sensor 
-	ON idSensor = fkSensor
-	JOIN localidade 
-	ON fkLocalidade = idLocalidade
-	WHERE DATE(dataHoraEmissao) = CURDATE();`;
+    var instrucaoSql = `SELECT CONCAT(dado,'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida
+    JOIN sensor 
+    ON idSensor = fkSensor
+    JOIN localidade 
+    ON fkLocalidade = idLocalidade
+    WHERE DATE(dataHoraEmissao) = CURDATE()
+    ORDER BY dado ASC LIMIT 1;	
+    `;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
 
 function maiorUmidade() {
-    var instrucaoSql = `SELECT CONCAT(MAX(dado),'%') AS TaxaMaior, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida
+    var instrucaoSql = `SELECT CONCAT(dado,'%') AS TaxaMaior, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida
     JOIN sensor 
     ON idSensor = fkSensor
     JOIN localidade 
     ON fkLocalidade = idLocalidade
-    WHERE DATE(dataHoraEmissao) = CURDATE();`;
+    WHERE DATE(dataHoraEmissao) = CURDATE()
+    ORDER BY dado DESC LIMIT 1;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
