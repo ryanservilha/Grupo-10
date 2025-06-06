@@ -46,7 +46,7 @@
                 </div>
             </div>
             <div class="perfil">
-                <select id="escolhaTerreno">
+                <select id="escolhaTerreno" onchange="atualizarGraficos()">
                     <option value="1">Terreno 1</option>
                     <option value="2">Terreno 2</option>
                 </select>
@@ -57,7 +57,7 @@
                 <div class="quadrados">
                     <div class="quadrado" id="alertas">
                         <h2>Você está vendo:</h2>
-                        <p>Terreno 1</p>
+                        <p id="terrenoNUM">Terreno 1</p>
                     </div>
                     <div class="quadrado" id="totalSensores">
                         <h2>Total de Sensores Ativos na Plantação</h2>
@@ -96,236 +96,264 @@
 
 </html>
 <script>
+    var terrenoSelecionado = 1;
+
+    function atualizarGraficos() {
+        terrenoSelecionado = escolhaTerreno.value;
+        terrenoNUM.innerText = `Terreno ${terrenoSelecionado}`;
+        obterDados();
+    }
+
     function obterDados() {
-        fetch(`/medidaTerreno/sensoresAtivos`, { cache: 'no-store' }).then(function (response) {
-            var vt_sensores = [];
+        qtdSensoresAtivos(terrenoSelecionado);
+        menorMaiorUmidade(terrenoSelecionado);
+        aoLongoDoDia(terrenoSelecionado);
+        alertas30dias(terrenoSelecionado);
 
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+        function qtdSensoresAtivos(terrenoSelecionado) {
+            fetch(`/medidaTerreno/sensoresAtivos/${terrenoSelecionado}`, { cache: 'no-store' }).then(function (response) {
+                var vt_sensores = [];
 
-                    vt_sensores = resposta;
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    sensoresAtivos.innerHTML = `<b style="color: rgb(37, 219, 0);">${vt_sensores[0].Ativos}</b> / ${vt_sensores[0].Total}`;
+                        vt_sensores = resposta;
 
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
+                        sensoresAtivos.innerHTML = `<b style="color: rgb(37, 219, 0);">${vt_sensores[0].Ativos}</b> / ${vt_sensores[0].Total}`;
 
-        fetch(`/medidaTerreno/menorUmidade`, { cache: 'no-store' }).then(function (response) {
-            var vt_umidade = [];
-
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-                    vt_umidade = resposta;
-
-                    menorUmidade.innerHTML = `${vt_umidade[0].Taxa}`;
-                    terrenoHorarioMenor.innerHTML = `${vt_umidade[0].Hora}`;
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-        fetch(`/medidaTerreno/maiorUmidade`, { cache: 'no-store' }).then(function (response) {
-            var vt_umidadeMaior = [];
-
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-                    vt_umidadeMaior = resposta;
-
-                    maiorUmidade.innerHTML = `${vt_umidadeMaior[0].Taxa}`;
-                    terrenoHorarioMaior.innerHTML = `${vt_umidadeMaior[0].Hora}`;
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-
-        fetch(`/medidaTerreno/aoLongoDia`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-
-                    graficoAoLongoDia(resposta);
-
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-        function graficoAoLongoDia(resposta) {
-
-            console.log('iniciando plotagem do gráfico...');
-
-            // Criando estrutura para plotar gráfico - labels
-            let labels = [];
-
-            // Criando estrutura para plotar gráfico - dados
-            let dados = {
-                labels: labels,
-                datasets: [{
-                    label: 'Umidade',
-                    data: [],
-                    fill: false,
-                    borderColor: '#a90039',
-                    backgroundColor: '#ED145B',
-                    tension: 0.1,
-                    pointRadius: 4,
-                    pointHoverRadius: 6
-                }]
-            };
-
-            console.log('----------------------------------------------')
-            console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-            console.log(resposta)
-
-            // Inserindo valores recebidos em estrutura para plotar o gráfico
-            for (i = 0; i < resposta.length; i++) {
-                var registro = resposta[i];
-                labels.push(registro.Hora);
-                dados.datasets[0].data.push(registro.Medida);
-            }
-
-            console.log('----------------------------------------------')
-            console.log('O gráfico será plotado com os respectivos valores:')
-            console.log('Labels:')
-            console.log(labels)
-            console.log('Dados:')
-            console.log(dados.datasets)
-            console.log('----------------------------------------------')
-            // Criando estrutura para plotar gráfico - config
-            const config = {
-                type: 'line',
-                data: dados,
-                options: {
-                    interaction: {
-                        mode: 'index',
-                        intersect: false
-                    },
-                    plugins: {
-                        tooltip: {
-                            enabled: true
-                        },
-                        legend: {
-                            display: false
-                        }
-                    }
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
                 }
-            };
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                });
 
-            // Adicionando gráfico criado em div na tela
-            let myChart = new Chart(
-                document.getElementById(`graficoUmidadeDia`),
-                config
-            );
+            setTimeout(obterDados, 5000);
 
         }
 
-        fetch(`/medidaTerreno/alertas30dias`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
+        function menorMaiorUmidade(terrenoSelecionado) {
+            fetch(`/medidaTerreno/menorUmidade/${terrenoSelecionado}`, { cache: 'no-store' }).then(function (response) {
+                var vt_umidade = [];
 
-                    alertas30dias(resposta);
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
+                        vt_umidade = resposta;
 
-        function alertas30dias(resposta) {
-
-            console.log('iniciando plotagem do gráfico...');
-
-            // Criando estrutura para plotar gráfico - labels
-            let labels = [];
-
-            // Criando estrutura para plotar gráfico - dados
-            let dados = {
-                labels: labels,
-                datasets: [{
-                    label: 'Alertas',
-                    data: [],
-                    fill: false,
-                    borderColor: '#a90039',
-                    backgroundColor: '#ED145B',
-                    tension: 0.1
-                }]
-            };
-
-            console.log('----------------------------------------------')
-            console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-            console.log(resposta)
-
-            // Inserindo valores recebidos em estrutura para plotar o gráfico
-            for (i = 0; i < resposta.length; i++) {
-                var registro = resposta[i];
-                labels.push(registro.Data);
-                dados.datasets[0].data.push(registro.Quant);
-            }
-
-            console.log('----------------------------------------------')
-            console.log('O gráfico será plotado com os respectivos valores:')
-            console.log('Labels:')
-            console.log(labels)
-            console.log('Dados:')
-            console.log(dados.datasets)
-            console.log('----------------------------------------------')
-            // Criando estrutura para plotar gráfico - config
-            const config = {
-                type: 'bar',
-                data: dados,
-                options: {
-                    interaction: {
-                        mode: 'index',
-                        intersect: false
-                    },
-                    plugins: {
-                        tooltip: {
-                            enabled: true
-                        },
-                        legend: {
-                            display: false
-                        }
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false,
+                        menorUmidade.innerHTML = `${vt_umidade[0].Taxa}`;
+                        terrenoHorarioMenor.innerHTML = `${vt_umidade[0].Hora}`;
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
                 }
-            };
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                });
 
-            // Adicionando gráfico criado em div na tela
-            let myChart = new Chart(
-                document.getElementById(`alertas30dias`),
-                config
-            );
+            fetch(`/medidaTerreno/maiorUmidade/${terrenoSelecionado}`, { cache: 'no-store' }).then(function (response) {
+                var vt_umidadeMaior = [];
 
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+
+                        vt_umidadeMaior = resposta;
+
+                        maiorUmidade.innerHTML = `${vt_umidadeMaior[0].Taxa}`;
+                        terrenoHorarioMaior.innerHTML = `${vt_umidadeMaior[0].Hora}`;
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                });
+        }
+
+        let chartUmidadeDia = null;
+        let chartAlertas30Dias = null;
+
+
+
+        function aoLongoDoDia(terrenoSelecionado) {
+            fetch(`/medidaTerreno/aoLongoDia/${terrenoSelecionado}`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+
+                        graficoAoLongoDia(resposta);
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                });
+
+            function graficoAoLongoDia(resposta) {
+
+                console.log('iniciando plotagem do gráfico...');
+
+                // Criando estrutura para plotar gráfico - labels
+                let labels = [];
+
+                // Criando estrutura para plotar gráfico - dados
+                let dados = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Umidade',
+                        data: [],
+                        fill: false,
+                        borderColor: '#a90039',
+                        backgroundColor: '#ED145B',
+                        tension: 0.1,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                };
+
+                console.log('----------------------------------------------')
+                console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+                console.log(resposta)
+
+                // Inserindo valores recebidos em estrutura para plotar o gráfico
+                for (i = 0; i < resposta.length; i++) {
+                    var registro = resposta[i];
+                    labels.push(registro.Hora);
+                    dados.datasets[0].data.push(registro.Medida);
+                }
+
+                console.log('----------------------------------------------')
+                console.log('O gráfico será plotado com os respectivos valores:')
+                console.log('Labels:')
+                console.log(labels)
+                console.log('Dados:')
+                console.log(dados.datasets)
+                console.log('----------------------------------------------')
+                // Criando estrutura para plotar gráfico - config
+                const config = {
+                    type: 'line',
+                    data: dados,
+                    options: {
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            tooltip: {
+                                enabled: true
+                            },
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
+                };
+
+                // Adicionando gráfico criado em div na tela
+                let myChart = new Chart(
+                    document.getElementById(`graficoUmidadeDia`),
+                    config
+                );
+
+            }
+        }
+
+        function alertas30dias(terrenoSelecionado) {
+            fetch(`/medidaTerreno/alertas30dias/${terrenoSelecionado}`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
+
+                        plotarAlertas30dias(resposta);
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+                });
+
+            function plotarAlertas30dias(resposta) {
+
+                console.log('iniciando plotagem do gráfico...');
+
+                // Criando estrutura para plotar gráfico - labels
+                let labels = [];
+
+                // Criando estrutura para plotar gráfico - dados
+                let dados = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Alertas',
+                        data: [],
+                        fill: false,
+                        borderColor: '#a90039',
+                        backgroundColor: '#ED145B',
+                        tension: 0.1
+                    }]
+                };
+
+                console.log('----------------------------------------------')
+                console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+                console.log(resposta)
+
+                // Inserindo valores recebidos em estrutura para plotar o gráfico
+                for (i = 0; i < resposta.length; i++) {
+                    var registro = resposta[i];
+                    labels.push(registro.Data);
+                    dados.datasets[0].data.push(registro.Quant);
+                }
+
+                console.log('----------------------------------------------')
+                console.log('O gráfico será plotado com os respectivos valores:')
+                console.log('Labels:')
+                console.log(labels)
+                console.log('Dados:')
+                console.log(dados.datasets)
+                console.log('----------------------------------------------')
+                // Criando estrutura para plotar gráfico - config
+                const config = {
+                    type: 'bar',
+                    data: dados,
+                    options: {
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            tooltip: {
+                                enabled: true
+                            },
+                            legend: {
+                                display: false
+                            }
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                    }
+                };
+
+                if (chartAlertas30Dias) chartAlertas30Dias.destroy();
+
+                let myChart = new Chart(
+                    document.getElementById(`alertas30dias`),
+                    config
+                );
+            }
         }
     }
 </script>

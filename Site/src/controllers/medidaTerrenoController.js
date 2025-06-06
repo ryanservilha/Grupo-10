@@ -2,7 +2,9 @@ var medidaTerrenoModel = require("../models/medidaTerrenoModel");
 
 function sensoresAtivos(req, res) {
 
-    medidaTerrenoModel.sensoresAtivos().then(function (resultado) {
+    const fkLocalidade = req.params.fkLocalidade;
+
+    medidaTerrenoModel.sensoresAtivos(fkLocalidade).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -16,8 +18,9 @@ function sensoresAtivos(req, res) {
 }
 
 function menorUmidade(req, res) {
+    const fkLocalidade = req.params.fkLocalidade;
 
-    medidaTerrenoModel.menorUmidade().then(function (resultado) {
+    medidaTerrenoModel.menorUmidade(fkLocalidade).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -31,8 +34,9 @@ function menorUmidade(req, res) {
 }
 
 function maiorUmidade(req, res) {
+    const fkLocalidade = req.params.fkLocalidade;
 
-    medidaTerrenoModel.maiorUmidade().then(function (resultado) {
+    medidaTerrenoModel.maiorUmidade(fkLocalidade).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -46,8 +50,9 @@ function maiorUmidade(req, res) {
 }
 
 function aoLongoDia(req, res) {
+    const fkLocalidade = req.params.fkLocalidade;
 
-    medidaTerrenoModel.aoLongoDia().then(function (resultado) {
+    medidaTerrenoModel.aoLongoDia(fkLocalidade).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -62,7 +67,9 @@ function aoLongoDia(req, res) {
 
 
 function alertas30dias(req, res) {
-    medidaTerrenoModel.alertas30dias().then(function (resultado) {
+    const fkLocalidade = req.params.fkLocalidade;
+
+    medidaTerrenoModel.alertas30dias(fkLocalidade).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

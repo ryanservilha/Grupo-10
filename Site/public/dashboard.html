@@ -88,21 +88,13 @@
             <div class="baixo">
                 <div class="graficoDia">
                     <div class="cimaGrafico">
-                        <select id="opcoesTerrenos">
-                            <option value="terreno1">Terreno 1</option>
-                            <option value="terreno2">Terreno 2</option>
-                        </select>
                         <h2>Variação de Umidade ao Longo do Dia</h2>
                     </div>
                     <canvas id="graficoUmidadeDia"></canvas>
                 </div>
                 <div class="grafico30dias">
                     <div class="grafico30">
-                        <select id="opcoesTerrenos">
-                            <option value="terreno1">Terreno 1</option>
-                            <option value="terreno2">Terreno 2</option>
-                        </select>
-                        <h2>Média da Taxa de Umidade nos Últimos 30 Dias</h2>
+                        <h2>Quantidade de Alertas Nos Últimos 7 Dias</h2>
                     </div>
                     <canvas id="graficoUmidade30Dias"></canvas>
                 </div>
@@ -120,36 +112,36 @@
         var nomeUsuario = sessionStorage.NOME_USUARIO;
         b_usuario.innerHTML = `${nomeUsuario}`
 
-            kpiSensoresAtivos();
-            kpiQtdAlertas();
-            conteudoKpiAlerta();
-            kpiMenorUmidade();
-            kpiMaiorUmidade();
-            graficoTrintaDias();
-            graficoLongoDia();
+        kpiSensoresAtivos();
+        kpiQtdAlertas();
+        conteudoKpiAlerta();
+        kpiMenorUmidade();
+        kpiMaiorUmidade();
+        graficoTrintaDias();
+        graficoLongoDia();
 
 
         function kpiSensoresAtivos() {
 
-        fetch(`/medidas/sensoresAtivos`, { cache: 'no-store' }).then(function (response) {
-            var vt_sensores = [];
+            fetch(`/medidas/sensoresAtivos`, { cache: 'no-store' }).then(function (response) {
+                var vt_sensores = [];
 
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    vt_sensores = resposta;
+                        vt_sensores = resposta;
 
-                    sensoresAtivos.innerHTML = `<b style="color: rgb(37, 219, 0);">${vt_sensores[0].Ativos}</b> / ${vt_sensores[0].Total}`;
+                        sensoresAtivos.innerHTML = `<b style="color: rgb(37, 219, 0);">${vt_sensores[0].Ativos}</b> / ${vt_sensores[0].Total}`;
 
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
                 });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
 
             setTimeout(obterDados, 5000);
 
@@ -157,262 +149,261 @@
 
         function kpiQtdAlertas() {
 
-        fetch(`/medidas/qtdAlertas`, { cache: 'no-store' }).then(function (response) {
-            var vt_alertas = [];
+            fetch(`/medidas/qtdAlertas`, { cache: 'no-store' }).then(function (response) {
+                var vt_alertas = [];
 
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    vt_alertas = resposta;
+                        vt_alertas = resposta;
 
-                    quantAlertas.innerHTML = `${vt_alertas[0].Alertas}`;
+                        quantAlertas.innerHTML = `${vt_alertas[0].Alertas}`;
 
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
                 });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
 
         }
 
 
         function conteudoKpiAlerta() {
 
-        fetch(`/medidas/conteudoAlertas`, { cache: 'no-store' }).then(function (response) {
-            var vt_conteudo = [];
+            fetch(`/medidas/conteudoAlertas`, { cache: 'no-store' }).then(function (response) {
+                var vt_conteudo = [];
 
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    vt_conteudo = resposta;
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        vt_conteudo = resposta;
+                        listaAlertas.innerHTML = ``;
 
-                    vt_conteudo.reverse();
+                        for (var i = 0; i < vt_conteudo.length; i++) {
+                            listaAlertas.innerHTML += `<li>${vt_conteudo[i].terreno}: <b style="color: red;">${vt_conteudo[i].dado}</b> - ${vt_conteudo[i].data}</li>`
+                        }
 
-                    for (var i = 0; i < vt_conteudo.length; i++) {
-                        listaAlertas.innerHTML += `<li>${vt_conteudo[i].Terreno}: <b style="color: red;">${vt_conteudo[i].Umidade}</b> - ${vt_conteudo[i].Horario}</li>`
-                    }
-
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
                 });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
 
         }
 
 
         function kpiMenorUmidade() {
 
-        fetch(`/medidas/menorUmidade`, { cache: 'no-store' }).then(function (response) {
-            var vt_umidade = [];
+            fetch(`/medidas/menorUmidade`, { cache: 'no-store' }).then(function (response) {
+                var vt_umidade = [];
 
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    vt_umidade = resposta;
+                        vt_umidade = resposta;
 
-                    menorUmidade.innerHTML = `${vt_umidade[0].Taxa}`;
-                    terrenoHorarioMenor.innerHTML = `${vt_umidade[0].Hora} - ${vt_umidade[0].terreno}`;
+                        menorUmidade.innerHTML = `${vt_umidade[0].Taxa}`;
+                        terrenoHorarioMenor.innerHTML = `${vt_umidade[0].Hora} - ${vt_umidade[0].terreno}`;
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
                 });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
 
         }
 
         function kpiMaiorUmidade() {
 
-        fetch(`/medidas/maiorUmidade`, { cache: 'no-store' }).then(function (response) {
-            var vt_umidadeMaior = [];
+            fetch(`/medidas/maiorUmidade`, { cache: 'no-store' }).then(function (response) {
+                var vt_umidadeMaior = [];
 
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
-                    vt_umidadeMaior = resposta;
+                        vt_umidadeMaior = resposta;
 
-                    maiorUmidade.innerHTML = `${vt_umidadeMaior[0].TaxaMaior}`;
-                    terrenoHorarioMaior.innerHTML = `${vt_umidadeMaior[0].Hora} - ${vt_umidadeMaior[0].terreno}`;
+                        maiorUmidade.innerHTML = `${vt_umidadeMaior[0].TaxaMaior}`;
+                        terrenoHorarioMaior.innerHTML = `${vt_umidadeMaior[0].Hora} - ${vt_umidadeMaior[0].terreno}`;
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
                 });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
 
         }
 
         function graficoTrintaDias() {
 
-        fetch(`/medidas/media-trinta-dias`)
-            .then((res) => res.json())
-            .then((dados) => {
-                const ultimosDados = dados.reverse();
+            fetch(`/medidas/media-trinta-dias`)
+                .then((res) => res.json())
+                .then((dados) => {
+                    const ultimosDados = dados.reverse();
 
-                // Mapeando as datas para labels, incluindo apenas o dia e o mês
-                const labels = ultimosDados.map((item) => {
-                    return new Date(item.momento_grafico).toLocaleDateString("pt-BR", {
-                        day: "2-digit",
-                        month: "2-digit",
-                    });
-                });
+                    // Mapeando as datas para labels, incluindo apenas o dia e o mês
+                    const labels = ultimosDados.map((item) => item.data_formatada);
 
-                // Mapeando os valores da umidade
-                const valores = ultimosDados.map((item) => item.umidade);
+                    // Mapeando os valores da umidade
+                    const valores = ultimosDados.map((item) => item.alertas);
 
-                const ctx = document.getElementById("graficoUmidade30Dias").getContext("2d");
+                    const ctx = document.getElementById("graficoUmidade30Dias").getContext("2d");
 
-                if (window.graficoAnotacoes instanceof Chart) {
-                    window.graficoAnotacoes.destroy();
-                }
+                    if (window.graficoAnotacoes instanceof Chart) {
+                        window.graficoAnotacoes.destroy();
+                    }
 
-                window.graficoAnotacoes = new Chart(ctx, {
-                    type: "bar",
-                    data: {
-                        labels: labels, // Usando as labels formatadas
-                        datasets: [
-                            {
-                                label: "Média de Umidade",
-                                data: valores,
-                                backgroundColor: "#ED145B",
-                                borderWidth: 1,
-                            },
-                        ],
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: {
-                                beginAtZero: true,
-                                grid: {
-                                    display: false,
+                    window.graficoAnotacoes = new Chart(ctx, {
+                        type: "bar",
+                        data: {
+                            labels: labels, // Usando as labels formatadas
+                            datasets: [
+                                {
+                                    label: 'Alertas',
+                                    data: valores,
+                                    backgroundColor: "#ED145B",
+                                    borderWidth: 1,
                                 },
+                            ],
+                        },
+                        options: {
+                            plugins: {
+                                legend: {
+                                    display: false // <- Isso remove a legenda do gráfico
+                                }
                             },
-                            y: {
-                                title: {
-                                    display: true,
-                                    text: "(%)",
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        display: false,
+                                    },
                                 },
-                                beginAtZero: true,
-                                grid: {
-                                    display: false,
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: "(%)",
+                                    },
+                                    beginAtZero: true,
+                                    grid: {
+                                        display: false,
+                                    }
                                 },
                             },
                         },
-                    },
+                    });
+                })
+                .catch((erro) => {
+                    console.error("Erro ao gerar gráfico de média da umidade nos últimos 30 dias:", erro);
                 });
-            })
-            .catch((erro) => {
-                console.error("Erro ao gerar gráfico de média da umidade nos últimos 30 dias:", erro);
-            });
 
         }
 
         function graficoLongoDia() {
 
-        fetch(`/medidas/aoLongoDia`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
+            fetch(`/medidas/aoLongoDia`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                        resposta.reverse();
 
-                    graficoDia(resposta);
+                        graficoDia(resposta);
 
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+                .catch(function (error) {
+                    console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
                 });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
 
-        function graficoDia(resposta) {
+            function graficoDia(resposta) {
 
-            console.log('iniciando plotagem do gráfico...');
+                console.log('iniciando plotagem do gráfico...');
 
-            // Criando estrutura para plotar gráfico - labels
-            let labels = [];
+                // Criando estrutura para plotar gráfico - labels
+                let labels = [];
 
-            // Criando estrutura para plotar gráfico - dados
-            let dados = {
-                labels: labels,
-                datasets: [{
-                    label: 'Umidade',
-                    data: [],
-                    fill: false,
-                    backgroundColor: '#6a3604',
-                    borderColor: '#6a3604',
-                    tension: 0.1,
-                    pointRadius: 4,
-                    pointHoverRadius: 6
-                }]
-            };
+                // Criando estrutura para plotar gráfico - dados
+                let dados = {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Umidade',
+                        data: [],
+                        fill: false,
+                        backgroundColor: '#6a3604',
+                        borderColor: '#6a3604',
+                        tension: 0.1,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                };
 
-            console.log('----------------------------------------------')
-            console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-            console.log(resposta)
+                console.log('----------------------------------------------')
+                console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+                console.log(resposta)
 
-            // Inserindo valores recebidos em estrutura para plotar o gráfico
-            for (i = 0; i < resposta.length; i++) {
-                var registro = resposta[i];
-                labels.push(registro.Hora);
-                dados.datasets[0].data.push(registro.Medida);
-            }
+                // Inserindo valores recebidos em estrutura para plotar o gráfico
+                for (i = 0; i < resposta.length; i++) {
+                    var registro = resposta[i];
+                    labels.push(registro.Hora);
+                    dados.datasets[0].data.push(registro.Medida);
+                }
 
-            console.log('----------------------------------------------')
-            console.log('O gráfico será plotado com os respectivos valores:')
-            console.log('Labels:')
-            console.log(labels)
-            console.log('Dados:')
-            console.log(dados.datasets)
-            console.log('----------------------------------------------')
-            // Criando estrutura para plotar gráfico - config
-            const config = {
-                type: 'line',
-                data: dados,
-                options: {
-                    interaction: {
-                        mode: 'index',
-                        intersect: false
-                    },
-                    plugins: {
-                        tooltip: {
-                            enabled: true
+                console.log('----------------------------------------------')
+                console.log('O gráfico será plotado com os respectivos valores:')
+                console.log('Labels:')
+                console.log(labels)
+                console.log('Dados:')
+                console.log(dados.datasets)
+                console.log('----------------------------------------------')
+                // Criando estrutura para plotar gráfico - config
+                const config = {
+                    type: 'line',
+                    data: dados,
+                    options: {
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
                         },
-                        legend: {
-                            display: false
+                        plugins: {
+                            tooltip: {
+                                enabled: true
+                            },
+                            legend: {
+                                display: false
+                            }
                         }
                     }
-                }
-            };
+                };
 
-            // Adicionando gráfico criado em div na tela
-            let myChart = new Chart(
-                document.getElementById(`graficoUmidadeDia`),
-                config
-            );
+                // Adicionando gráfico criado em div na tela
+                let myChart = new Chart(
+                    document.getElementById(`graficoUmidadeDia`),
+                    config
+                );
 
-            setTimeout(() => atualizarGrafico(dados, myChart), 2000);
+                setTimeout(() => atualizarGrafico(dados, myChart), 2000);
+            }
         }
-    }
 
-}
+    }
 
     function mostrarDetalhe() {
         detalhe.style.display = 'flex';

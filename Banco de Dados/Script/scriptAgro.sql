@@ -1,6 +1,5 @@
 -- criação do banco de dados
 CREATE DATABASE protecaoSoja;
-
 USE protecaoSoja;
 
 -- criação da tabela endereco
@@ -119,7 +118,7 @@ INSERT INTO medida (dado, dataHoraEmissao, fkSensor) VALUES
 (15.0, '2025-06-05 08:15:00', 1),
 (17.5, '2025-06-05 09:00:00', 1),
 (13.0, '2025-06-05 10:45:00', 1),
-(11.5, '2025-06-05 11:30:00', 1),
+(11.5, '2025-06-05 11:30:00', 1),	
 (12.0, '2025-06-05 12:15:00', 1);
 
 INSERT INTO medida (dado, dataHoraEmissao, fkSensor) VALUES
@@ -192,6 +191,20 @@ ON fkSensor = idSensor
 JOIN localidade 
 ON fkLocalidade = idLocalidade
 WHERE DATE(dataHoraEmissao) = CURDATE() AND (dado > 15 OR dado < 13);
+
+-- versão a cada 5 segundos
+SELECT 
+    MAX(terreno) AS Terreno, 
+    CONCAT(MAX(dado), '%') AS Umidade, 
+    DATE_FORMAT(dataHoraEmissao, '%H:%i') AS HoraMinuto,
+    FLOOR(SECOND(dataHoraEmissao) / 5) * 5 AS SegundoInicio
+  FROM medida
+  JOIN sensor ON fkSensor = idSensor	
+  JOIN localidade ON fkLocalidade = idLocalidade
+  WHERE DATE(dataHoraEmissao) = CURDATE() 
+    AND (dado > 15 OR dado < 13)
+  GROUP BY HoraMinuto, SegundoInicio;
+    
 
 -- SELECT MENOR TAXA DE UMIDADE DO DIA 
 SELECT CONCAT(dado,'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida

@@ -1,13 +1,18 @@
 var database = require("../database/config");
 
 function buscarMediaTrinta() {
-  var instrucaoSql = `SELECT ROUND(AVG(dado), 2) AS umidade, 
-    DATE(dataHoraEmissao) AS momento_grafico
-    FROM medida
-    GROUP BY DATE(dataHoraEmissao)
-    ORDER BY momento_grafico DESC
-    LIMIT 30;
-    `;
+      var instrucaoSql = `
+SELECT 
+  COUNT(*) AS alertas,
+  DATE_FORMAT(data, '%d/%m') AS data_formatada
+FROM (
+  SELECT DATE(dataHoraEmissao) AS data
+  FROM medida
+  WHERE dado > 15 OR dado < 13
+) AS Subconsulta
+GROUP BY data
+ORDER BY data DESC
+LIMIT 7;`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -22,31 +27,19 @@ function buscarSensoresAtivos() {
 }
 
 function buscarqtdAlertas() {
-  var instrucaoSql = `SELECT COUNT(*) AS Alertas FROM (
-  SELECT 
-    MAX(terreno) AS Terreno, 
-    CONCAT(MAX(dado), '%') AS Umidade, 
-    DATE_FORMAT(dataHoraEmissao, '%H:%i:') AS HoraMinuto,
-    FLOOR(SECOND(dataHoraEmissao) / 5) * 5 AS SegundoInicio
-  FROM medida
-  JOIN sensor ON fkSensor = idSensor	
-  JOIN localidade ON fkLocalidade = idLocalidade
-  WHERE DATE(dataHoraEmissao) = CURDATE() 
-    AND (dado > 15 OR dado < 13)
-  GROUP BY HoraMinuto, SegundoInicio
-) AS Subconsulta;`;
+  var instrucaoSql = `  select COUNT(idMedida) as Alertas FROM medida
+  where (dado > 15 or dado < 13) and date(dataHoraEmissao) = CURDATE();`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
 }
 
 function conteudoAlertas() {
-  var instrucaoSql = `SELECT terreno AS Terreno, CONCAT(dado, '%') AS Umidade, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Horario FROM medida
-    JOIN sensor
-    ON fkSensor = idSensor	
-    JOIN localidade 
-    ON fkLocalidade = idLocalidade
-    WHERE DATE(dataHoraEmissao) = CURDATE() AND (dado > 15 OR dado < 13);`;
+    var instrucaoSql = ` SELECT terreno, dado, DATE_FORMAT(dataHoraEmissao, '%H:%i') as data FROM medida
+  JOIN sensor ON fkSensor = idSensor
+  JOIN localidade ON fkLocalidade = idLocalidade
+  WHERE (dado > 15 or dado < 13) and date(dataHoraEmissao) = CURDATE()
+  ORDER BY dataHoraEmissao DESC;`;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
