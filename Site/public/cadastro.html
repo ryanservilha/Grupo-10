@@ -2,88 +2,93 @@
 <html lang="pt">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/cadastro.css">
-    <script src="js/cadastroLogin.js"></script>
-    <title>Cadastro Agro Smart</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/cadastro.css">
+  <script src="js/cadastroLogin.js"></script>
+  <title>Cadastro Agro Smart</title>
 </head>
 
 <body>
-    <div class="container">
-        <div class="logo">
-            <a href="index.html">
-                <h1>Agro Smart<span>.</span></h1>
-                <svg width="79" height="14" viewBox="0 0 79 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 2.69324C15.6667 9.19324 49.8 18.2932 77 2.69324" stroke="#CCF32F" stroke-width="4"
-                        stroke-linecap="round" />
-                </svg>
-            </a>
-        </div>
-        <div class="container2">
-            <div class="introducao">
-                <div class="textos">
-                    <h2>Faça seu cadastro</h2>
-                    <h2>E utilize da nossa <span>solução!</span></h2>
-                </div>
-                <div class="figuraFazendeiros">
-                    <img src="imgs/fazendeiros.png">
-                </div>
-            </div>
-            <div class="cadastro">
-                <h2 id="tituloCadastro">Cadastre-se</h2>
-                <div class="inputs">
-                    <div class="inputsRow">
-                        <div class="caixinha">
-                            <p>Nome</p>
-                            <input id="inpt_nome" placeholder="Digite seu nome">
-                        </div>
-                        <div class="caixinha">
-                            <p>CPF</p>
-                            <input id="inpt_cpf" placeholder="Digite seu CPF">
-                        </div>
-                    </div>
-                    <div class="inputsRow">
-                        <div class="caixinha">
-                            <p>Email</p>
-                            <input id="inpt_emailCadastrado" placeholder="Digite o seu email">
-                        </div>
-                        <div class="caixinha">
-                            <p>Código de Verificação</p>
-                            <input id="inpt_code" placeholder="Código de Verificação">
-                        </div>
-                    </div>
-                    <div class="inputsRow">
-                        <div class="caixinha">
-                            <p>Senha</p>
-                            <input id="inpt_senhaCadastrada" type="password" placeholder="Crie uma senha">
-                        </div>
-                        <div class="caixinha">
-                            <p>Confirmar Senha</p>
-                            <input id="inpt_confirmeSenha" type="password" placeholder="Confirme sua senha">
-                        </div>
-                    </div>
-                </div>
-                <div class="botaoCadastrar">
-                    <button onclick="cadastrar()">
-                        <p>Cadastrar</p>
-                    </button>
-                </div>
-                <h3>Já possui cadastro? <a href="login.html">Login</a></h3>
-            </div>
-        </div>
+  <div class="container">
+    <div id="bemvindo">
+      <div class="msg" id="msg">
+      </div>
     </div>
+    <div class="logo">
+      <a href="index.html">
+        <h1>Agro Smart<span>.</span></h1>
+        <svg width="79" height="14" viewBox="0 0 79 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 2.69324C15.6667 9.19324 49.8 18.2932 77 2.69324" stroke="#CCF32F" stroke-width="4"
+            stroke-linecap="round" />
+        </svg>
+      </a>
+    </div>
+    <div class="container2">
+      <div class="introducao">
+        <div class="textos">
+          <h2>Faça seu cadastro</h2>
+          <h2>E utilize da nossa <span>solução!</span></h2>
+        </div>
+        <div class="figuraFazendeiros">
+          <img src="imgs/fazendeiros.png">
+        </div>
+      </div>
+      <div class="cadastro">
+        <h2 id="tituloCadastro">Cadastre-se</h2>
+        <div class="inputs">
+          <div class="inputsRow">
+            <div class="caixinha">
+              <p>Nome</p>
+              <input id="inpt_nome" placeholder="Digite seu nome">
+            </div>
+            <div class="caixinha">
+              <p>CPF</p>
+              <input id="inpt_cpf" placeholder="Digite seu CPF">
+            </div>
+          </div>
+          <div class="inputsRow">
+            <div class="caixinha">
+              <p>Email</p>
+              <input id="inpt_emailCadastrado" placeholder="Digite o seu email">
+            </div>
+            <div class="caixinha">
+              <p>Código de Verificação</p>
+              <input id="inpt_code" placeholder="Código de Verificação">
+            </div>
+          </div>
+          <div class="inputsRow">
+            <div class="caixinha">
+              <p>Senha</p>
+              <input id="inpt_senhaCadastrada" type="password" placeholder="Crie uma senha">
+            </div>
+            <div class="caixinha">
+              <p>Confirmar Senha</p>
+              <input id="inpt_confirmeSenha" type="password" placeholder="Confirme sua senha">
+            </div>
+          </div>
+        </div>
+        <div class="botaoCadastrar">
+          <button onclick="cadastrar()">
+            <p>Cadastrar</p>
+          </button>
+        </div>
+        <h3>Já possui cadastro? <a href="login.html">Login</a></h3>
+      </div>
+    </div>
+  </div>
 
-    <div class="vazio"></div>
-    
+  <div class="vazio"></div>
+
 </body>
+
 </html>
 
 <script>
 
-function cadastrar() {
-    
-     var nomeVar = inpt_nome.value;
+  function cadastrar() {
+
+    var nomeVar = inpt_nome.value;
     var cpfVar = inpt_cpf.value;
     var emailVar = inpt_emailCadastrado.value;
     var empresaVar = inpt_code.value;
@@ -103,39 +108,43 @@ function cadastrar() {
       // cardErro.style.display = "block";
       // mensagem_erro.innerHTML =
       //   "(Mensagem de erro para todos os campos em branco)";
-
-      alert('Deu erro campos em branco');
+      bemvindo.style.display = "block";
+      msg.innerHTML = '<h2 id="campoBranco">Deu erro, campos em branco!</h2>';
 
       finalizarAguardar();
       return false;
-    } 
+    }
     else if (nomeVar.length <= 1) {
       // cardErro.style.display = "block";
       // mensagem_erro.innerHTML = "(Seu nome deve ter mais de 1 caractere)"
 
-      alert('Seu nome precisa ter mais de 1 caractere')
+      bemvindo.style.display = "block";
+      msg.innerHTML = '<h2 id="campoBranco">Seu nome precisa ter mais de 1 caractere</h2>';
       finalizarAguardar();
       return false;
     }
     else if (!cpfVar.length == 11) {
       // cardErro.style.display = "block";
       // mensagem_erro.innerHTML = "(Seu nome deve ter mais de 1 caractere)"
-
-      alert('Seu CNPJ precisa ter mais de 14 caracteres')
+      bemvindo.style.display = "block";
+      msg.innerHTML = '<h2 id="campoBranco">Seu CNPJ precisa ter mais de 14 caracteres</h2>';
       finalizarAguardar();
       return false;
     }
     else if (!emailVar.includes('@') || !emailVar.includes('.')) {
       // cardErro.style.display = "block";
       // mensagem_erro.innerHTML = "(O seu E-mail deve conter @ e .)"
-      alert ('Seu email deve conter @ e .')
+      bemvindo.style.display = "block";
+      msg.innerHTML = '<h2 id="campoBranco">Seu email deve conter @ e .</h2>';
       finalizarAguardar();
       return false;
     }
     else if (!empresaVar.length == 5) {
       // cardErro.style.display = "block";
       // mensagem_erro.innerHTML = "(O seu E-mail deve conter @ e .)"
-      alert ('Seu código precisa ter 5 caracteres')
+
+      bemvindo.style.display = "block";
+      msg.innerHTML = '<h2 id="campoBranco">Seu código precisa ter 5 caracteres</h2>';
       finalizarAguardar();
       return false;
     }
@@ -143,7 +152,8 @@ function cadastrar() {
       // cardErro.style.display = "block";
       // mensagem_erro.innerHTML = "(Sua senha está com menos de 6 caracteres)"
 
-      alert('Sua senha está com menos de 6 caracteres')
+      bemvindo.style.display = "block";
+      msg.innerHTML = '<h2 id="campoBranco">Sua senha está com menos de 6 caracteres</h2>';
       finalizarAguardar();
       return false;
     }
@@ -151,11 +161,12 @@ function cadastrar() {
       // cardErro.style.display = "block";
       // mensagem_erro.innerHTML = "(Sua senha não é a mesma da confirmação)"
 
-      alert('Sua senha não é a mesma da confirmação')
+      bemvindo.style.display = "block";
+      msg.innerHTML = '<h2 id="campoBranco">Sua senha não é a mesma da confirmação</h2>';
       finalizarAguardar();
       return false;
     }
-   
+
     else {
       setInterval(sumirMensagem, 5000);
     }
@@ -183,7 +194,8 @@ function cadastrar() {
           // cardErro.style.display = "block";
 
           // mensagem_erro.innerHTML =
-           alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+          bemvindo.style.display = "block";
+          msg.innerHTML = '<h2 id="campoBranco">Cadastro realizado com sucesso! Redirecionando para tela de Login...</h2>';
 
           setTimeout(() => {
             window.location = "login.html";

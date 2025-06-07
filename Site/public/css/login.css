@@ -39,7 +39,9 @@ body {
 
 .container2 {
     display: flex;
-    gap: 10rem;
+    gap: 5rem;
+    align-items: center;
+    justify-content: center;
 }
 
 .introducao {
@@ -52,9 +54,10 @@ body {
 .textos {
     color: #77cb12;
     font-size: 24px;
+    width: 70vh;
 }
 
-.textos h2{
+.textos h2 {
     margin-left: 5%;
 }
 
@@ -68,8 +71,8 @@ body {
 }
 
 .figuraFazendeiros img {
-    width: 450px;
-    height: fit-content;
+    width: 96%;
+    height: 350px;
 }
 
 .acessoLogin {
@@ -78,7 +81,7 @@ body {
     margin-right: 9%;
     margin-top: 32px;
     border-radius: 25px;
-    background-color: #9cdf4a;
+    background-color: #B9FF66;
     border: 2px solid black;
 }
 
@@ -185,4 +188,42 @@ body {
 
 .acessoLogin h3 a:hover {
     text-decoration: underline;
+}
+
+#bemvindo {
+    width: 20%;
+    height: 15%;
+    display: none;
+    background-color: #5aa400;
+    border-radius: 15px;
+    box-shadow: 2px 0px 10px rgb(35, 63, 0);
+    animation: descer 0.7s ease forwards;
+    position: fixed;
+    left: 40%;
+}
+
+@keyframes descer {
+    from {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.msg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.msg h2 {
+    font-size: 30px;
+    color: white;
 }

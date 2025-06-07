@@ -23,4 +23,8 @@ router.get("/alertas30dias/:fkLocalidade", function (req, res) {
     medidaTerrenoController.alertas30dias(req, res);
 });
 
+router.get("/listarTerrenos/", function (req, res) {
+    medidaTerrenoController.listarTerrenos(req, res);
+});
+
 module.exports = router;

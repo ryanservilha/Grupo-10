@@ -11,6 +11,10 @@
 
 <body>
     <div class="container">
+        <div id="bemvindo">
+            <div class="msg" id="msg">
+            </div>
+        </div>
         <div class="logo">
             <a href="index.html">
                 <h1>Agro Smart<span>.</span></h1>
@@ -24,7 +28,7 @@
             <div class="introducao">
                 <div class="textos">
                     <h2>Faça o Login</h2>
-                    <h2>E entre para o nosso time!</h2>
+                    <h2>E entre para o nosso <span style="color: black;">time!</span></h2>
                 </div>
                 <div class="figuraFazendeiros">
                     <img src="imgs/fazendeiros.png">
@@ -69,7 +73,9 @@
         if (emailVar == "" || senhaVar == "") {
             // cardErro.style.display = "block"
             // mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
-            alert('Mensagem de erro para todos os campos em branco')
+            msg.innerHTML = '<h2 style="padding: 10px; text-align: center; font-size: 15px;">Mensagem de erro para todos os campos em branco!</h2>';
+
+            bemvindo.style.display = "block";
             finalizarAguardar();
             return false;
         }
@@ -102,10 +108,17 @@
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.idFuncionario;
 
-                    setTimeout(function () {
-                        window.location = "dashboard.html";
-                    }, 1000); // apenas para exibir o loading
-
+                    if (sessionStorage.EMAIL_USUARIO == 'agroSmart@empresa.com') {
+                        setTimeout(function () {
+                            window.location = "bobIA.html";
+                        }, 1000); // apenas para exibir o loading
+                    } else {
+                        setTimeout(function () {
+                            window.location = "dashboard.html";
+                        }, 1000); // apenas para exibir o loading
+                    }
+                    msg.innerHTML = '<h2>Bem-vindo!</h2>';
+                    bemvindo.style.display = "block";
                 });
 
             } else {

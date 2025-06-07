@@ -1,5 +1,15 @@
 var medidaTerrenoModel = require("../models/medidaTerrenoModel");
 
+function listarTerrenos(req, res) {
+    medidaTerrenoModel.listarTerrenos().then(function (resultado) {
+        res.status(200).json(resultado);
+    }).catch(function (erro) {
+        res.status(500).json(erro.sqlMessage);
+    })
+}
+
+
+
 function sensoresAtivos(req, res) {
 
     const fkLocalidade = req.params.fkLocalidade;
@@ -51,7 +61,7 @@ function maiorUmidade(req, res) {
 
 function aoLongoDia(req, res) {
     const fkLocalidade = req.params.fkLocalidade;
-
+    
     medidaTerrenoModel.aoLongoDia(fkLocalidade).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
@@ -83,6 +93,7 @@ function alertas30dias(req, res) {
 }
 
 module.exports = {
+    listarTerrenos,
     sensoresAtivos,
     menorUmidade,
     maiorUmidade,

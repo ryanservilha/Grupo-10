@@ -3,10 +3,6 @@ var router = express.Router();
 
 var medidaController = require("../controllers/medidaController");
 
-router.get("/media-trinta-dias/", function (req, res) {
-    medidaController.buscarMediaTrinta(req, res);
-});
-
 router.get("/sensoresAtivos/", function (req, res) {
     medidaController.buscarSensoresAtivos(req, res);
 });
@@ -26,11 +22,5 @@ router.get("/menorUmidade/", function (req, res) {
 router.get("/maiorUmidade/", function (req, res) {
     medidaController.maiorUmidade(req, res);
 });
-
-router.get("/aoLongoDia/", function (req, res) {
-    medidaController.aoLongoDia(req, res);
-});
-
-
 
 module.exports = router;
