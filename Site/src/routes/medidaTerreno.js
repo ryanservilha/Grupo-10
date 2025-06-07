@@ -27,4 +27,14 @@ router.get("/listarTerrenos/", function (req, res) {
     medidaTerrenoController.listarTerrenos(req, res);
 });
 
+router.get("/tempoRealDia/:fkLocalidade", function (req, res) {
+    medidaTerrenoController.tempoRealDia(req, res);
+});
+
+
+router.get("/tempoRealAlerta/:fkLocalidade", function (req, res) {
+    medidaTerrenoController.tempoRealAlerta(req, res);
+});
+
+
 module.exports = router;

@@ -61,7 +61,7 @@ function maiorUmidade(req, res) {
 
 function aoLongoDia(req, res) {
     const fkLocalidade = req.params.fkLocalidade;
-    
+
     medidaTerrenoModel.aoLongoDia(fkLocalidade).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
@@ -92,11 +92,46 @@ function alertas30dias(req, res) {
     });
 }
 
+function tempoRealDia(req, res) {
+    const fkLocalidade = req.params.fkLocalidade;
+
+    medidaTerrenoModel.tempoRealDia(fkLocalidade).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function tempoRealAlerta(req, res) {
+    const fkLocalidade = req.params.fkLocalidade;
+
+    medidaTerrenoModel.tempoRealAlerta(fkLocalidade).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 module.exports = {
     listarTerrenos,
     sensoresAtivos,
     menorUmidade,
     maiorUmidade,
     aoLongoDia,
-    alertas30dias
+    alertas30dias,
+    tempoRealDia,
+    tempoRealAlerta
 }
