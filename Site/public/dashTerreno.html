@@ -178,7 +178,13 @@
 
                     vt_umidade = resposta;
 
-                    menorUmidade.innerHTML = `${vt_umidade[0].Taxa}`;
+                    if (vt_umidade[0].Taxa > 15 || vt_umidade[0].Taxa < 13) {
+                        menorUmidade.innerHTML = `<b style="color: red;">${vt_umidade[0].Taxa}%</b>`;
+                    }
+                    else {
+                        menorUmidade.innerHTML = `${vt_umidade[0].Taxa}%`;
+                    }
+
                     terrenoHorarioMenor.innerHTML = `${vt_umidade[0].Hora}`;
                 });
             } else {
@@ -198,7 +204,14 @@
 
                     vt_umidadeMaior = resposta;
 
-                    maiorUmidade.innerHTML = `${vt_umidadeMaior[0].Taxa}`;
+                    if (vt_umidadeMaior[0].Taxa > 15 || vt_umidadeMaior[0].Taxa < 13) {
+
+                        maiorUmidade.innerHTML = `<b style="color: red;">${vt_umidadeMaior[0].Taxa}%</b>`;
+                    }
+                    else {
+                        maiorUmidade.innerHTML = `${vt_umidadeMaior[0].Taxa}%`;
+                    }
+
                     terrenoHorarioMaior.innerHTML = `${vt_umidadeMaior[0].Hora}`;
                 });
             } else {

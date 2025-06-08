@@ -17,7 +17,7 @@ function sensoresAtivos(fkLocalidade) {
 }
 
 function menorUmidade(fkLocalidade) {
-  var instrucaoSql = `SELECT CONCAT(dado,'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora FROM medida
+  var instrucaoSql = `SELECT dado AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora FROM medida
     JOIN sensor 
     ON idSensor = fkSensor
     JOIN localidade 
@@ -30,7 +30,7 @@ function menorUmidade(fkLocalidade) {
 }
 
 function maiorUmidade(fkLocalidade) {
-  var instrucaoSql = `SELECT CONCAT(dado,'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora FROM medida
+  var instrucaoSql = `SELECT dado AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora FROM medida
     JOIN sensor 
     ON idSensor = fkSensor
     JOIN localidade 

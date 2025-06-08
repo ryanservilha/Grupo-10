@@ -185,7 +185,13 @@
                     }
                     else {
                         for (var i = vt_conteudo.length - 1; i >= 0; i--) {
-                            listaAlertas.innerHTML += `<div class="itemAlerta"><div class="numeracao"><p id="numeracao">${i + 1}°</p></div> ${vt_conteudo[i].terreno}: <b style="color: red;">${vt_conteudo[i].dado}%</b> ${vt_conteudo[i].data}</div> <br>`
+
+                            if (vt_conteudo[i].dado > 15) {
+                                listaAlertas.innerHTML += `<div id="maior15" class="itemAlerta"><div class="numeracao"><p id="numeracao">${i + 1}°</p></div> ${vt_conteudo[i].terreno} <b style="color: red;">${vt_conteudo[i].dado}%</b> ${vt_conteudo[i].data}</div> <br>`
+                            }
+                            else {
+                                listaAlertas.innerHTML += `<div id="menor13" class="itemAlerta"><div class="numeracao"><p id="numeracao">${i + 1}°</p></div> ${vt_conteudo[i].terreno} <b style="color: red;">${vt_conteudo[i].dado}%</b> ${vt_conteudo[i].data}</div> <br>`
+                            }
                         }
                     }
 
@@ -212,7 +218,13 @@
 
                     vt_umidade = resposta;
 
-                    menorUmidade.innerHTML = `${vt_umidade[0].Taxa}`;
+                    if (vt_umidade[0].Taxa > 15 || vt_umidade[0].Taxa < 13) {
+                        menorUmidade.innerHTML = `<b style="color: red;">${vt_umidade[0].Taxa}%</b>`;
+                    }
+                    else {
+                        menorUmidade.innerHTML = `<b style="color: black;">${vt_umidade[0].Taxa}%</b>`;
+                    }
+
                     terrenoHorarioMenor.innerHTML = `${vt_umidade[0].Hora} - ${vt_umidade[0].terreno}`;
                 });
             } else {
@@ -236,7 +248,13 @@
 
                     vt_umidadeMaior = resposta;
 
-                    maiorUmidade.innerHTML = `${vt_umidadeMaior[0].TaxaMaior}`;
+                    if (vt_umidadeMaior[0].TaxaMaior > 15 || vt_umidadeMaior[0].TaxaMaior < 13) {
+                        maiorUmidade.innerHTML = `<b style="color: red;">${vt_umidadeMaior[0].TaxaMaior}%</b>`;
+                    }
+                    else {
+                        maiorUmidade.innerHTML = `<b style="color: black;">${vt_umidadeMaior[0].TaxaMaior}%</b>`;
+                    }
+
                     terrenoHorarioMaior.innerHTML = `${vt_umidadeMaior[0].Hora} - ${vt_umidadeMaior[0].terreno}`;
                 });
             } else {

@@ -28,7 +28,7 @@ function conteudoAlertas() {
 }
 
 function menorUmidade() {
-  var instrucaoSql = `SELECT CONCAT(dado,'%') AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida
+  var instrucaoSql = `SELECT dado AS Taxa, DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, terreno FROM medida
     JOIN sensor 
     ON idSensor = fkSensor
     JOIN localidade 
@@ -42,7 +42,7 @@ function menorUmidade() {
 }
 
 function maiorUmidade() {
-  var instrucaoSql = `SELECT CONCAT(dado,'%') AS TaxaMaior, 
+  var instrucaoSql = `SELECT dado AS TaxaMaior, 
   DATE_FORMAT(dataHoraEmissao, '%H:%i') AS Hora, 
   terreno FROM medida
     JOIN sensor 
