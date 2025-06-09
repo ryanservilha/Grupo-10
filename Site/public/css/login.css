@@ -224,6 +224,13 @@ body {
 }
 
 .msg h2 {
+    text-align: center;
     font-size: 30px;
+    color: white;
+}
+
+.msg h4 {
+    text-align: center;
+    font-size: 20px;
     color: white;
 }

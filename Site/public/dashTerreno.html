@@ -57,7 +57,7 @@
                         <p id="terrenoNUM">Terreno 1</p>
                     </div>
                     <div class="quadrado" id="totalSensores">
-                        <h2>Total de Sensores Ativos na Plantação</h2>
+                        <h2>Total de Sensores Ativos no Terreno</h2>
                         <p><b id="sensoresAtivos"></b></p>
                     </div>
                     <div class="quadrado" id="menorTaxaDia">
@@ -76,7 +76,7 @@
             <div class="baixo">
                 <div class="graficoDia">
                     <div class="cimaGrafico">
-                        <h2>Variação de Umidade ao Longo do Dia</h2>
+                        <h2>Variação de Umidade Neste Momento</h2>
                     </div>
                     <canvas id="graficoUmidadeDia"></canvas>
                 </div>
@@ -457,7 +457,12 @@
                             beginAtZero: true,
                             grid: {
                                 display: false,
-                            }
+                            },
+                            ticks: {
+                                callback: function (value) {
+                                    return value.toFixed(1);
+                                }
+                            },
                         },
                     },
                 }
