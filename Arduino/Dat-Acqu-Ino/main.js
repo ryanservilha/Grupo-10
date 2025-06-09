@@ -19,7 +19,7 @@ const serial = async (
     // conexão com o banco de dados MySQL
     let poolBancoDados = mysql.createPool(
         {
-            host: '127.0.0.1', // nesse caso cdé para o servidor lubuntu no local usa localhost
+            host: '10.18.32.239', // nesse caso cdé para o servidor lubuntu no local usa localhost
             user: 'aluno', // usuario do ubuntu ou local
             password: 'Sptech#2024', // senha do lubuntu ou local
             database: 'protecaoSoja', // banco de dados
