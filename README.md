@@ -1,4 +1,4 @@
-# AGRO SMART
+![Captura de tela 2025-06-09 100735](https://github.com/user-attachments/assets/a1f1044b-9d00-41c5-9e13-026f1424dcbf)# AGRO SMART
 
 ---
 <b>MONITORAMENTO INTELIGENTE DE UMIDADE DO SOLO PARA CULTIVO DE SOJA</b>
@@ -56,7 +56,8 @@ Visite o site institucional da AgroSmart para saber mais sobre a solução, bene
 ![visaodenegocio](https://github.com/user-attachments/assets/6cc74099-0624-4479-ab6f-0013de3777c9)
 
 ## 🖥️ Diagrama de Solução
-![visaodesolução](https://github.com/user-attachments/assets/eddd3e5e-9db4-43fd-82bf-e2cc0bf84377)
+![Diagrama-Solução(https://github.com/user-attachments/assets/f0cf1bbf-dc44-4949-a031-612332ac5e24)
+
 
 
 
