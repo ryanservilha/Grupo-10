@@ -182,7 +182,7 @@
                         menorUmidade.innerHTML = `<b style="color: red;">${vt_umidade[0].Taxa}%</b>`;
                     }
                     else {
-                        menorUmidade.innerHTML = `${vt_umidade[0].Taxa}%`;
+                        menorUmidade.innerHTML = `<b style="color: #5aa400;">${vt_umidade[0].Taxa}%</b>`;
                     }
 
                     terrenoHorarioMenor.innerHTML = `${vt_umidade[0].Hora}`;
@@ -209,7 +209,7 @@
                         maiorUmidade.innerHTML = `<b style="color: red;">${vt_umidadeMaior[0].Taxa}%</b>`;
                     }
                     else {
-                        maiorUmidade.innerHTML = `${vt_umidadeMaior[0].Taxa}%`;
+                        maiorUmidade.innerHTML = `<b style="color: #5aa400;">${vt_umidadeMaior[0].Taxa}%</b>`;
                     }
 
                     terrenoHorarioMaior.innerHTML = `${vt_umidadeMaior[0].Hora}`;
@@ -312,7 +312,9 @@
                                 size: 14
                             },
                             color: '#333'
-                        }
+                        },
+                        min: 0,
+                        max: 50
                     }
                 }
             }
@@ -460,9 +462,11 @@
                             },
                             ticks: {
                                 callback: function (value) {
-                                    return value.toFixed(1);
+                                    return value.toFixed(0);
                                 }
                             },
+                            min: 0,
+                            max: 40
                         },
                     },
                 }
