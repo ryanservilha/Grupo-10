@@ -1,4 +1,4 @@
-![Captura de tela 2025-06-09 100735](https://github.com/user-attachments/assets/a1f1044b-9d00-41c5-9e13-026f1424dcbf)# AGRO SMART
+# AGRO SMART
 
 ---
 <b>MONITORAMENTO INTELIGENTE DE UMIDADE DO SOLO PARA CULTIVO DE SOJA</b>
